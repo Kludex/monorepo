@@ -1,6 +1,6 @@
-# Conference Speaker
+# Talks
 
-As a conference speaker, I have been sharing my knowledge about Python, FastAPI, Starlette, and other related topics.
+I have been sharing my knowledge about Python, FastAPI, Starlette, and other related topics.
 
 ## Upcoming Talks
 
