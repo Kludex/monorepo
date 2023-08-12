@@ -12,6 +12,7 @@ theme:
   locale: en
   icon:
     repo: fontawesome/brands/github
+    logo: material/trophy
   features:
     - navigation.tabs
     - content.code.annotate
@@ -72,5 +73,7 @@ extra:
       link: https://www.linkedin.com/in/marcelotryle/
     - icon: fontawesome/brands/youtube
       link: https://www.youtube.com/channel/UC91TdNbobUqT3d2CHcTkx8A
+    - icon: fontawesome/brands/instagram
+      link: https://www.instagram.com/marcelotryle/
     - icon: fontawesome/solid/envelope
       link: mailto:marcelotryle@gmail.com
