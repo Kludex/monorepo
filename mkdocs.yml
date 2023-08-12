@@ -9,10 +9,12 @@ edit_uri: edit/main/docs/
 
 theme:
   name: material
+  locale: en
   icon:
     repo: fontawesome/brands/github
   features:
     - navigation.tabs
+    - content.code.annotate
 
   palette:
     # Palette toggle for light mode
@@ -32,7 +34,11 @@ theme:
         name: Switch to system preference
 
 plugins:
+  - meta
   - search
+  - tags
+  - blog:
+      blog_dir: blog/
 
 markdown_extensions:
   - attr_list
@@ -51,4 +57,18 @@ markdown_extensions:
 
 nav:
   - Home: index.md
-  - Blog: blog.md
+  - Blog:
+    - blog/index.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/marcelotryle
+    - icon: fontawesome/brands/github
+      link: https://github.com/kludex
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/marcelotryle/
+    - icon: fontawesome/brands/youtube
+      link: https://www.youtube.com/channel/UC91TdNbobUqT3d2CHcTkx8A
+    - icon: fontawesome/solid/envelope
+      link: mailto:marcelotryle@gmail.com

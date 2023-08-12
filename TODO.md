@@ -9,3 +9,5 @@
 - [ ] Follow my updates (create project, release, YouTube video, blog post, etc.)
 - [ ] Check PR title
 - [ ] Social cards
+- [ ] Reward contributors & Sponsors
+- [ ] Google Analytics
