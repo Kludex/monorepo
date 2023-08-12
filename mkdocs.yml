@@ -57,9 +57,10 @@ markdown_extensions:
 
 nav:
   - Home:
-    - About: index.md
+      - About: index.md
+      - Conferences: conferences.md
   - Blog:
-    - blog/index.md
+      - blog/index.md
 
 extra:
   social:
