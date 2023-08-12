@@ -1,0 +1,11 @@
+- [ ] Favorite Books
+- [ ] Career
+- [ ] Blog
+- [ ] Packages
+- [ ] Talks
+- [ ] Anaconda
+- [ ] YouTube videos
+- [ ] Sponsoring
+- [ ] Follow my updates (create project, release, YouTube video, blog post, etc.)
+- [ ] Check PR title
+- [ ] Social cards
