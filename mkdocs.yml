@@ -38,6 +38,7 @@ plugins:
   - meta
   - search
   - tags
+  - social
   - blog:
       blog_dir: blog/
 
