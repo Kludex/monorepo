@@ -1,0 +1,7 @@
+git+https://${GH_TOKEN}@github.com/squidfunk/mkdocs-material-insiders.git@9.1.2-insiders-4.32.3
+mkdocs-rss-plugin
+
+fastapi
+uvicorn
+httpx
+trio
