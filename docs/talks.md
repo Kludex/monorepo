@@ -8,6 +8,10 @@ I have been sharing my knowledge about Python, FastAPI, Starlette, and other rel
 
 ### PyCon India 2023: [To be defined...][pycon-in-2023]
 
+### Sentry + FastAPI Berlin Meetup: [To be defined...][sentry-fastapi-2023]
+
+[Download Slides :heart:](proposals/fastapi_history.html){:download="fastapi_history.html" .md-button}
+
 ## Past Talks
 
 ### EuroPython 2023: [Performance tips by the FastAPI Expert][europython-2023]
@@ -30,6 +34,7 @@ I have been sharing my knowledge about Python, FastAPI, Starlette, and other rel
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ULhX7761GAY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
+[sentry-fastapi-2023]: https://sentry.io/resources/fastapi-event/
 [pycon-es-2023]: https://2023.es.pycon.org/
 [pycon-in-2023]: https://in.pycon.org/2023/keynote/marcelo-trylesinski/
 [europython-2023]: https://ep2023.europython.eu/speaker/marcelo-trylesinski
