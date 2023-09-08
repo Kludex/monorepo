@@ -8,11 +8,11 @@ I have been sharing my knowledge about Python, FastAPI, Starlette, and other rel
 
 ### PyCon India 2023: [To be defined...][pycon-in-2023]
 
-### Sentry + FastAPI Berlin Meetup: [To be defined...][sentry-fastapi-2023]
+## Past Talks
+
+### Sentry + FastAPI Berlin Meetup: [The History of FastAPI][sentry-fastapi-2023]
 
 [Download Slides :heart:](proposals/fastapi_history.html){:download="fastapi_history.html" .md-button}
-
-## Past Talks
 
 ### EuroPython 2023: [Performance tips by the FastAPI Expert][europython-2023]
 
