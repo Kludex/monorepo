@@ -16,6 +16,8 @@ I have been sharing my knowledge about Python, FastAPI, Starlette, and other rel
 
 ### EuroPython 2023: [Performance tips by the FastAPI Expert][europython-2023]
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/7jtzjovKQ8A?si=Wb8u4pbKC7SKz-IL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 ### PyCon Poland 2023: [Keynote: Chronicles of an Open Source Developer][pycon-pl-2023]
 
 ### PyCon Italy 2023: [What does Starlette really do for FastAPI?][pycon-it-2023]
