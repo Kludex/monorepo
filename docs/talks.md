@@ -10,6 +10,8 @@ I have been sharing my knowledge about Python, FastAPI, Starlette, and other rel
 
 ### PyCon India 2023: [Keynote: How the duck those packages work?][pycon-in-2023]
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/EtglvudUZZI?si=jpGUxiCnfJfC3eJx&amp;start=19047" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 [Download Slides :heart:](slides/how_the_duck_those_web_packages_work.html){:download="how_the_duck_those_web_packages_work.html" .md-button}
 
 ### Sentry + FastAPI Berlin Meetup: [The History of FastAPI][sentry-fastapi-2023]
