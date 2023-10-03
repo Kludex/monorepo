@@ -6,13 +6,17 @@ I have been sharing my knowledge about Python, FastAPI, Starlette, and other rel
 
 ### PyCon Spain 2023: [To be defined...][pycon-es-2023]
 
-### PyCon India 2023: [To be defined...][pycon-in-2023]
-
 ## Past Talks
+
+### PyCon India 2023: [Keynote: How the duck those packages work?][pycon-in-2023]
+
+[Download Slides :heart:](slides/how_the_duck_those_web_packages_work.html){:download="how_the_duck_those_web_packages_work.html" .md-button}
 
 ### Sentry + FastAPI Berlin Meetup: [The History of FastAPI][sentry-fastapi-2023]
 
-[Download Slides :heart:](proposals/fastapi_history.html){:download="fastapi_history.html" .md-button}
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Rms75K0AM4s?si=XY_n_YgP1QEMe7Qs&amp;start=1999" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+[Download Slides :heart:](slides/fastapi_history.html){:download="fastapi_history.html" .md-button}
 
 ### EuroPython 2023: [Performance tips by the FastAPI Expert][europython-2023]
 
@@ -38,7 +42,7 @@ I have been sharing my knowledge about Python, FastAPI, Starlette, and other rel
 
 [sentry-fastapi-2023]: https://sentry.io/resources/fastapi-event/
 [pycon-es-2023]: https://2023.es.pycon.org/
-[pycon-in-2023]: https://in.pycon.org/2023/keynote/marcelo-trylesinski/
+[pycon-in-2023]: https://in.pycon.org/2023/speakers/
 [europython-2023]: https://ep2023.europython.eu/speaker/marcelo-trylesinski
 [pycon-pl-2023]: https://pl.pycon.org/2023/en/prelegenci/
 [pycon-it-2023]: https://2023.pycon.it/en/event/what-does-starlette-really-do-for-fastapi
