@@ -4,9 +4,11 @@ I have been sharing my knowledge about Python, FastAPI, Starlette, and other rel
 
 ## Upcoming Talks
 
+## Past Talks
+
 ### PyCon Spain 2023: [The validation evolution: Pydantic V2tronger][pycon-es-2023]
 
-## Past Talks
+[Download Slides :heart:](slides/pydantic_v2tronger.html){:download="pydantic_v2tronger.html" .md-button}
 
 ### PyCon India 2023: [Keynote: How the duck those packages work?][pycon-in-2023]
 
