@@ -16,7 +16,7 @@ I'm currently living in <b>Utrecht</b>, <b>Netherlands</b>. 🇳🇱
 
 
 <p align="center">
-I'm a maintainer of <b><a href="https://starlette.io/">Starlette</a></b> and <b><a href="https://uvicorn.org/">Uvicorn</a></b>.
+I'm a maintainer of <b><a href="https://www.starlette.io/">Starlette</a></b> and <b><a href="https://www.uvicorn.org/">Uvicorn</a></b>.
 </p>
 
 <p align="center">
