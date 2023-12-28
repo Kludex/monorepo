@@ -8,6 +8,8 @@ I have been sharing my knowledge about Python, FastAPI, Starlette, and other rel
 
 ### PyCon Spain 2023: [The validation evolution: Pydantic V2tronger][pycon-es-2023]
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Z_G1h6YxiT8?si=bvCx6vf5YBWcf6I3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 [Download Slides :heart:](slides/pydantic_v2tronger.html){:download="pydantic_v2tronger.html" .md-button}
 
 ### PyCon India 2023: [Keynote: How the duck those packages work?][pycon-in-2023]

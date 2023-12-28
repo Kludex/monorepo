@@ -284,8 +284,7 @@ https://docs.pydantic.dev/latest/migration/
 
 # Early Access to our Product!
 
-1. Talk to me to get my business card.
-2. Talk to me today - I'll be on the beach tomorrow.
+Talk to me to get my business card.
 
 ---
 
