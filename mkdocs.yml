@@ -36,7 +36,8 @@ theme:
         name: Switch to system preference
 
 plugins:
-  - meta
+  - meta:
+      meta_file: blog/.meta.yml
   - search
   - tags
   - social
