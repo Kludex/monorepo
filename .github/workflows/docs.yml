@@ -25,9 +25,10 @@ jobs:
           restore-keys: |
             mkdocs-material-
       - run: sudo apt-get install libcairo2-dev libfreetype6-dev libffi-dev libjpeg-dev libpng-dev libz-dev
-      - run: pip install --extra-index-url=$EXTRA_INDEX_URL mkdocs-material pillow cairosvg
+      - run: pip install pillow cairosvg
+      - run: pip install mkdocs-material
         env:
-          EXTRA_INDEX_URL: ${{ secrets.EXTRA_INDEX_URL }}
+          PIP_INDEX_URL: ${{ secrets.EXTRA_INDEX_URL }}
       - run: mkdocs gh-deploy --force
 env:
   GH_TOKEN: ${{ secrets.GH_TOKEN }}
