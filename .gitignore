@@ -4,3 +4,4 @@
 /.pids
 
 .cache
+.venv
