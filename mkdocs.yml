@@ -67,6 +67,9 @@ nav:
       - blog/index.md
 
 extra:
+  analytics:
+    provider: google
+    property: G-GV6DCSY8E3
   social:
     - icon: fontawesome/brands/twitter
       link: https://twitter.com/marcelotryle
