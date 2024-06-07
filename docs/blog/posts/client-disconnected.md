@@ -185,7 +185,7 @@ We've created the `disconnected()` task, that will _await_ on `request.receive()
 Is the logic above 100% correct? When I was writing this article, I actually thought it was, but then I remembered
 that I forgot a small detail... What if the client doesn't disconnect?
 
-Well... Then the task runs forever. So yeah, we need to actually need to either stop the `TaskClient` when:
+Well... Then the task runs forever. So yeah, we need to actually stop the `TaskClient` when either:
 1. the client disconnects or...
 2. the endpoint finishes to process its logic, and is ready to send the response.
 
