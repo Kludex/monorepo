@@ -242,7 +242,7 @@ If there's curiosity, I'll write a blog post about it as well. There are some su
 
 ## Conclusion
 
-If you learned something useful with this blog post, consider [sponsor me on GitHub], and/or share this
+If you learned something useful with this blog post, consider [sponsoring me on GitHub], and/or share this
 blog post among your colleagues.
 
 If you have more ideas about what would be interesting to share, feel free to let me know on [LinkedIn] or [Twitter].
