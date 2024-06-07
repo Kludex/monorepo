@@ -185,7 +185,7 @@ We've created the `disconnected()` task, that will _await_ on `request.receive()
 Is the logic above 100% correct? When I was writing this article, I actually thought it was, but then I remembered
 that I forgot a small detail... What if the client doesn't disconnect?
 
-Well... Then the task runs forever. So yeah, we need to actually need to either stop the `TaskClient` when:
+Well... Then the task runs forever. So yeah, we need to actually stop the `TaskClient` when either:
 1. the client disconnects or...
 2. the endpoint finishes to process its logic, and is ready to send the response.
 
@@ -238,11 +238,11 @@ For now, yes. As I said above, we are working on a new mechanism to detect if th
 
 ## What about WebSockets?
 
-If there's curiosity, I'll write a blog post about it as well. There are some sutil (but important) differences.
+If there's curiosity, I'll write a blog post about it as well. There are some subtle (but important) differences.
 
 ## Conclusion
 
-If you learned something useful with this blog post, consider [sponsor me on GitHub], and/or share this
+If you learned something useful with this blog post, consider [sponsoring me on GitHub], and/or share this
 blog post among your colleagues.
 
 If you have more ideas about what would be interesting to share, feel free to let me know on [LinkedIn] or [Twitter].
