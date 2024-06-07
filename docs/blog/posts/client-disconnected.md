@@ -238,7 +238,7 @@ For now, yes. As I said above, we are working on a new mechanism to detect if th
 
 ## What about WebSockets?
 
-If there's curiosity, I'll write a blog post about it as well. There are some sutil (but important) differences.
+If there's curiosity, I'll write a blog post about it as well. There are some subtle (but important) differences.
 
 ## Conclusion
 
