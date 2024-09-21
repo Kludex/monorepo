@@ -1,8 +1,8 @@
 - [ ] Favorite Books
 - [ ] Career
-- [ ] Blog
+- [X] Blog
 - [ ] Packages
-- [ ] Talks
+- [X] Talks
 - [ ] Anaconda
 - [ ] YouTube videos
 - [ ] Sponsoring
@@ -10,4 +10,4 @@
 - [ ] Check PR title
 - [ ] Social cards
 - [ ] Reward contributors & Sponsors
-- [ ] Google Analytics
+- [X] Google Analytics

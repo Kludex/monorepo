@@ -2,10 +2,6 @@
 
 I have been sharing my knowledge about Python, FastAPI, Starlette, and other related topics.
 
-## Upcoming Talks
-
-## Past Talks
-
 ### PyCon Italy 2024: [FastAPI Internals: How does it work?][pycon-it-2024]
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/nYAMtzAbNN8?si=m4wR9PLiyoPEmCxy" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>

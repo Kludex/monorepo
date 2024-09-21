@@ -1,0 +1,21 @@
+[project]
+name = "monorepo"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
+
+[tool.uv]
+package = false
+dev-dependencies = [
+    "fastapi",
+    "uvicorn",
+    "httpx",
+    # Documentation
+    "mkdocs-material[imaging]",
+    "mkdocs-rss-plugin",
+    # Linting
+    "ruff",
+    "feedparser>=6.0.11",
+]

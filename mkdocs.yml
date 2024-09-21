@@ -63,8 +63,12 @@ nav:
   - Home:
       - About: index.md
       - Talks: talks.md
+      - YouTube: youtube.md
   - Blog:
       - blog/index.md
+
+extra_css:
+  - extra.css
 
 extra:
   analytics:
@@ -83,3 +87,6 @@ extra:
       link: https://www.instagram.com/marcelotryle/
     - icon: fontawesome/solid/envelope
       link: mailto:marcelotryle@gmail.com
+
+hooks:
+  - docs/plugins/main.py
