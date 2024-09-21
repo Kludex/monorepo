@@ -4,7 +4,6 @@ categories:
 - FastAPI
 - Starlette
 - Uvicorn
-- Client Disconnect
 readtime: 5
 ---
 
