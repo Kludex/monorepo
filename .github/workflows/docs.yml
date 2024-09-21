@@ -30,6 +30,6 @@ jobs:
         env:
           UV_EXTRA_INDEX_URL: ${{ secrets.EXTRA_INDEX_URL }}
 
-      - run: mkdocs gh-deploy --force
+      - run: uv run mkdocs gh-deploy --force
 env:
   GH_TOKEN: ${{ secrets.GH_TOKEN }}
