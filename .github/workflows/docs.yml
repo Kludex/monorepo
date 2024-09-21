@@ -13,15 +13,23 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.repository.fork == false
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v2
         with:
-          python-version: 3.x
+          version: "0.4.12"
+          enable-cache: true
+
       - run: sudo apt-get install libcairo2-dev libfreetype6-dev libffi-dev libjpeg-dev libpng-dev libz-dev
-      - run: pip install pillow cairosvg
-      - run: pip install --upgrade mkdocs-material==9.5.17+insiders.4.53.5
+
+      - name: Set up Python
+        run: uv python install 3.12
+
+      - run: uv sync --frozen
         env:
-          PIP_EXTRA_INDEX_URL: ${{ secrets.EXTRA_INDEX_URL }}
+          UV_EXTRA_INDEX_URL: ${{ secrets.EXTRA_INDEX_URL }}
+
       - run: mkdocs gh-deploy --force
 env:
   GH_TOKEN: ${{ secrets.GH_TOKEN }}
