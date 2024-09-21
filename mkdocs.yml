@@ -14,9 +14,23 @@ theme:
     repo: fontawesome/brands/github
     logo: material/trophy
   features:
-    - navigation.tabs
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
     - content.code.annotate
     - content.code.copy
+    - content.code.select
+    - navigation.indexes
+    - navigation.path
+    - navigation.tabs
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
+    - navigation.sections
+    - navigation.tracking
+    - navigation.top # alternatively, we could do navigation.tabs.sticky
+    - toc.follow
+    - toc.integrate
 
   palette:
     # Palette toggle for light mode
@@ -42,7 +56,10 @@ plugins:
   - tags
   - social
   - blog:
+      archive: false
       blog_dir: blog/
+      blog_toc: true
+      categories: true
 
 markdown_extensions:
   - attr_list
@@ -65,6 +82,8 @@ nav:
       - Talks: talks.md
       - YouTube: youtube.md
       - Sponsors 💖️: sponsors.md
+  - Services:
+      - services/index.md
   - Blog:
       - blog/index.md
 
