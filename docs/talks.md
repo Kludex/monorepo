@@ -2,6 +2,10 @@
 
 I have been sharing my knowledge about Python, FastAPI, Starlette, and other related topics.
 
+### EuroPython 2024: [FastAPI Internals][europython-2024]
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/QcRq3F8FpSg?si=N7yRhVjGnLrH_nBN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 ### PyCon Italy 2024: [FastAPI Internals: How does it work?][pycon-it-2024]
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/nYAMtzAbNN8?si=m4wR9PLiyoPEmCxy" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -48,6 +52,7 @@ I have been sharing my knowledge about Python, FastAPI, Starlette, and other rel
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ULhX7761GAY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
+[europython-2024]: https://ep2024.europython.eu/session/fastapi-internals
 [pycon-it-2024]: https://2024.pycon.it/en/event/fastapi-internals-how-does-it-work
 [sentry-fastapi-2023]: https://sentry.io/resources/fastapi-event/
 [pycon-es-2023]: https://charlas.2023.es.pycon.org/pycones-2023/talk/SVLHVA/
