@@ -1,0 +1,37 @@
+.youtube-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.youtube-grid .latest-video {
+    flex: 1 1 100%;
+    aspect-ratio: 16 / 9;
+    max-width: 100%;
+    margin-bottom: 16px;
+    border: 2px solid #ccc;
+    /* Added border */
+}
+
+.youtube-grid iframe {
+    flex: 1 1 calc(50% - 16px);
+    /* Modified size */
+    max-width: calc(50% - 16px);
+    /* Modified size */
+    aspect-ratio: 16 / 9;
+    border: 2px solid #ccc;
+    /* Added border */
+}
+
+@media (max-width: 768px) {
+    .youtube-grid iframe {
+        flex: 1 1 calc(100% - 16px);
+        /* Modified size */
+    }
+}
+
+@media (max-width: 480px) {
+    .youtube-grid iframe {
+        flex: 1 1 100%;
+    }
+}
