@@ -84,6 +84,7 @@ nav:
       - Sponsors 💖️: sponsors.md
   - Services:
       - services/index.md
+  - Open Source: open-source.md
   - Blog:
       - blog/index.md
 
