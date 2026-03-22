@@ -37,7 +37,7 @@ A special thanks to our sponsors as well: [@tiangolo](https://github.com/tiangol
 
 ## Starlette in the last year
 
-Since the [2024 Open Source Report](../open-source-2024.md), here's what happened
+Since the [2024 Open Source Report](open-source-2024.md), here's what happened
 (data gathered from the [GitHub API](https://docs.github.com/en/rest) and [PyPI Stats](https://pypistats.org/packages/starlette)):
 
 | Downloads/month | Releases | Closed issues | Merged PRs | Closed unmerged PRs | Answered discussions |
