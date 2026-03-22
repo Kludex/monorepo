@@ -2,6 +2,18 @@
 
 I have been sharing my knowledge about Python, FastAPI, Starlette, and other related topics.
 
+### PyCon DE & PyData 2025: [Generative AI Monitoring with PydanticAI and Logfire][pycon-de-2025]
+
+### PyCon Italy 2025: [Generative AI Monitoring with PydanticAI and Logfire][pycon-it-2025]
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/agSsmylyHpI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+### PyCon Portugal 2024: [Unlocking ASGI Innovations: How FastAPI Reaps the Benefits][pycon-pt-2024-asgi]
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/kcZ8TBTg-Uk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+[Download Slides :heart:](slides/asgi_innovations.html){:download="asgi_innovations.html" .md-button}
+
 ### EuroPython 2024: [FastAPI Internals][europython-2024]
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/QcRq3F8FpSg?si=N7yRhVjGnLrH_nBN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -52,6 +64,9 @@ I have been sharing my knowledge about Python, FastAPI, Starlette, and other rel
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ULhX7761GAY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
+[pycon-de-2025]: https://2025.pycon.de/talks/GS9QWQ/
+[pycon-it-2025]: https://2025.pycon.it/en/event/fastapi-benchmarks
+[pycon-pt-2024-asgi]: https://pretalx.evolutio.pt/pycon-portugal-2024/speaker/RRPZWA/
 [europython-2024]: https://ep2024.europython.eu/session/fastapi-internals
 [pycon-it-2024]: https://2024.pycon.it/en/event/fastapi-internals-how-does-it-work
 [sentry-fastapi-2023]: https://sentry.io/resources/fastapi-event/
