@@ -10,6 +10,8 @@ I have been sharing my knowledge about Python, FastAPI, Starlette, and other rel
 
 ### PyCon Portugal 2024: [Unlocking ASGI Innovations: How FastAPI Reaps the Benefits][pycon-pt-2024-asgi]
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/kcZ8TBTg-Uk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 [Download Slides :heart:](slides/asgi_innovations.html){:download="asgi_innovations.html" .md-button}
 
 ### PyCon Portugal 2024: [Pydantic Logfire - Uncomplicated Observability][pycon-pt-2024-logfire]
