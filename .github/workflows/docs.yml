@@ -21,7 +21,7 @@ jobs:
           version: "0.4.12"
           enable-cache: true
 
-      - run: sudo apt-get install libcairo2-dev libfreetype6-dev libffi-dev libjpeg-dev libpng-dev libz-dev
+      - run: sudo apt-get update && sudo apt-get install -y libcairo2-dev libfreetype6-dev libffi-dev libjpeg-dev libpng-dev libz-dev
 
       - name: Set up Python
         run: uv python install 3.12
@@ -31,6 +31,8 @@ jobs:
           UV_EXTRA_INDEX_URL: ${{ secrets.EXTRA_INDEX_URL }}
 
       - run: uv run mkdocs build
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
