@@ -281,7 +281,7 @@ https://github.com/Kludex/fastapi-tips
 
 # Thank You!
 
-[www.fastapiexpert.com](https://www.fastapiexpert.com)
+[marcelotryle.com](https://www.marcelotryle.com)
 
 <i class="fab fa-linkedin"></i> Marcelo Trylesinski
 <i class="fab fa-twitter"></i> @marcelotryle

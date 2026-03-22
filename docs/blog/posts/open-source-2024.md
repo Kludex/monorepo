@@ -26,7 +26,7 @@ pull requests, and investigating issues.
 ## Sponsors
 
 I would like to thank all the sponsors that
-[supported me in 2024](https://fastapiexpert.com/sponsors/)! :heart:
+[supported me in 2024](https://marcelotryle.com/sponsors/)! :heart:
 
 ## Data Analysis
 
