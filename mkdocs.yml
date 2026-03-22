@@ -1,4 +1,4 @@
-site_name: The FastAPI Expert
+site_name: Marcelo Trylesinski
 site_url: https://fastapiexpert.com
 site_author: Marcelo Trylesinski
 copyright: Copyright &copy; 2023 Marcelo Trylesinski
@@ -82,8 +82,6 @@ nav:
       - Talks: talks.md
       - YouTube: youtube.md
       - Sponsors 💖️: sponsors.md
-  - Services:
-      - services/index.md
   - Blog:
       - blog/index.md
 
