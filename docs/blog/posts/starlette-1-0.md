@@ -21,7 +21,7 @@ Before we continue, I'd like to thank the people that helped shape the project i
 **First and foremost**, thank you to [Mia Kimberly Christie](https://github.com/lovelydinosaur) for creating Starlette! :pray:
 
 Over the years, many people have shaped this project.
-[Thomas Grainger](https://github.com/graingert) and [Alex Gronholm](https://github.com/agronholm) taught me so much about async Python, and have always been ready to help and mentor me along the way.
+[Thomas Grainger](https://github.com/graingert) and [Alex Grönholm](https://github.com/agronholm) taught me so much about async Python, and have always been ready to help and mentor me along the way.
 [Adrian Garcia Badaracco](https://github.com/adriangb), one of the smartest people I know, who I have the pleasure of working with at Pydantic.
 [Aber Sheeran](https://github.com/abersheeran) has been my go-to person when I need help on many subjects.
 [Florimond Manca](https://github.com/florimondmanca) was always present in the early days of both Starlette and Uvicorn, and helped a lot in the ecosystem.
