@@ -4,39 +4,50 @@ on:
   push:
     branches:
       - main
+  pull_request:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    if: github.event.repository.fork == false
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.fork == false
     permissions:
       contents: read
       deployments: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install uv
-        uses: astral-sh/setup-uv@v2
+      - uses: actions/setup-node@v4
         with:
-          version: "0.4.12"
-          enable-cache: true
+          node-version: 22
+          cache: npm
+          cache-dependency-path: website/package-lock.json
 
-      - run: sudo apt-get update && sudo apt-get install -y libcairo2-dev libfreetype6-dev libffi-dev libjpeg-dev libpng-dev libz-dev
+      - run: npm ci
+        working-directory: website
 
-      - name: Set up Python
-        run: uv python install 3.12
-
-      - run: uv sync --frozen
-        env:
-          UV_EXTRA_INDEX_URL: ${{ secrets.EXTRA_INDEX_URL }}
-
-      - run: uv run mkdocs build
+      - run: npm run build
+        working-directory: website
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Deploy to Cloudflare Pages
+        id: deploy
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy site --project-name=marcelotryle
+          command: >-
+            pages deploy website/dist --project-name=marcelotryle
+            --branch=${{ github.event_name == 'pull_request' && github.head_ref || 'main' }}
+
+      - name: Comment preview URL on PR
+        if: github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          URL: ${{ steps.deploy.outputs.deployment-url }}
+        run: |
+          gh pr comment ${{ github.event.pull_request.number }} --repo ${{ github.repository }} \
+            --edit-last --body "Cloudflare Pages preview: $URL" \
+          || gh pr comment ${{ github.event.pull_request.number }} --repo ${{ github.repository }} \
+            --body "Cloudflare Pages preview: $URL"

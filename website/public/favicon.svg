@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="6" fill="#171b26"/>
+  <text x="16" y="22" font-family="monospace" font-size="14" fill="#d6336c" text-anchor="middle">~/</text>
+</svg>

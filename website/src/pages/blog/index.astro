@@ -1,0 +1,18 @@
+---
+import { getCollection } from "astro:content";
+import PostCard from "../../components/PostCard.astro";
+import Layout from "../../layouts/Layout.astro";
+
+const posts = (await getCollection("blog")).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Layout title="Blog — Marcelo Trylesinski">
+  <p class="eyebrow">blog</p>
+  <h1 class="mt-2 font-display text-3xl font-bold tracking-tight">Notes from the ASGI trenches</h1>
+  <p class="mt-3 max-w-xl text-muted">
+    Deep dives on FastAPI, Starlette, Uvicorn, testing, and life as an open source maintainer.
+  </p>
+  <div class="mt-8 grid gap-4">
+    {posts.map((post) => <PostCard post={post} />)}
+  </div>
+</Layout>
