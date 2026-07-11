@@ -36,6 +36,7 @@ const canonical = new URL(Astro.url.pathname.replace(/\/$/, "") || "/", Astro.si
     <meta property="og:url" content={canonical} />
     <link rel="canonical" href={canonical} />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Marcelo Trylesinski" href="/rss.xml" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <title>{title}</title>
     <script is:inline>
