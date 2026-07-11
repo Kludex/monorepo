@@ -21,6 +21,7 @@ const nav = [
 ];
 
 const currentPath = Astro.url.pathname.replace(/\/$/, "");
+const canonical = new URL(Astro.url.pathname.replace(/\/$/, "") || "/", Astro.site);
 ---
 
 <!doctype html>
@@ -31,6 +32,10 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "");
     <meta name="description" content={description} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <link rel="canonical" href={canonical} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <title>{title}</title>
     <script is:inline>

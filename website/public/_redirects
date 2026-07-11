@@ -10,3 +10,5 @@
 /blog/2022/09/20/* /blog/fastapi-escape-characters 301
 /blog/2022/09/13/* /blog/test-client-behavior 301
 /blog/category/* /blog 301
+# MkDocs generated /sitemap.xml; Astro's sitemap integration serves /sitemap-index.xml
+/sitemap.xml /sitemap-index.xml 301
