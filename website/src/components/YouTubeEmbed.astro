@@ -1,0 +1,28 @@
+---
+type Props = {
+  videoId: string;
+  title: string;
+  start?: number;
+};
+
+const { videoId, title, start } = Astro.props;
+---
+
+<button type="button" class="yt-facade" data-video-id={videoId} data-start={start} aria-label={`Play: ${title}`}>
+  <img src={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`} alt="" loading="lazy" width="480" height="270" />
+  <span class="play" aria-hidden="true">▶</span>
+</button>
+
+<script>
+  document.addEventListener("click", (event) => {
+    const facade = (event.target as HTMLElement).closest<HTMLButtonElement>(".yt-facade");
+    if (!facade || facade.querySelector("iframe")) return;
+    const { videoId, start } = facade.dataset;
+    const iframe = document.createElement("iframe");
+    iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1${start ? `&start=${start}` : ""}`;
+    iframe.title = facade.getAttribute("aria-label") ?? "YouTube video";
+    iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+    iframe.allowFullscreen = true;
+    facade.append(iframe);
+  });
+</script>

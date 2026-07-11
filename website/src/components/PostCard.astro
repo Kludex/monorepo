@@ -1,0 +1,26 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+type Props = {
+  post: CollectionEntry<"blog">;
+};
+
+const { post } = Astro.props;
+const date = post.data.date.toISOString().slice(0, 10);
+---
+
+<article class="group border-b border-line py-6 sm:flex sm:gap-8">
+  <time datetime={date} class="font-mono text-xs text-muted sm:w-28 sm:shrink-0 sm:pt-1.5">{date}</time>
+  <div>
+    <h3 class="mt-1 font-display text-xl font-semibold sm:mt-0 sm:text-2xl">
+      <a href={`/blog/${post.id}`} class="transition-colors group-hover:text-accent">{post.data.title}</a>
+    </h3>
+    {
+      post.data.categories.length > 0 && (
+        <p class="mt-1 font-mono text-xs text-muted">
+          {post.data.categories.map((category) => category.toLowerCase()).join(" · ")}
+        </p>
+      )
+    }
+  </div>
+</article>

@@ -1,0 +1,14 @@
+# Old mkdocs-material blog URLs (/blog/YYYY/MM/DD/<slug>/) — dates are unique per post
+/blog/2026/05/28/* /blog/badhost-cve-2026-48710 301
+/blog/2026/03/22/* /blog/starlette-1-0 301
+/blog/2025/01/01/* /blog/open-source-2024 301
+/blog/2024/06/06/* /blog/client-disconnected 301
+/blog/2024/05/28/* /blog/uvicorn-0-30-0-release 301
+/blog/2024/05/12/* /blog/websockets_exception 301
+/blog/2023/03/14/* /blog/contract-testing2 301
+/blog/2022/11/03/* /blog/contract-testing 301
+/blog/2022/09/20/* /blog/fastapi-escape-characters 301
+/blog/2022/09/13/* /blog/test-client-behavior 301
+/blog/category/* /blog 301
+# MkDocs generated /sitemap.xml; Astro's sitemap integration serves /sitemap-index.xml
+/sitemap.xml /sitemap-index.xml 301

@@ -1,0 +1,45 @@
+---
+import { fetchSponsors } from "../lib/sponsors";
+import Layout from "../layouts/Layout.astro";
+
+const sponsors = await fetchSponsors();
+---
+
+<Layout title="Sponsors — Marcelo Trylesinski">
+  <p class="eyebrow"><span class="verb">GET</span> /sponsors</p>
+  <h1 class="mt-3 font-display text-4xl font-bold tracking-tight sm:text-5xl">Thank you to all my sponsors ❤️</h1>
+  <p class="mt-4 max-w-xl text-lg text-muted">
+    Your sponsorship keeps <a href="https://www.starlette.io/" class="text-accent underline underline-offset-4"
+      >Starlette</a
+    > and <a href="https://www.uvicorn.org/" class="text-accent underline underline-offset-4">Uvicorn</a> maintained, and
+    sends me to <a href="/talks" class="text-accent underline underline-offset-4">Python conferences</a> to share what I
+    know.
+  </p>
+
+  <a
+    href="https://github.com/sponsors/Kludex"
+    class="mt-8 inline-block rounded-lg bg-accent-bright px-5 py-2.5 text-sm font-semibold text-white transition-transform hover:scale-[1.02]"
+  >
+    ❤️ Become a sponsor
+  </a>
+
+  {
+    sponsors.length > 0 && (
+      <div class="mt-14 flex flex-wrap gap-x-6 gap-y-8 border-t border-line pt-10">
+        {sponsors.map((sponsor) => (
+          <a href={`https://github.com/${sponsor.login}`} class="group w-24 text-center">
+            <img
+              src={sponsor.avatarUrl}
+              alt={sponsor.login}
+              width="80"
+              height="80"
+              loading="lazy"
+              class="mx-auto h-20 w-20 rounded-full transition-transform group-hover:scale-105"
+            />
+            <p class="mt-2 truncate font-mono text-xs text-muted group-hover:text-accent">{sponsor.login}</p>
+          </a>
+        ))}
+      </div>
+    )
+  }
+</Layout>

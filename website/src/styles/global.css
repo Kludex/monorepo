@@ -1,0 +1,342 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --ink: #171b26;
+  --muted: #5a6172;
+  --line: #e2e5eb;
+  --accent: #c2255c;
+  --accent-bright: #d6336c;
+  --gold: #b8860b;
+}
+
+[data-theme="dark"] {
+  --bg: #0e1118;
+  --surface: #161b26;
+  --ink: #e8eaf0;
+  --muted: #99a0b0;
+  --line: #262d3b;
+  --accent: #f06595;
+  --accent-bright: #f06595;
+  --gold: #e8b931;
+}
+
+@theme inline {
+  --color-paper: var(--bg);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-bright: var(--accent-bright);
+  --color-gold: var(--gold);
+  --font-display: "Bricolage Grotesque Variable", system-ui, sans-serif;
+  --font-sans: "Public Sans Variable", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+html {
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: var(--accent-bright);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Protocol-style eyebrow labels: rendered as a request line, e.g. "GET /blog" */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.eyebrow .verb {
+  color: var(--accent);
+}
+
+/* Elevated panel — the one boxed surface on the site (hero, callouts) */
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+  box-shadow:
+    0 1px 2px rgb(23 27 38 / 0.04),
+    0 12px 32px -16px rgb(23 27 38 / 0.1);
+}
+
+[data-theme="dark"] .panel {
+  background: linear-gradient(180deg, #19212f 0%, #131926 100%);
+  border-color: #2b3448;
+  box-shadow: none;
+}
+
+/* Code blocks */
+.astro-code {
+  border: 1px solid var(--line);
+  border-radius: 0.5rem;
+  padding: 1rem 1.25rem;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  overflow-x: auto;
+}
+
+[data-theme="dark"] .astro-code,
+[data-theme="dark"] .astro-code span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+}
+
+/* Callouts (converted from mkdocs admonitions) */
+.callout {
+  border-left: 3px solid var(--accent);
+  border-radius: 0 0.5rem 0.5rem 0;
+  background: color-mix(in srgb, var(--surface) 60%, var(--bg));
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+
+[data-theme="dark"] .callout {
+  background: color-mix(in srgb, var(--surface) 70%, var(--bg));
+}
+
+.callout-warning,
+.callout-danger {
+  border-left-color: var(--gold);
+}
+
+.callout-title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+
+/* Article body typography */
+.prose {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--ink);
+  overflow-wrap: break-word;
+}
+
+.prose > * + * {
+  margin-top: 1.25rem;
+}
+
+.prose h2,
+.prose h3,
+.prose h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.25;
+  margin-top: 2.5rem;
+  scroll-margin-top: 6rem;
+}
+
+.prose h2 {
+  font-size: 1.625rem;
+}
+
+.prose h3 {
+  font-size: 1.25rem;
+}
+
+.prose a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  text-underline-offset: 3px;
+}
+
+.prose a:hover {
+  text-decoration-color: var(--accent);
+}
+
+.prose code:not(.astro-code code) {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background: color-mix(in srgb, var(--ink) 7%, transparent);
+  border-radius: 0.25rem;
+  padding: 0.125rem 0.375rem;
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.5rem;
+}
+
+.prose ul {
+  list-style: disc;
+}
+
+.prose ol {
+  list-style: decimal;
+}
+
+.prose li + li {
+  margin-top: 0.375rem;
+}
+
+.prose blockquote {
+  border-left: 3px solid var(--line);
+  padding-left: 1.25rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.prose img {
+  border-radius: 0.5rem;
+  border: 1px solid var(--line);
+}
+
+.prose hr {
+  border: 0;
+  border-top: 1px solid var(--line);
+  margin: 2.5rem 0;
+}
+
+.prose table {
+  width: 100%;
+  font-size: 0.9375rem;
+  border-collapse: collapse;
+}
+
+.prose th,
+.prose td {
+  border: 1px solid var(--line);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+
+/* Starfield footer — a nod to Starlette */
+.starfield {
+  position: relative;
+  overflow: hidden;
+}
+
+.starfield::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(1px 1px at 12% 30%, var(--gold) 50%, transparent 51%),
+    radial-gradient(1px 1px at 28% 70%, var(--muted) 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 41% 25%, var(--gold) 50%, transparent 51%),
+    radial-gradient(1px 1px at 55% 60%, var(--muted) 50%, transparent 51%),
+    radial-gradient(1px 1px at 67% 35%, var(--gold) 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 78% 75%, var(--muted) 50%, transparent 51%),
+    radial-gradient(1px 1px at 90% 40%, var(--gold) 50%, transparent 51%);
+  opacity: 0.5;
+}
+
+/* Streamed hero response */
+@media (prefers-reduced-motion: no-preference) {
+  .stream-line {
+    opacity: 0;
+    animation: stream-in 0.3s ease-out forwards;
+    animation-delay: calc(var(--line-index) * 120ms);
+  }
+
+  @keyframes stream-in {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+/* Click-to-play YouTube facade */
+.yt-facade {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  background: #000;
+}
+
+.yt-facade img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0.92;
+}
+
+.yt-facade:hover img,
+.yt-facade:focus-visible img {
+  transform: scale(1.03);
+  opacity: 1;
+}
+
+.yt-facade .play {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 9999px;
+  background: rgb(14 17 24 / 0.75);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.125rem;
+  transition: background 0.2s ease;
+  pointer-events: none;
+}
+
+.yt-facade:hover .play,
+.yt-facade:focus-visible .play {
+  background: var(--accent-bright);
+}
+
+.yt-facade iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+@media (max-width: 640px) {
+  .prose {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .prose h2 {
+    font-size: 1.375rem;
+  }
+
+  .prose h3 {
+    font-size: 1.125rem;
+  }
+}

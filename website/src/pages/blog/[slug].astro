@@ -1,0 +1,33 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const date = post.data.date.toISOString().slice(0, 10);
+---
+
+<Layout title={`${post.data.title} — Marcelo Trylesinski`}>
+  <article class="mx-auto max-w-3xl">
+    <p class="font-mono text-xs text-muted">
+      <a href="/blog" class="hover:text-accent">blog</a> / <time datetime={date}>{date}</time>
+      {post.data.categories.length > 0 && <> · {post.data.categories.map((c) => c.toLowerCase()).join(" · ")}</>}
+    </p>
+    <h1 class="mt-3 font-display text-3xl font-bold tracking-tight sm:text-5xl sm:leading-[1.1]">{post.data.title}</h1>
+    <div class="prose mt-8">
+      <Content />
+    </div>
+    <hr class="mt-12 border-line" />
+    <p class="mt-6 text-sm text-muted">
+      Was this useful? Consider
+      <a href="https://github.com/sponsors/Kludex" class="text-accent underline underline-offset-4"
+        >sponsoring my open source work</a
+      >. ❤️
+    </p>
+  </article>
+</Layout>

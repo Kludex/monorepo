@@ -1,0 +1,45 @@
+---
+import YouTubeEmbed from "../components/YouTubeEmbed.astro";
+import { fetchVideos } from "../lib/youtube";
+import Layout from "../layouts/Layout.astro";
+
+const videos = await fetchVideos();
+const [latest, ...rest] = videos;
+---
+
+<Layout title="YouTube — Marcelo Trylesinski">
+  <p class="eyebrow"><span class="verb">GET</span> /youtube</p>
+  <h1 class="mt-3 font-display text-4xl font-bold tracking-tight sm:text-5xl">The FastAPI Expert channel</h1>
+  <p class="mt-4 max-w-xl text-lg text-muted">
+    Videos about programming, software development, and Python web internals.
+    <a
+      href="https://www.youtube.com/channel/UC91TdNbobUqT3d2CHcTkx8A"
+      class="text-accent underline underline-offset-4">Subscribe on YouTube</a
+    >.
+  </p>
+
+  {
+    latest ? (
+      <div class="mt-10">
+        <YouTubeEmbed videoId={latest.videoId} title={latest.title} />
+        <p class="mt-3 font-display text-lg font-semibold">{latest.title}</p>
+        <div class="mt-8 grid gap-x-6 gap-y-8 sm:grid-cols-2">
+          {rest.map((video) => (
+            <div>
+              <YouTubeEmbed videoId={video.videoId} title={video.title} />
+              <p class="mt-2 text-sm font-medium">{video.title}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    ) : (
+      <p class="mt-10 text-muted">
+        Video grid unavailable — visit the
+        <a href="https://www.youtube.com/channel/UC91TdNbobUqT3d2CHcTkx8A" class="text-accent underline underline-offset-4">
+          channel directly
+        </a>
+        .
+      </p>
+    )
+  }
+</Layout>

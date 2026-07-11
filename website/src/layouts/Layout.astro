@@ -1,0 +1,119 @@
+---
+import "@fontsource-variable/bricolage-grotesque";
+import "@fontsource-variable/public-sans";
+import "@fontsource/ibm-plex-mono/400.css";
+import "@fontsource/ibm-plex-mono/500.css";
+import "../styles/global.css";
+
+type Props = {
+  title: string;
+  description?: string;
+};
+
+const { title, description = "Marcelo Trylesinski — maintainer of Starlette and Uvicorn, FastAPI Expert." } =
+  Astro.props;
+
+const nav = [
+  { href: "/blog", label: "blog" },
+  { href: "/talks", label: "talks" },
+  { href: "/youtube", label: "youtube" },
+  { href: "/sponsors", label: "sponsors" },
+];
+
+const currentPath = Astro.url.pathname.replace(/\/$/, "");
+const canonical = new URL(Astro.url.pathname.replace(/\/$/, "") || "/", Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <link rel="canonical" href={canonical} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>{title}</title>
+    <script is:inline>
+      const stored = localStorage.getItem("theme");
+      const preferred = stored ?? (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.dataset.theme = preferred;
+    </script>
+  </head>
+  <body class="min-h-screen bg-paper text-ink antialiased">
+    <header class="sticky top-0 z-10 border-b border-line bg-paper/90 backdrop-blur">
+      <div class="mx-auto flex max-w-4xl flex-wrap items-center justify-between gap-x-6 gap-y-1 px-5 py-3">
+        <a href="/" class="font-mono text-sm font-medium tracking-wide hover:text-accent">
+          <span class="text-accent">~/</span>marcelotryle
+        </a>
+        <nav class="flex flex-1 items-center justify-between gap-4 text-sm font-medium sm:flex-none sm:justify-start sm:gap-6">
+          {
+            nav.map((item) => (
+              <a
+                href={item.href}
+                aria-current={currentPath.startsWith(item.href) ? "page" : undefined}
+                class:list={[
+                  "py-1 transition-colors hover:text-accent",
+                  currentPath.startsWith(item.href)
+                    ? "text-ink underline decoration-accent decoration-2 underline-offset-8"
+                    : "text-muted",
+                ]}
+              >
+                {item.label}
+              </a>
+            ))
+          }
+          <button
+            id="theme-toggle"
+            type="button"
+            aria-label="Dark mode"
+            aria-pressed="false"
+            class="text-muted transition-colors hover:text-accent"
+          >
+            <span class="dark:hidden">☾</span>
+            <span class="hidden dark:inline">☀</span>
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-4xl px-5 pt-6 pb-20 sm:pt-12">
+      <slot />
+    </main>
+
+    <footer class="starfield border-t border-line">
+      <div class="mx-auto flex max-w-4xl flex-col gap-4 px-5 py-10 sm:flex-row sm:items-center sm:justify-between">
+        <div class="font-mono text-xs text-muted">
+          <p>HTTP/1.1 200 OK</p>
+          <p>server: uvicorn</p>
+          <p>x-built-with: astro + starlette-grade care</p>
+        </div>
+        <div class="flex flex-wrap gap-x-5 gap-y-2 text-sm font-medium">
+          <a class="text-muted hover:text-accent" href="https://github.com/kludex">github</a>
+          <a class="text-muted hover:text-accent" href="https://twitter.com/marcelotryle">twitter</a>
+          <a class="text-muted hover:text-accent" href="https://www.linkedin.com/in/marcelotryle/">linkedin</a>
+          <a class="text-muted hover:text-accent" href="https://www.youtube.com/channel/UC91TdNbobUqT3d2CHcTkx8A"
+            >youtube</a
+          >
+          <a class="text-muted hover:text-accent" href="mailto:marcelotryle@gmail.com">email</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const toggle = document.getElementById("theme-toggle");
+      const sync = () => toggle?.setAttribute("aria-pressed", String(document.documentElement.dataset.theme === "dark"));
+      sync();
+      toggle?.addEventListener("click", () => {
+        const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+        document.documentElement.dataset.theme = next;
+        localStorage.setItem("theme", next);
+        sync();
+      });
+    </script>
+  </body>
+</html>
