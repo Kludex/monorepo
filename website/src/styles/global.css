@@ -50,18 +50,38 @@ html {
   color: #fff;
 }
 
-/* Protocol-style eyebrow labels */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Protocol-style eyebrow labels: rendered as a request line, e.g. "GET /blog" */
 .eyebrow {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
-  text-transform: lowercase;
+  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
   color: var(--muted);
 }
 
-.eyebrow::before {
-  content: ">> ";
+.eyebrow .verb {
   color: var(--accent);
+}
+
+/* Elevated panel — the one boxed surface on the site (hero, callouts) */
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+  box-shadow:
+    0 1px 2px rgb(23 27 38 / 0.04),
+    0 12px 32px -16px rgb(23 27 38 / 0.1);
+}
+
+[data-theme="dark"] .panel {
+  background: linear-gradient(180deg, #19212f 0%, #131926 100%);
+  border-color: #2b3448;
+  box-shadow: none;
 }
 
 /* Code blocks */
@@ -84,12 +104,15 @@ html {
 
 /* Callouts (converted from mkdocs admonitions) */
 .callout {
-  border: 1px solid var(--line);
   border-left: 3px solid var(--accent);
-  border-radius: 0.5rem;
-  background: var(--surface);
+  border-radius: 0 0.5rem 0.5rem 0;
+  background: color-mix(in srgb, var(--surface) 60%, var(--bg));
   padding: 1rem 1.25rem;
   margin: 1.5rem 0;
+}
+
+[data-theme="dark"] .callout {
+  background: color-mix(in srgb, var(--surface) 70%, var(--bg));
 }
 
 .callout-warning,
@@ -245,9 +268,75 @@ html {
   }
 }
 
-.youtube-embed {
+/* Click-to-play YouTube facade */
+.yt-facade {
+  position: relative;
+  display: block;
   aspect-ratio: 16 / 9;
   width: 100%;
-  border: 1px solid var(--line);
+  overflow: hidden;
   border-radius: 0.5rem;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  background: #000;
+}
+
+.yt-facade img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0.92;
+}
+
+.yt-facade:hover img,
+.yt-facade:focus-visible img {
+  transform: scale(1.03);
+  opacity: 1;
+}
+
+.yt-facade .play {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 9999px;
+  background: rgb(14 17 24 / 0.75);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.125rem;
+  transition: background 0.2s ease;
+  pointer-events: none;
+}
+
+.yt-facade:hover .play,
+.yt-facade:focus-visible .play {
+  background: var(--accent-bright);
+}
+
+.yt-facade iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+@media (max-width: 640px) {
+  .prose {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .prose h2 {
+    font-size: 1.375rem;
+  }
+
+  .prose h3 {
+    font-size: 1.125rem;
+  }
 }

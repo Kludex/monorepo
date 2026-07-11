@@ -3,116 +3,117 @@ import { getCollection } from "astro:content";
 import PostCard from "../components/PostCard.astro";
 import Layout from "../layouts/Layout.astro";
 
-const posts = (await getCollection("blog")).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 3);
+const posts = (await getCollection("blog")).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 4);
 
 const responseLines = [
-  { text: "HTTP/1.1 200 OK", class: "text-ink font-medium" },
-  { text: "server: uvicorn", class: "text-muted" },
-  { text: "content-type: text/human; charset=utf-8", class: "text-muted" },
-  { text: "x-origin: Brazil 🇧🇷", class: "text-muted" },
-  { text: "x-location: Utrecht, Netherlands 🇳🇱", class: "text-muted" },
+  { text: "HTTP/1.1 200 OK", class: "text-ink font-medium", mobile: true },
+  { text: "server: uvicorn", class: "text-muted", mobile: true },
+  { text: "content-type: text/human; charset=utf-8", class: "text-muted", mobile: false },
+  { text: "x-origin: Brazil 🇧🇷", class: "text-muted", mobile: false },
+  { text: "x-location: Utrecht, Netherlands 🇳🇱", class: "text-muted", mobile: true },
 ];
 
 const projects = [
   {
-    name: "starlette",
+    name: "Starlette",
     role: "maintainer",
-    description: "The little ASGI framework that shines. The foundation FastAPI is built on.",
+    description:
+      "The little ASGI framework that shines — the foundation FastAPI is built on, downloaded hundreds of millions of times a month.",
     url: "https://www.starlette.io/",
   },
   {
-    name: "uvicorn",
+    name: "Uvicorn",
     role: "maintainer",
-    description: "The lightning-fast ASGI server. It probably serves your app right now.",
+    description: "The lightning-fast ASGI server. If you run an async Python web app, it probably serves it right now.",
     url: "https://www.uvicorn.org/",
-  },
-  {
-    name: "fastapi",
-    role: "expert",
-    description: "Top user of all time on the issue tracker — hence “The FastAPI Expert”.",
-    url: "https://fastapi.tiangolo.com/fastapi-people/#experts",
   },
 ];
 ---
 
 <Layout title="Marcelo Trylesinski">
   <!-- Hero: a raw HTTP exchange -->
-  <section class="rounded-lg border border-line bg-surface font-mono text-sm">
-    <div class="border-b border-line px-5 py-3 text-muted">
+  <section class="panel font-mono text-sm">
+    <div class="border-b border-line px-5 py-3 text-muted sm:px-7">
       <span class="text-accent">GET</span> /marcelo HTTP/1.1<br />
       host: marcelotryle.com
     </div>
-    <div class="px-5 py-4">
+    <div class="px-5 py-5 sm:px-7 sm:py-6">
       {
         responseLines.map((line, index) => (
-          <p class={`stream-line ${line.class}`} style={`--line-index: ${index}`}>
+          <p class={`stream-line ${line.class} ${line.mobile ? "" : "hidden sm:block"}`} style={`--line-index: ${index}`}>
             {line.text}
           </p>
         ))
       }
-      <div class="stream-line mt-6 flex flex-col gap-6 sm:flex-row sm:items-center" style="--line-index: 6">
+      <div class="stream-line mt-6 flex items-center gap-5 sm:mt-8 sm:gap-7" style="--line-index: 6">
         <img
           src="https://avatars.githubusercontent.com/u/7353520?v=4"
           alt="Marcelo Trylesinski"
           width="112"
           height="112"
-          class="h-28 w-28 rounded-full border border-line"
+          class="h-20 w-20 rounded-full border border-line sm:h-28 sm:w-28"
         />
-        <div class="font-sans">
-          <h1 class="font-display text-4xl font-bold tracking-tight sm:text-5xl">Marcelo Trylesinski</h1>
-          <p class="mt-3 max-w-xl text-muted">
-            I maintain the plumbing of Python's web: <a class="text-accent underline underline-offset-4" href="https://www.starlette.io/">Starlette</a> and
-            <a class="text-accent underline underline-offset-4" href="https://www.uvicorn.org/">Uvicorn</a>. Also known as
-            <a class="text-accent underline underline-offset-4" href="https://fastapi.tiangolo.com/fastapi-people/#experts">the FastAPI Expert</a>.
-          </p>
-        </div>
+        <h1 class="font-display text-4xl font-bold tracking-tight sm:text-6xl">Marcelo Trylesinski</h1>
       </div>
+      <p class="stream-line mt-5 max-w-2xl font-sans text-base text-muted sm:text-lg" style="--line-index: 7">
+        I maintain the plumbing of Python's web:
+        <a class="text-accent underline underline-offset-4" href="https://www.starlette.io/">Starlette</a> and
+        <a class="text-accent underline underline-offset-4" href="https://www.uvicorn.org/">Uvicorn</a>. Also known as
+        <a class="text-accent underline underline-offset-4" href="https://fastapi.tiangolo.com/fastapi-people/#experts"
+          >the FastAPI Expert</a
+        >.
+      </p>
     </div>
   </section>
 
   <div class="mt-6 flex flex-wrap gap-3">
     <a
       href="https://github.com/sponsors/Kludex"
-      class="rounded-lg bg-accent-bright px-4 py-2 font-mono text-sm font-medium text-white transition-opacity hover:opacity-90"
+      class="rounded-lg bg-accent-bright px-5 py-2.5 text-sm font-semibold text-white transition-transform hover:scale-[1.02]"
     >
-      ❤️ sponsor my work
+      ❤️ Sponsor my work
     </a>
     <a
       href="/blog"
-      class="rounded-lg border border-line bg-surface px-4 py-2 font-mono text-sm text-ink transition-colors hover:border-accent"
+      class="rounded-lg px-5 py-2.5 text-sm font-semibold text-ink underline decoration-line underline-offset-4 transition-colors hover:text-accent"
     >
-      read the blog
+      Read the blog
     </a>
   </div>
 
   <!-- Projects -->
-  <section class="mt-16">
-    <p class="eyebrow">what i work on</p>
-    <div class="mt-4 grid gap-4 sm:grid-cols-3">
+  <section class="mt-20">
+    <h2 class="border-t border-line pt-6 font-display text-2xl font-bold tracking-tight sm:text-3xl">Work</h2>
+    <div class="mt-8 grid gap-10 sm:grid-cols-2">
       {
         projects.map((project) => (
-          <a
-            href={project.url}
-            class="group rounded-lg border border-line bg-surface p-5 transition-colors hover:border-accent"
-          >
-            <p class="font-mono text-sm">
-              <span class="font-medium group-hover:text-accent">{project.name}</span>
-              <span class="text-muted"> · {project.role}</span>
-            </p>
-            <p class="mt-2 text-sm text-muted">{project.description}</p>
-          </a>
+          <div>
+            <h3 class="font-display text-2xl font-semibold">
+              <a href={project.url} class="transition-colors hover:text-accent">
+                {project.name}
+              </a>
+              <span class="ml-2 align-middle font-mono text-xs font-normal text-muted">{project.role}</span>
+            </h3>
+            <p class="mt-3 max-w-md text-base text-muted">{project.description}</p>
+          </div>
         ))
       }
     </div>
+    <p class="mt-10 text-base text-muted">
+      Also the all-time top user on the FastAPI issue tracker — which earned me the name
+      <a href="https://fastapi.tiangolo.com/fastapi-people/#experts" class="text-accent underline underline-offset-4"
+        >“the FastAPI Expert”</a
+      >.
+    </p>
   </section>
 
   <!-- Latest posts -->
-  <section class="mt-16">
-    <div class="flex items-baseline justify-between">
-      <p class="eyebrow">latest posts</p>
-      <a href="/blog" class="font-mono text-sm text-muted hover:text-accent">all posts →</a>
+  <section class="mt-20">
+    <div class="flex items-baseline justify-between border-t border-line pt-6">
+      <h2 class="font-display text-2xl font-bold tracking-tight sm:text-3xl">Writing</h2>
+      <a href="/blog" class="text-sm font-medium text-muted transition-colors hover:text-accent">All posts →</a>
     </div>
-    <div class="mt-4 grid gap-4">
+    <div class="mt-2">
       {posts.map((post) => <PostCard post={post} />)}
     </div>
   </section>

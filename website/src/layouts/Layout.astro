@@ -45,14 +45,17 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "");
         <a href="/" class="font-mono text-sm font-medium tracking-wide hover:text-accent">
           <span class="text-accent">~/</span>marcelotryle
         </a>
-        <nav class="flex flex-1 items-center justify-between gap-4 font-mono text-sm sm:flex-none sm:justify-start sm:gap-6">
+        <nav class="flex flex-1 items-center justify-between gap-4 text-sm font-medium sm:flex-none sm:justify-start sm:gap-6">
           {
             nav.map((item) => (
               <a
                 href={item.href}
+                aria-current={currentPath.startsWith(item.href) ? "page" : undefined}
                 class:list={[
-                  "hover:text-accent",
-                  currentPath.startsWith(item.href) ? "text-accent" : "text-muted",
+                  "py-1 transition-colors hover:text-accent",
+                  currentPath.startsWith(item.href)
+                    ? "text-ink underline decoration-accent decoration-2 underline-offset-8"
+                    : "text-muted",
                 ]}
               >
                 {item.label}
@@ -62,8 +65,9 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "");
           <button
             id="theme-toggle"
             type="button"
-            aria-label="Toggle dark mode"
-            class="text-muted hover:text-accent"
+            aria-label="Dark mode"
+            aria-pressed="false"
+            class="text-muted transition-colors hover:text-accent"
           >
             <span class="dark:hidden">☾</span>
             <span class="hidden dark:inline">☀</span>
@@ -72,7 +76,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "");
       </div>
     </header>
 
-    <main class="mx-auto max-w-4xl px-5 pt-10 pb-20">
+    <main class="mx-auto max-w-4xl px-5 pt-6 pb-20 sm:pt-12">
       <slot />
     </main>
 
@@ -83,7 +87,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "");
           <p>server: uvicorn</p>
           <p>x-built-with: astro + starlette-grade care</p>
         </div>
-        <div class="flex flex-wrap gap-x-5 gap-y-2 font-mono text-sm">
+        <div class="flex flex-wrap gap-x-5 gap-y-2 text-sm font-medium">
           <a class="text-muted hover:text-accent" href="https://github.com/kludex">github</a>
           <a class="text-muted hover:text-accent" href="https://twitter.com/marcelotryle">twitter</a>
           <a class="text-muted hover:text-accent" href="https://www.linkedin.com/in/marcelotryle/">linkedin</a>
@@ -97,10 +101,13 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "");
 
     <script>
       const toggle = document.getElementById("theme-toggle");
+      const sync = () => toggle?.setAttribute("aria-pressed", String(document.documentElement.dataset.theme === "dark"));
+      sync();
       toggle?.addEventListener("click", () => {
         const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
         document.documentElement.dataset.theme = next;
         localStorage.setItem("theme", next);
+        sync();
       });
     </script>
   </body>

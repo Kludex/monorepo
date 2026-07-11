@@ -1,4 +1,5 @@
 ---
+import YouTubeEmbed from "../components/YouTubeEmbed.astro";
 import { talks } from "../data/talks";
 import Layout from "../layouts/Layout.astro";
 
@@ -6,49 +7,50 @@ const years = [...new Set(talks.map((talk) => talk.year))].sort((a, b) => b - a)
 ---
 
 <Layout title="Talks — Marcelo Trylesinski">
-  <p class="eyebrow">talks</p>
-  <h1 class="mt-2 font-display text-3xl font-bold tracking-tight">Conference talks</h1>
-  <p class="mt-3 max-w-xl text-muted">
+  <p class="eyebrow"><span class="verb">GET</span> /talks</p>
+  <h1 class="mt-3 font-display text-4xl font-bold tracking-tight sm:text-5xl">Conference talks</h1>
+  <p class="mt-4 max-w-xl text-lg text-muted">
     Sharing what I know about Python, FastAPI, Starlette, ASGI, and open source maintenance — from PyCon keynotes to
     meetups.
   </p>
 
   {
     years.map((year) => (
-      <section class="mt-12">
-        <h2 class="font-mono text-sm text-muted">{year}</h2>
-        <div class="mt-4 grid gap-6">
+      <section class="mt-14">
+        <h2 class="border-t border-line pt-5 font-mono text-sm text-muted">{year}</h2>
+        <div class="mt-6 grid gap-12">
           {talks
             .filter((talk) => talk.year === year)
             .map((talk) => (
-              <div class="rounded-lg border border-line bg-surface p-5">
-                <p class="font-mono text-xs text-muted">
-                  {talk.event}
-                  {talk.keynote && <span class="ml-2 rounded bg-gold/15 px-1.5 py-0.5 text-gold">keynote</span>}
-                </p>
-                <h3 class="mt-1 font-display text-xl font-semibold">
-                  <a href={talk.url} class="hover:text-accent">
-                    {talk.title}
-                  </a>
-                </h3>
-                {talk.youtubeId && (
-                  <iframe
-                    class="youtube-embed mt-4"
-                    src={`https://www.youtube.com/embed/${talk.youtubeId}${talk.youtubeStart ? `?start=${talk.youtubeStart}` : ""}`}
-                    title={`${talk.title} — ${talk.event} ${talk.year}`}
-                    loading="lazy"
-                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen
-                  />
-                )}
-                {talk.slides && (
-                  <p class="mt-3">
-                    <a href={talk.slides} class="font-mono text-sm text-accent hover:underline">
-                      view slides →
-                    </a>
+              <article class="sm:grid sm:grid-cols-[1fr_20rem] sm:items-start sm:gap-8">
+                <div>
+                  <p class="font-mono text-xs text-muted">
+                    {talk.event}
+                    {talk.keynote && <span class="ml-2 rounded bg-gold/15 px-1.5 py-0.5 text-gold">keynote</span>}
                   </p>
+                  <h3 class="mt-2 font-display text-2xl font-semibold leading-snug">
+                    <a href={talk.url} class="transition-colors hover:text-accent">
+                      {talk.title}
+                    </a>
+                  </h3>
+                  {talk.slides && (
+                    <p class="mt-3">
+                      <a href={talk.slides} class="text-sm font-medium text-accent hover:underline">
+                        View slides →
+                      </a>
+                    </p>
+                  )}
+                </div>
+                {talk.youtubeId && (
+                  <div class="mt-4 sm:mt-0">
+                    <YouTubeEmbed
+                      videoId={talk.youtubeId}
+                      start={talk.youtubeStart}
+                      title={`${talk.title} — ${talk.event} ${talk.year}`}
+                    />
+                  </div>
                 )}
-              </div>
+              </article>
             ))}
         </div>
       </section>
