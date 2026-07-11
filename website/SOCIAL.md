@@ -1,33 +1,43 @@
 # Auto-posting blog posts to LinkedIn and X/Twitter
 
 New blog posts are announced automatically via the site's RSS feed at
-`https://marcelotryle.com/rss.xml`. Publishing a post (merging to `main`) adds it
-to the feed; a Zapier automation picks it up from there. No repo-side action needed
-beyond merging.
+`https://marcelotryle.com/rss.xml`. Publishing a post (merging to `main`) adds it to
+the feed; Buffer picks it up from there and posts at the next scheduled slot -
+14:00-15:00 European time, when worldwide impressions are best. No repo-side action
+needed beyond merging.
 
-## One-time Zapier setup
+## How it flows
 
-Zapier polls the feed and posts new items. Create two Zaps at
-[zapier.com](https://zapier.com):
+```
+merge post -> site deploys -> rss.xml updates -> IFTTT detects new item
+           -> adds to Buffer queue -> Buffer posts at the next 14:00 CET slot
+```
 
-### Zap 1: RSS → LinkedIn
+Buffer holds queued posts until a scheduled slot, so it doesn't matter when you merge.
+Posts sit in the queue where you can edit the wording per network before they go out.
 
-1. **Trigger**: "RSS by Zapier" → *New Item in Feed* → feed URL `https://marcelotryle.com/rss.xml`.
-2. **Action**: "LinkedIn" → *Create Share Update* (connect your LinkedIn account).
-3. Comment template: `New blog post: {{Title}}` + `{{Link}}` (add `{{Description}}` if you want the excerpt).
+## One-time setup
 
-### Zap 2: RSS → X/Twitter
+### 1. Buffer ([buffer.com](https://buffer.com))
 
-1. **Trigger**: same RSS trigger (you can copy Zap 1).
-2. **Action**: "Twitter" → *Create Tweet*.
-3. Tweet template: `{{Title}} {{Link}}`.
+1. Create an account and connect two channels: your LinkedIn profile and X account.
+   The free plan covers 3 channels and 10 queued posts per channel - plenty.
+2. For **each** channel, set the posting schedule (Settings → Posting Schedule):
+   timezone `Amsterdam (Europe)`, one daily slot at `14:00`. Add a second slot at
+   `15:00` if you want a fallback window.
 
-Notes:
+### 2. IFTTT ([ifttt.com](https://ifttt.com))
 
-- Zapier's free plan polls every 15 minutes and covers two single-step Zaps - enough for this.
-- The X integration may require a paid Zapier plan depending on current X API terms; if it
-  does, [Buffer](https://buffer.com) or [dlvr.it](https://dlvr.it) can watch the same feed
-  and post to both networks instead. Any RSS-based tool works - the feed is the contract.
+Buffer has no native RSS ingestion (their [help center](https://support.buffer.com/article/613-automating-rss-feeds-using-feedly-and-zapier)
+recommends a connector), so IFTTT bridges feed → queue. Create one applet per channel:
+
+1. **If**: "RSS Feed" → *New feed item* → `https://marcelotryle.com/rss.xml`.
+2. **Then**: "Buffer" → *Add to Buffer* → pick the channel.
+3. Message template: `New blog post: {{EntryTitle}} {{EntryUrl}}` for LinkedIn;
+   `{{EntryTitle}} {{EntryUrl}}` for X (leave room within 280 chars).
+
+The IFTTT free plan allows two applets - exactly what this needs. Zapier works
+identically if preferred ("RSS by Zapier" → "Add to Buffer").
 
 ## Feed details
 
