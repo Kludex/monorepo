@@ -13,3 +13,4 @@ npm run build   # static build to dist/
 - The YouTube grid is built from the channel RSS feed at build time; the sponsors grid from the GitHub GraphQL API (needs `GH_TOKEN`). Both degrade gracefully when unavailable.
 - Slide decks are served as static HTML from `public/slides/`.
 - `public/_redirects` maps the old MkDocs blog URLs to the new ones on Cloudflare Pages.
+- New posts are auto-shared to LinkedIn and X (via Buffer, scheduled 14:00-15:00 CET) from the RSS feed (`/rss.xml`) - see [SOCIAL.md](SOCIAL.md).
