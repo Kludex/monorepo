@@ -3,97 +3,53 @@ import Layout from "../layouts/Layout.astro";
 
 const links = [
   {
-    label: "GitHub",
-    description: "Starlette, Uvicorn, and everything else I build.",
-    href: "https://github.com/kludex",
-    host: "github.com/kludex",
-  },
-  {
-    label: "Sponsor my work",
-    description: "Support the maintenance of Python's web plumbing.",
+    label: "❤️ Sponsor my work",
     href: "https://github.com/sponsors/Kludex",
-    host: "github.com/sponsors/Kludex",
     highlight: true,
   },
-  {
-    label: "YouTube",
-    description: "Videos on FastAPI, Starlette, and async Python.",
-    href: "https://www.youtube.com/channel/UC91TdNbobUqT3d2CHcTkx8A",
-    host: "youtube.com",
-  },
-  {
-    label: "LinkedIn",
-    description: "Professional profile and updates.",
-    href: "https://www.linkedin.com/in/marcelotryle/",
-    host: "linkedin.com/in/marcelotryle",
-  },
-  {
-    label: "X / Twitter",
-    description: "Hot takes and release announcements.",
-    href: "https://twitter.com/marcelotryle",
-    host: "x.com/marcelotryle",
-  },
-  {
-    label: "Blog",
-    description: "Writing on ASGI, HTTP, and open source.",
-    href: "/blog",
-    host: "marcelotryle.com/blog",
-  },
-  {
-    label: "Email",
-    description: "Reach me directly.",
-    href: "mailto:marcelotryle@gmail.com",
-    host: "marcelotryle@gmail.com",
-  },
+  { label: "GitHub", href: "https://github.com/kludex" },
+  { label: "YouTube", href: "https://www.youtube.com/channel/UC91TdNbobUqT3d2CHcTkx8A" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/marcelotryle/" },
+  { label: "X / Twitter", href: "https://twitter.com/marcelotryle" },
+  { label: "Blog", href: "/blog" },
+  { label: "Email", href: "mailto:marcelotryle@gmail.com" },
 ];
 ---
 
 <Layout title="Links — Marcelo Trylesinski" description="All of Marcelo Trylesinski's important links in one place.">
-  <section class="mx-auto max-w-xl">
-    <div class="panel font-mono text-sm">
-      <div class="border-b border-line px-5 py-3 text-muted sm:px-7">
-        <span class="text-accent">GET</span> /links HTTP/1.1<br />
-        host: marcelotryle.com
-      </div>
-      <div class="px-5 py-5 sm:px-7 sm:py-6">
-        <p class="stream-line font-medium text-ink" style="--line-index: 0">HTTP/1.1 300 Multiple Choices</p>
-        <p class="stream-line text-muted" style="--line-index: 1">server: uvicorn</p>
-        <p class="stream-line text-muted" style="--line-index: 2">vary: whatever-you-came-for</p>
-        <div class="stream-line mt-6 flex items-center gap-4" style="--line-index: 3">
-          <img
-            src="https://avatars.githubusercontent.com/u/7353520?v=4"
-            alt="Marcelo Trylesinski"
-            width="64"
-            height="64"
-            class="h-16 w-16 rounded-full border border-line"
-          />
-          <div class="font-sans">
-            <h1 class="font-display text-2xl font-bold tracking-tight">Marcelo Trylesinski</h1>
-            <p class="text-sm text-muted">Maintainer of Starlette & Uvicorn · the FastAPI Expert</p>
-          </div>
-        </div>
-      </div>
-    </div>
+  <section class="mx-auto max-w-md py-6 text-center sm:py-10">
+    <img
+      src="https://avatars.githubusercontent.com/u/7353520?v=4"
+      alt="Marcelo Trylesinski"
+      width="96"
+      height="96"
+      class="stream-line mx-auto h-24 w-24 rounded-full border border-line"
+      style="--line-index: 0"
+    />
+    <h1 class="stream-line mt-4 font-display text-3xl font-bold tracking-tight" style="--line-index: 1">
+      Marcelo Trylesinski
+    </h1>
+    <p class="stream-line mt-2 text-sm text-muted" style="--line-index: 2">
+      Maintainer of Starlette & Uvicorn · the FastAPI Expert
+    </p>
+    <p class="stream-line eyebrow mt-3" style="--line-index: 3">
+      <span class="verb">GET</span> /links → 300 Multiple Choices
+    </p>
 
-    <div class="mt-6 flex flex-col gap-3">
+    <div class="mt-8 flex flex-col gap-3.5">
       {
         links.map((link, index) => (
           <a
             href={link.href}
             class:list={[
-              "stream-line panel block px-5 py-4 transition-transform hover:scale-[1.01] hover:border-accent sm:px-6",
-              link.highlight ? "border-accent" : "",
+              "stream-line block w-full rounded-full px-6 py-3.5 text-center font-semibold transition-transform hover:scale-[1.02]",
+              link.highlight
+                ? "bg-accent-bright text-white"
+                : "border border-line bg-surface text-ink hover:border-accent hover:text-accent",
             ]}
             style={`--line-index: ${index + 4}`}
           >
-            <span class="flex items-baseline justify-between gap-4">
-              <span class="font-display text-lg font-semibold">
-                {link.highlight ? "❤️ " : ""}
-                {link.label}
-              </span>
-              <span class="hidden font-mono text-xs text-muted sm:inline">{link.host}</span>
-            </span>
-            <span class="mt-1 block text-sm text-muted">{link.description}</span>
+            {link.label}
           </a>
         ))
       }
