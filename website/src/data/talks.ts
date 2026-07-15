@@ -73,7 +73,7 @@ export const talks: Talk[] = [
   {
     event: "EuroPython",
     year: 2023,
-    title: "Performance tips by the FastAPI Expert",
+    title: "Performance tips by The FastAPI Expert",
     url: "https://ep2023.europython.eu/speaker/marcelo-trylesinski",
     youtubeId: "7jtzjovKQ8A",
   },
@@ -103,7 +103,7 @@ export const talks: Talk[] = [
   {
     event: "Pyjamas",
     year: 2022,
-    title: "Performance tips by the FastAPI Expert",
+    title: "Performance tips by The FastAPI Expert",
     url: "https://www.youtube.com/embed/-CjKMfva398",
     youtubeId: "-CjKMfva398",
   },

@@ -40,7 +40,7 @@ I have been sharing my knowledge about Python, FastAPI, Starlette, and other rel
 
 [Download Slides :heart:](slides/fastapi_history.html){:download="fastapi_history.html" .md-button}
 
-### EuroPython 2023: [Performance tips by the FastAPI Expert][europython-2023]
+### EuroPython 2023: [Performance tips by The FastAPI Expert][europython-2023]
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/7jtzjovKQ8A?si=Wb8u4pbKC7SKz-IL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
@@ -56,7 +56,7 @@ I have been sharing my knowledge about Python, FastAPI, Starlette, and other rel
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/2fgBKDT1j8k?start=22987" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-### Pyjamas 2022: [Performance tips by the FastAPI Expert][pyjamas-2022]
+### Pyjamas 2022: [Performance tips by The FastAPI Expert][pyjamas-2022]
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/-CjKMfva398" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
