@@ -1,0 +1,49 @@
+---
+import "@fontsource-variable/bricolage-grotesque";
+import "@fontsource/ibm-plex-mono/400.css";
+import "@fontsource/ibm-plex-mono/500.css";
+import QRCode from "qrcode";
+import "../styles/global.css";
+
+const qrSvg = await QRCode.toString("https://marcelotryle.com/links", {
+  type: "svg",
+  errorCorrectionLevel: "H",
+  margin: 0,
+  color: { dark: "#0e1118", light: "#ffffff" },
+});
+---
+
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Scan me — Marcelo Trylesinski</title>
+  </head>
+  <body class="starfield flex min-h-dvh flex-col items-center justify-center gap-8 bg-paper px-8 text-ink">
+    <img
+      src="https://avatars.githubusercontent.com/u/7353520?v=4"
+      alt="Marcelo Trylesinski"
+      width="80"
+      height="80"
+      class="h-20 w-20 rounded-full border border-line"
+    />
+    <div class="text-center">
+      <h1 class="font-display text-3xl font-bold tracking-tight">Marcelo Trylesinski</h1>
+      <p class="mt-1 font-mono text-sm text-muted">The AI Expert</p>
+    </div>
+    <div class="qr w-full max-w-70 rounded-3xl bg-white p-6 shadow-lg" set:html={qrSvg} />
+    <p class="font-mono text-sm text-muted">
+      <span class="text-accent">GET</span> marcelotryle.com/links
+    </p>
+  </body>
+</html>
+
+<style>
+  .qr :global(svg) {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+</style>
