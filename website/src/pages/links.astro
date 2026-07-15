@@ -1,0 +1,57 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const links = [
+  {
+    label: "❤️ Sponsor my work",
+    href: "https://github.com/sponsors/Kludex",
+    highlight: true,
+  },
+  { label: "GitHub", href: "https://github.com/kludex" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/marcelotryle/" },
+  { label: "X / Twitter", href: "https://twitter.com/marcelotryle" },
+  { label: "Email", href: "mailto:marcelotryle@gmail.com" },
+  { label: "Schedule a meeting", href: "https://calendar.app.google/bSdi8MEceSxT24Ww5" },
+];
+---
+
+<Layout title="Links — Marcelo Trylesinski" description="All of Marcelo Trylesinski's important links in one place.">
+  <section class="mx-auto max-w-md py-6 text-center sm:py-10">
+    <img
+      src="https://avatars.githubusercontent.com/u/7353520?v=4"
+      alt="Marcelo Trylesinski"
+      width="96"
+      height="96"
+      class="stream-line mx-auto h-24 w-24 rounded-full border border-line"
+      style="--line-index: 0"
+    />
+    <h1 class="stream-line mt-4 font-display text-3xl font-bold tracking-tight" style="--line-index: 1">
+      Marcelo Trylesinski
+    </h1>
+    <p class="stream-line mt-2 text-sm text-muted" style="--line-index: 2">
+      Maintainer of Starlette & Uvicorn · the FastAPI Expert
+    </p>
+    <p class="stream-line eyebrow mt-3" style="--line-index: 3">
+      <span class="verb">GET</span> /links → 300 Multiple Choices
+    </p>
+
+    <div class="mt-8 flex flex-col gap-3.5">
+      {
+        links.map((link, index) => (
+          <a
+            href={link.href}
+            class:list={[
+              "stream-line block w-full rounded-full px-6 py-3.5 text-center font-semibold transition-transform hover:scale-[1.02]",
+              link.highlight
+                ? "bg-accent-bright text-white"
+                : "border border-line bg-surface text-ink hover:border-accent hover:text-accent",
+            ]}
+            style={`--line-index: ${index + 4}`}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </div>
+  </section>
+</Layout>
