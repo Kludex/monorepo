@@ -63,10 +63,10 @@ const policySteps = [
       </p>
       <div class="mt-7 flex flex-wrap gap-3">
         <a
-          href="mailto:marcelotryle@gmail.com?subject=Private%20security%20report"
+          href="#reporting"
           class="rounded-lg bg-accent-bright px-5 py-2.5 text-sm font-semibold text-white transition-transform hover:scale-[1.02]"
         >
-          Report privately
+          How to report
         </a>
         <a
           href="#proposed-cna-scope"
@@ -139,29 +139,47 @@ const policySteps = [
     </p>
   </section>
 
-  <section class="mt-20">
+  <section id="reporting" class="mt-20 scroll-mt-24">
     <h2 class="border-t border-line pt-6 font-display text-3xl font-bold tracking-tight sm:text-4xl">
       Report a vulnerability
     </h2>
     <p class="mt-5 max-w-3xl leading-relaxed text-muted">
-      Please report suspected vulnerabilities privately. If a repository has private vulnerability reporting enabled,
-      its <strong class="text-ink">Security</strong> tab is the best route. Otherwise, email me. Do not open a public
-      issue before we agree on disclosure.
+      Start with the affected project's own private reporting channel. Open its GitHub repository, select the
+      <strong class="text-ink">Security</strong> tab, and use <strong class="text-ink">Report a vulnerability</strong>
+      when that option is available. This keeps the report with the maintainers responsible for the affected code.
     </p>
+
+    <ol class="mt-8 grid gap-3 sm:grid-cols-3">
+      <li class="rounded-lg border border-line p-5">
+        <span class="font-mono text-xs text-accent">01</span>
+        <strong class="mt-4 block font-display text-lg">Find the project</strong>
+        <span class="mt-2 block text-sm leading-relaxed text-muted">Open the affected project's canonical GitHub repository.</span>
+      </li>
+      <li class="rounded-lg border border-line p-5">
+        <span class="font-mono text-xs text-accent">02</span>
+        <strong class="mt-4 block font-display text-lg">Report privately</strong>
+        <span class="mt-2 block text-sm leading-relaxed text-muted">Use its Security tab and private vulnerability reporting form.</span>
+      </li>
+      <li class="rounded-lg border border-line p-5">
+        <span class="font-mono text-xs text-accent">03</span>
+        <strong class="mt-4 block font-display text-lg">Use email only as fallback</strong>
+        <span class="mt-2 block text-sm leading-relaxed text-muted">Email me only when the project has no private reporting route or for CNA coordination.</span>
+      </li>
+    </ol>
 
     <div class="panel mt-8 grid gap-6 p-6 sm:grid-cols-[minmax(0,1fr)_14rem] sm:p-8">
       <div>
-        <h3 class="font-display text-xl font-semibold">Private contact</h3>
+        <h3 class="font-display text-xl font-semibold">CNA coordination fallback</h3>
         <a
           class="mt-3 inline-block font-mono text-sm text-accent underline underline-offset-4"
-          href="mailto:marcelotryle@gmail.com?subject=Private%20security%20report"
+          href="mailto:marcelotryle@gmail.com?subject=CNA%20coordination"
         >
           marcelotryle@gmail.com
         </a>
         <p class="mt-4 text-sm leading-relaxed text-muted">
           Use the subject <code class="rounded bg-paper px-1.5 py-0.5 font-mono text-xs text-ink"
-            >Private security report: &lt;project&gt;</code
-          >.
+            >CNA coordination: &lt;project&gt;</code
+          >. Do not open a public issue before disclosure is agreed.
         </p>
       </div>
       <dl class="border-t border-line pt-5 text-sm sm:border-t-0 sm:border-l sm:pt-0 sm:pl-6">
@@ -236,32 +254,18 @@ const policySteps = [
     </div>
   </section>
 
-  <section class="mt-20">
+  <section id="advisories" class="mt-20 scroll-mt-24">
     <h2 class="border-t border-line pt-6 font-display text-3xl font-bold tracking-tight sm:text-4xl">
-      Public advisories
+      Advisory location
     </h2>
-    <p class="mt-5 text-muted">Advisories are public, require no login, and link to the canonical security notice.</p>
+    <p class="mt-5 max-w-3xl leading-relaxed text-muted">
+      Formal vulnerability advisories are published through the affected project's canonical GitHub Security Advisories
+      page. Once public, advisories coordinated in this scope will be indexed here and will be readable without login.
+    </p>
 
-    <article class="mt-8 grid gap-4 rounded-lg border border-line p-6 sm:grid-cols-[5rem_minmax(0,1fr)]">
-      <time datetime="2026-05-28" class="font-mono text-xs leading-relaxed text-accent">28 MAY<br />2026</time>
-      <div>
-        <h3 class="font-display text-xl font-semibold">
-          <a
-            class="transition-colors hover:text-accent"
-            href="https://github.com/Kludex/starlette/security/advisories/GHSA-86qp-5c8j-p5mr"
-          >
-            CVE-2026-48710 · Starlette request URL host validation
-          </a>
-        </h3>
-        <p class="mt-3 text-sm leading-relaxed text-muted">
-          Malformed <code class="font-mono text-ink">Host</code> values could make a reconstructed request URL differ
-          from the path used by routing. Fixed in Starlette 1.0.1.
-          <a class="text-accent underline underline-offset-4" href="/blog/badhost-cve-2026-48710"
-            >Read the maintainer perspective</a
-          >.
-        </p>
-      </div>
-    </article>
+    <div class="mt-8 rounded-lg border border-dashed border-line px-6 py-8 text-center">
+      <p class="font-mono text-xs tracking-[0.12em] text-muted uppercase">No published advisories to list yet</p>
+    </div>
   </section>
 
   <section class="panel mt-20 p-8 text-center sm:p-12">
@@ -270,10 +274,10 @@ const policySteps = [
       Send it privately. You will get a human response, a fair technical review, and clear next steps.
     </p>
     <a
-      href="mailto:marcelotryle@gmail.com?subject=Private%20security%20report"
+      href="#reporting"
       class="mt-7 inline-block rounded-lg bg-accent-bright px-5 py-2.5 text-sm font-semibold text-white transition-transform hover:scale-[1.02]"
     >
-      Start a private report
+      Choose the reporting route
     </a>
   </section>
 </Layout>
