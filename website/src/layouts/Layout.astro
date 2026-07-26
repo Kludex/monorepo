@@ -8,13 +8,18 @@ import "../styles/global.css";
 type Props = {
   title: string;
   description?: string;
+  image?: string;
 };
 
-const { title, description = "Marcelo Trylesinski — maintainer of Starlette and Uvicorn, FastAPI Expert." } =
-  Astro.props;
+const {
+  title,
+  description = "Marcelo Trylesinski — maintainer of Starlette and Uvicorn, FastAPI Expert.",
+  image,
+} = Astro.props;
 
 const nav = [
   { href: "/blog", label: "blog" },
+  { href: "/cna", label: "security" },
   { href: "/talks", label: "talks" },
   { href: "/youtube", label: "youtube" },
   { href: "/sponsors", label: "sponsors" },
@@ -22,6 +27,7 @@ const nav = [
 
 const currentPath = Astro.url.pathname.replace(/\/$/, "");
 const canonical = new URL(Astro.url.pathname.replace(/\/$/, "") || "/", Astro.site);
+const socialImage = image ? new URL(image, Astro.site) : undefined;
 ---
 
 <!doctype html>
@@ -34,6 +40,10 @@ const canonical = new URL(Astro.url.pathname.replace(/\/$/, "") || "/", Astro.si
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
+    {socialImage && <meta property="og:image" content={socialImage} />}
+    {socialImage && <meta property="og:image:alt" content={title} />}
+    {socialImage && <meta name="twitter:card" content="summary_large_image" />}
+    {socialImage && <meta name="twitter:image" content={socialImage} />}
     <link rel="canonical" href={canonical} />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />

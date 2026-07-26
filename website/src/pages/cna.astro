@@ -1,0 +1,102 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const projects = [
+  { name: "Starlette", url: "https://github.com/Kludex/starlette" },
+  { name: "python-multipart", url: "https://github.com/Kludex/python-multipart" },
+  { name: "Uvicorn", url: "https://github.com/Kludex/uvicorn" },
+  { name: "Pydantic", url: "https://github.com/pydantic/pydantic" },
+  { name: "Pydantic AI", url: "https://github.com/pydantic/pydantic-ai" },
+  { name: "MCP", url: "https://github.com/modelcontextprotocol/modelcontextprotocol" },
+  { name: "Mangum", url: "https://github.com/Kludex/mangum" },
+  { name: "HTTPX2", url: "https://github.com/pydantic/httpx2" },
+];
+---
+
+<Layout
+  title="CVE Coordination — Marcelo Trylesinski"
+  description="Public CNA scope, security contact, disclosure policy, and advisory location for Marcelo Trylesinski."
+  image="/assets/cna/cve-coordination.png"
+>
+  <p class="eyebrow"><span class="verb">GET</span> /cna</p>
+
+  <header class="mt-4 border-b border-line pb-10">
+    <div class="flex flex-wrap items-center gap-3">
+      <h1 class="font-display text-4xl font-bold tracking-tight sm:text-6xl">CVE coordination</h1>
+      <span class="rounded-full border border-line bg-surface px-3 py-1 font-mono text-xs text-muted">Prospective CNA</span>
+    </div>
+    <p class="mt-5 max-w-2xl text-lg leading-relaxed text-muted">
+      Public scope, reporting contact, disclosure policy, and advisory location for my CVE Numbering Authority
+      application.
+    </p>
+  </header>
+
+  <aside class="callout mt-8" aria-label="CNA authorization notice">
+    <p class="leading-relaxed text-muted">
+      I am not yet a CVE Numbering Authority. I will only reserve, assign, or publish CVE IDs after authorization by
+      the CVE Program.
+    </p>
+  </aside>
+
+  <div class="prose mt-12 max-w-none">
+    <section>
+      <h2>Scope</h2>
+      <p>
+        Vulnerabilities in the open-source projects listed below when I am an authorized maintainer or security
+        coordinator; and vulnerabilities in other open-source projects that I research or coordinate when an authorized
+        project representative explicitly requests my assistance, provided the vulnerability is not already covered by
+        another CNA with more appropriate scope.
+      </p>
+      <ul>
+        {
+          projects.map((project) => (
+            <li>
+              <a href={project.url}>{project.name}</a>
+            </li>
+          ))
+        }
+      </ul>
+      <p>
+        Supported and end-of-life releases are considered case by case. I will defer to the supplier or another CNA
+        whenever it has more appropriate scope.
+      </p>
+    </section>
+
+    <section id="reporting">
+      <h2>Reporting and public contact</h2>
+      <p>
+        Report vulnerabilities through the affected project's private reporting channel first. On GitHub, open the
+        project's <strong>Security</strong> tab and use <strong>Report a vulnerability</strong> when available. Do not
+        open a public issue.
+      </p>
+      <p>
+        If the project has no private reporting channel, or for CNA coordination, contact
+        <a href="mailto:security@marcelotryle.com?subject=CNA%20coordination">security@marcelotryle.com</a>.
+      </p>
+    </section>
+
+    <section>
+      <h2>Disclosure policy</h2>
+      <p>
+        Reports are handled privately with the reporter and the affected project. I will validate the issue, identify
+        affected versions, check for duplicate CVE records, and coordinate a fix and disclosure date with the relevant
+        maintainers.
+      </p>
+      <p>
+        A fix or mitigation should be available before or at disclosure whenever feasible. Published information will
+        include affected and fixed versions, impact, mitigations, references, and reporter credit when requested.
+        Timelines may be shortened for active exploitation or adjusted when necessary to protect users. The current
+        <a href="https://www.cve.org/ResourcesSupport/AllResources/CNARules">CNA Operational Rules</a> take precedence.
+      </p>
+    </section>
+
+    <section id="advisories">
+      <h2>Advisory location</h2>
+      <p>
+        Formal advisories are published through the affected project's canonical public security-advisory page and will
+        be indexed here after disclosure. Published advisories will be readable without login.
+      </p>
+      <p><em>No published advisories are currently listed.</em></p>
+    </section>
+  </div>
+</Layout>
