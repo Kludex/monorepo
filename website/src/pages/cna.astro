@@ -1,0 +1,279 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const projects = [
+  { name: "Starlette", description: "ASGI framework", url: "https://github.com/Kludex/starlette" },
+  {
+    name: "python-multipart",
+    description: "Multipart parser",
+    url: "https://github.com/Kludex/python-multipart",
+  },
+  { name: "Uvicorn", description: "ASGI server", url: "https://github.com/Kludex/uvicorn" },
+  { name: "Pydantic", description: "Data validation", url: "https://github.com/pydantic/pydantic" },
+  { name: "Pydantic AI", description: "Agent framework", url: "https://github.com/pydantic/pydantic-ai" },
+  {
+    name: "MCP",
+    description: "Protocol & Python SDK",
+    url: "https://github.com/modelcontextprotocol/modelcontextprotocol",
+  },
+  { name: "Mangum", description: "AWS Lambda support for ASGI", url: "https://github.com/Kludex/mangum" },
+  { name: "HTTPX2", description: "HTTP client", url: "https://github.com/pydantic/httpx2" },
+];
+
+const policySteps = [
+  {
+    number: "01",
+    title: "Receive & acknowledge",
+    body: "I will acknowledge a complete private report within three business days and establish a private coordination channel.",
+  },
+  {
+    number: "02",
+    title: "Validate & scope",
+    body: "I will reproduce the issue, assess affected versions and impact, check for duplicates, and identify the CNA with the most appropriate scope.",
+  },
+  {
+    number: "03",
+    title: "Fix & coordinate",
+    body: "We will agree on a disclosure plan. The usual target is no later than 90 days, but may be shorter for active exploitation or adjusted when user safety requires it.",
+  },
+  {
+    number: "04",
+    title: "Publish & credit",
+    body: "A fix should be available before or at disclosure whenever feasible. The advisory will include affected versions, mitigations, impact, references, and requested credit.",
+  },
+];
+---
+
+<Layout
+  title="CVE Coordination — Marcelo Trylesinski"
+  description="Responsible vulnerability reporting, coordinated disclosure, and proposed CNA scope for open-source projects maintained or coordinated by Marcelo Trylesinski."
+  image="/assets/cna/cve-coordination.png"
+>
+  <p class="eyebrow"><span class="verb">GET</span> /cna</p>
+
+  <section class="mt-3 grid gap-8 border-b border-line pb-10 md:grid-cols-[minmax(0,1fr)_15rem] md:items-end">
+    <div>
+      <p class="font-mono text-xs font-medium tracking-[0.16em] text-accent uppercase">Security & CVE coordination</p>
+      <h1 class="mt-4 max-w-3xl font-display text-5xl leading-[0.98] font-bold tracking-[-0.055em] sm:text-7xl">
+        Open-source security, handled responsibly.
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
+        I coordinate vulnerability reports for open-source infrastructure used across the Python ecosystem. This is
+        the public home for reporting, disclosure, advisories, and my proposed CVE Numbering Authority scope.
+      </p>
+      <div class="mt-7 flex flex-wrap gap-3">
+        <a
+          href="mailto:marcelotryle@gmail.com?subject=Private%20security%20report"
+          class="rounded-lg bg-accent-bright px-5 py-2.5 text-sm font-semibold text-white transition-transform hover:scale-[1.02]"
+        >
+          Report privately
+        </a>
+        <a
+          href="#proposed-cna-scope"
+          class="rounded-lg border border-line bg-surface px-5 py-2.5 text-sm font-semibold text-ink transition-colors hover:border-accent hover:text-accent"
+        >
+          View CNA scope
+        </a>
+      </div>
+    </div>
+
+    <aside class="panel relative overflow-hidden p-5" aria-label="CNA application status">
+      <p class="font-mono text-[0.65rem] tracking-[0.12em] text-muted uppercase">
+        <span class="mr-2 inline-block h-2 w-2 rounded-full bg-accent shadow-[0_0_0_4px_color-mix(in_srgb,var(--accent)_18%,transparent)]"
+        ></span>
+        Application status
+      </p>
+      <p class="mt-8 font-display text-xl font-semibold">Prospective CNA</p>
+      <p class="mt-2 text-sm leading-relaxed text-muted">Public materials prepared for CVE Program onboarding.</p>
+    </aside>
+  </section>
+
+  <aside class="callout mt-8" aria-label="CNA authorization notice">
+    <p class="callout-title">Not yet a CVE Numbering Authority</p>
+    <p class="leading-relaxed text-muted">
+      I am preparing a CNA application. I will only reserve, assign, or publish CVE IDs after the CVE Program
+      authorizes me to do so. Until then, I coordinate with an appropriate existing CNA.
+    </p>
+  </aside>
+
+  <section id="proposed-cna-scope" class="mt-20 scroll-mt-24">
+    <div class="grid gap-5 sm:grid-cols-2 sm:items-end">
+      <h2 class="font-display text-3xl font-bold tracking-tight sm:text-4xl">Proposed CNA scope</h2>
+      <p class="leading-relaxed text-muted">
+        Specific enough to prevent overlapping assignments, but flexible enough to support maintainers who explicitly
+        ask for help.
+      </p>
+    </div>
+
+    <div class="mt-8 rounded-xl border border-accent/40 bg-surface p-6 sm:p-8">
+      <p class="font-mono text-xs font-medium tracking-[0.14em] text-accent uppercase">Scope statement</p>
+      <p class="mt-4 text-lg leading-relaxed">
+        Vulnerabilities in the open-source projects listed below when I am an authorized maintainer or security
+        coordinator; and vulnerabilities in other open-source projects that I research or coordinate when an authorized
+        project representative explicitly requests my assistance, provided the vulnerability is not already covered by
+        another CNA with more appropriate scope.
+      </p>
+      <p class="mt-4 leading-relaxed text-muted">
+        Supported and end-of-life releases are considered case by case. I will defer to the supplier or another CNA
+        whenever it has more appropriate scope.
+      </p>
+    </div>
+
+    <div class="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        projects.map((project, index) => (
+          <a
+            href={project.url}
+            class="group flex min-h-36 flex-col rounded-lg border border-line bg-surface p-4 transition hover:-translate-y-0.5 hover:border-accent"
+          >
+            <span class="font-mono text-[0.65rem] text-muted">{String(index + 1).padStart(2, "0")}</span>
+            <strong class="mt-auto font-display text-lg group-hover:text-accent">{project.name}</strong>
+            <small class="mt-1 text-muted">{project.description}</small>
+          </a>
+        ))
+      }
+    </div>
+    <p class="mt-3 text-sm text-muted">
+      This list describes the proposed starting scope. The approved scope may change during onboarding and will be kept
+      current here.
+    </p>
+  </section>
+
+  <section class="mt-20">
+    <h2 class="border-t border-line pt-6 font-display text-3xl font-bold tracking-tight sm:text-4xl">
+      Report a vulnerability
+    </h2>
+    <p class="mt-5 max-w-3xl leading-relaxed text-muted">
+      Please report suspected vulnerabilities privately. If a repository has private vulnerability reporting enabled,
+      its <strong class="text-ink">Security</strong> tab is the best route. Otherwise, email me. Do not open a public
+      issue before we agree on disclosure.
+    </p>
+
+    <div class="panel mt-8 grid gap-6 p-6 sm:grid-cols-[minmax(0,1fr)_14rem] sm:p-8">
+      <div>
+        <h3 class="font-display text-xl font-semibold">Private contact</h3>
+        <a
+          class="mt-3 inline-block font-mono text-sm text-accent underline underline-offset-4"
+          href="mailto:marcelotryle@gmail.com?subject=Private%20security%20report"
+        >
+          marcelotryle@gmail.com
+        </a>
+        <p class="mt-4 text-sm leading-relaxed text-muted">
+          Use the subject <code class="rounded bg-paper px-1.5 py-0.5 font-mono text-xs text-ink"
+            >Private security report: &lt;project&gt;</code
+          >.
+        </p>
+      </div>
+      <dl class="border-t border-line pt-5 text-sm sm:border-t-0 sm:border-l sm:pt-0 sm:pl-6">
+        <dt class="font-semibold">Initial response</dt>
+        <dd class="mt-1 text-muted">Within 3 business days</dd>
+        <dt class="mt-5 font-semibold">Triage update</dt>
+        <dd class="mt-1 text-muted">Within 7 calendar days</dd>
+      </dl>
+    </div>
+
+    <h3 class="mt-10 font-display text-xl font-semibold">What to include</h3>
+    <ul class="mt-4 grid gap-3 text-muted sm:grid-cols-2">
+      <li class="border-l-2 border-line pl-4">The affected project, component, and version or commit.</li>
+      <li class="border-l-2 border-line pl-4">A clear description of impact and a realistic attack scenario.</li>
+      <li class="border-l-2 border-line pl-4">Reproduction steps or a minimal proof of concept.</li>
+      <li class="border-l-2 border-line pl-4">Known mitigations, patches, or disclosure constraints.</li>
+      <li class="border-l-2 border-line pl-4">Your preferred credit, or a request to remain anonymous.</li>
+      <li class="border-l-2 border-line pl-4">Synthetic test data—never real user data, credentials, or secrets.</li>
+    </ul>
+  </section>
+
+  <section class="mt-20">
+    <h2 class="border-t border-line pt-6 font-display text-3xl font-bold tracking-tight sm:text-4xl">
+      Vulnerability disclosure policy
+    </h2>
+    <p class="mt-5 max-w-3xl leading-relaxed text-muted">
+      My goal is to protect users while treating reporters and maintainers fairly. Timelines are coordinated around
+      impact, exploitation risk, patch complexity, release capacity, and downstream adoption.
+    </p>
+
+    <div class="mt-8 grid gap-3 sm:grid-cols-2">
+      {
+        policySteps.map((step) => (
+          <article class="rounded-lg border border-line p-5">
+            <p class="font-mono text-xs text-accent">{step.number}</p>
+            <h3 class="mt-5 font-display text-lg font-semibold">{step.title}</h3>
+            <p class="mt-3 text-sm leading-relaxed text-muted">{step.body}</p>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="prose mt-10 max-w-none">
+      <h3>Embargo and confidentiality</h3>
+      <p>
+        Information shared under embargo is limited to people needed to validate, fix, release, and notify affected
+        downstreams. I will not use a report for publicity or share identifying information without permission, except
+        where necessary to protect users or comply with law.
+      </p>
+
+      <h3>CVE assignment principles</h3>
+      <ul>
+        <li>Assign only within the approved CNA scope and only after CNA authorization.</li>
+        <li>Give the supplier or CNA with the most appropriate scope the first opportunity to assign.</li>
+        <li>Check for existing CVE records and coordinate to avoid duplicates.</li>
+        <li>Create records that are specific, accurate, and useful to affected users.</li>
+        <li>Publish or update the CVE record promptly when the advisory becomes public.</li>
+        <li>
+          Follow the current <a href="https://www.cve.org/ResourcesSupport/AllResources/CNARules"
+            >CNA Operational Rules</a
+          > when they differ from this page.
+        </li>
+      </ul>
+
+      <h3>Safe harbor</h3>
+      <p>
+        I welcome good-faith research that avoids privacy violations, service disruption, data destruction, persistence,
+        and access beyond what is necessary to demonstrate impact. I will not pursue legal action for accidental,
+        good-faith violations of this policy. This statement cannot bind third parties, but I will support responsible
+        reporters who follow it.
+      </p>
+    </div>
+  </section>
+
+  <section class="mt-20">
+    <h2 class="border-t border-line pt-6 font-display text-3xl font-bold tracking-tight sm:text-4xl">
+      Public advisories
+    </h2>
+    <p class="mt-5 text-muted">Advisories are public, require no login, and link to the canonical security notice.</p>
+
+    <article class="mt-8 grid gap-4 rounded-lg border border-line p-6 sm:grid-cols-[5rem_minmax(0,1fr)]">
+      <time datetime="2026-05-28" class="font-mono text-xs leading-relaxed text-accent">28 MAY<br />2026</time>
+      <div>
+        <h3 class="font-display text-xl font-semibold">
+          <a
+            class="transition-colors hover:text-accent"
+            href="https://github.com/Kludex/starlette/security/advisories/GHSA-86qp-5c8j-p5mr"
+          >
+            CVE-2026-48710 · Starlette request URL host validation
+          </a>
+        </h3>
+        <p class="mt-3 text-sm leading-relaxed text-muted">
+          Malformed <code class="font-mono text-ink">Host</code> values could make a reconstructed request URL differ
+          from the path used by routing. Fixed in Starlette 1.0.1.
+          <a class="text-accent underline underline-offset-4" href="/blog/badhost-cve-2026-48710"
+            >Read the maintainer perspective</a
+          >.
+        </p>
+      </div>
+    </article>
+  </section>
+
+  <section class="panel mt-20 p-8 text-center sm:p-12">
+    <h2 class="font-display text-3xl font-bold tracking-tight">Found something important?</h2>
+    <p class="mx-auto mt-4 max-w-xl leading-relaxed text-muted">
+      Send it privately. You will get a human response, a fair technical review, and clear next steps.
+    </p>
+    <a
+      href="mailto:marcelotryle@gmail.com?subject=Private%20security%20report"
+      class="mt-7 inline-block rounded-lg bg-accent-bright px-5 py-2.5 text-sm font-semibold text-white transition-transform hover:scale-[1.02]"
+    >
+      Start a private report
+    </a>
+  </section>
+</Layout>

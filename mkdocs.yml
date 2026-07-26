@@ -9,7 +9,6 @@ edit_uri: edit/main/docs/
 
 theme:
   name: material
-  custom_dir: docs/overrides
   locale: en
   icon:
     repo: fontawesome/brands/github
@@ -63,7 +62,6 @@ plugins:
       categories: true
 
 markdown_extensions:
-  - md_in_html
   - attr_list
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
@@ -81,7 +79,6 @@ markdown_extensions:
 nav:
   - Home:
       - About: index.md
-      - CVE Coordination: cna.md
       - Talks: talks.md
       - YouTube: youtube.md
       - Sponsors 💖️: sponsors.md
