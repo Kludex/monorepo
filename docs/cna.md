@@ -60,9 +60,9 @@ Supported and end-of-life releases are considered case by case. I will defer to 
   <a class="cna-project" href="https://github.com/modelcontextprotocol/modelcontextprotocol">
     <span class="cna-project__index">06</span><strong>MCP</strong><small>Protocol &amp; Python SDK</small>
   </a>
-  <div class="cna-project">
-    <span class="cna-project__index">07</span><strong>Magnum</strong><small>Open-source project</small>
-  </div>
+  <a class="cna-project" href="https://github.com/Kludex/mangum">
+    <span class="cna-project__index">07</span><strong>Mangum</strong><small>AWS Lambda support for ASGI</small>
+  </a>
   <a class="cna-project" href="https://github.com/pydantic/httpx2">
     <span class="cna-project__index">08</span><strong>HTTPX2</strong><small>HTTP client</small>
   </a>
