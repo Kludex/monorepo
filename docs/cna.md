@@ -152,19 +152,6 @@ Advisories are public, require no login, and link to the affected project's cano
 Malformed `Host` values could make a reconstructed request URL differ from the path used by routing. Fixed in Starlette 1.0.1. [Read the maintainer perspective](blog/posts/badhost-cve-2026-48710.md).
 </div>
 
-## Application readiness
-
-<div class="cna-readiness">
-  <div><span>01</span><strong>Public scope</strong><small>Defined above, including overlap and end-of-life handling.</small></div>
-  <div><span>02</span><strong>Public contact</strong><small>A direct path for reporters and CVE Program communications.</small></div>
-  <div><span>03</span><strong>Disclosure policy</strong><small>Embargo, timelines, assignment principles, and safe harbor.</small></div>
-  <div><span>04</span><strong>Advisory location</strong><small>Public, permanent, and accessible without credentials.</small></div>
-</div>
-
-The proposed public identity is **Marcelo Trylesinski** with the short name **Kludex**, in the **Information Technology** industry and based in the **Netherlands**. I maintain Starlette and Uvicorn, contribute across the Pydantic ecosystem, and have experience triaging private reports, shipping security fixes, and publishing GitHub Security Advisories.
-
-The exact Root, CNA role/type, annual allocation, and onboarding schedule will be agreed with the CVE Program during registration. The official [CNA onboarding resources](https://www.cve.org/ResourcesSupport/Resources#cnaOnboarding) and [CNA Operational Rules](https://www.cve.org/ResourcesSupport/AllResources/CNARules) govern the application.
-
 <section class="cna-closing" markdown>
 ## Found something important?
 

@@ -298,32 +298,6 @@ a.cna-project:hover {
     color: var(--cna-muted);
 }
 
-.cna-readiness {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-.cna-readiness div {
-    display: flex;
-    flex-direction: column;
-    padding-top: .8rem;
-    border-top: 2px solid var(--cna-accent);
-}
-
-.cna-readiness span {
-    margin-bottom: 1.5rem;
-    color: var(--cna-muted);
-    font-family: var(--md-code-font-family);
-    font-size: .65rem;
-}
-
-.cna-readiness small {
-    margin-top: .4rem;
-    color: var(--cna-muted);
-}
-
 .cna-closing {
     margin: 4rem 0 1rem;
     padding: clamp(1.7rem, 5vw, 3.5rem);
@@ -341,8 +315,7 @@ a.cna-project:hover {
 }
 
 @media (max-width: 900px) {
-    .cna-project-grid,
-    .cna-readiness {
+    .cna-project-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
@@ -367,8 +340,7 @@ a.cna-project:hover {
 }
 
 @media (max-width: 480px) {
-    .cna-project-grid,
-    .cna-readiness {
+    .cna-project-grid {
         grid-template-columns: 1fr;
     }
 
