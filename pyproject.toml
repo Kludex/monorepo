@@ -12,12 +12,8 @@ dev-dependencies = [
     "fastapi",
     "uvicorn",
     "httpx",
-    # Documentation
-    "mkdocs-material[imaging]",
-    "mkdocs-rss-plugin",
     # Linting
     "ruff",
-    "feedparser>=6.0.11",
 ]
 
 [tool.ruff]
