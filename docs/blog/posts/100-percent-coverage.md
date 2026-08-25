@@ -91,6 +91,19 @@ exclude_lines = [
 From that moment, the gate is live. No new untested line can enter the codebase, and the remaining debt is one
 `grep "pragma: full coverage"` away. You burn it down over time; new code never adds to it.
 
+### "But that's fake 100%"
+
+You might object: "I don't want a fake 100% - I'd rather compare coverage against `HEAD` in CI, so I can see
+exactly what my PR left uncovered."
+
+That works in CI. But locally, a diff-based gate gives you nothing: run the suite and the report shows the same
+sea of partially covered files, old debt and new gaps blended together. You cannot tell at a glance whether *your*
+change is covered.
+
+With the pragma approach, a local run is binary. 100% means you are done. Anything below 100% is a short list of
+lines *you* just added, right there in the terminal. That instant, local signal is another benefit of the 100%
+gate - no CI round trip needed.
+
 ## Summary
 
 - A percentage below 100 means your untested line count grows forever, anonymously.
