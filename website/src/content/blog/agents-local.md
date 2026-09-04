@@ -218,8 +218,8 @@ You should see the files marked as ignored:
 
 ## Copy the files into worktrees
 
-Claude Code supports `.worktreeinclude` for copying ignored files into worktrees it creates. The file uses
-`.gitignore` syntax, and matched files must already be ignored.
+Claude Code and Codex support `.worktreeinclude` for copying ignored files into worktrees they create. The file
+uses `.gitignore` syntax, and matched files must already be ignored.
 
 Create `.worktreeinclude` in the repository root:
 
@@ -230,7 +230,8 @@ CLAUDE.local.md
 ```
 
 Including `.worktreeinclude` itself lets a copied worktree retain the same policy when it creates another worktree.
-Claude documents this behavior under [Copy gitignored files into worktrees][claude-worktrees].
+Claude documents this behavior under [Copy gitignored files into worktrees][claude-worktrees]. Codex documents it
+under [Copy ignored local files into managed worktrees][codex-worktrees].
 
 For a worktree created manually, copy the files yourself:
 
@@ -239,9 +240,10 @@ git worktree add -b my-feature ../project-my-feature
 cp .worktreeinclude AGENTS.local.md CLAUDE.local.md ../project-my-feature/
 ```
 
-At the time of writing, `.worktreeinclude` is documented by Claude Code. Codex's public CLI documentation does not
-document it, and pi does not create worktrees itself. If another Codex surface copies these files, treat that as a
-surface-specific feature and test it before depending on it.
+For Codex, this applies only to local worktrees managed by the ChatGPT desktop app. It does not apply to remote
+worktrees or worktrees you create from the command line. Codex automatically copies an ignored
+`AGENTS.override.md` into local managed worktrees, but `AGENTS.local.md` is not special and must remain listed in
+`.worktreeinclude`. Pi does not create worktrees itself.
 
 ## The resulting behavior
 
@@ -272,6 +274,7 @@ provides. Most importantly, it preserves the project's instructions instead of f
 silently become stale.
 
 [codex-agents]: https://developers.openai.com/codex/guides/agents-md/#how-codex-discovers-guidance
+[codex-worktrees]: https://learn.chatgpt.com/docs/environments/git-worktrees.md#copy-ignored-local-files-into-managed-worktrees
 [claude-memory]: https://code.claude.com/docs/en/memory#how-claudemd-files-load
 [claude-worktrees]: https://code.claude.com/docs/en/worktrees#copy-gitignored-files-into-worktrees
 [pi-context]: https://github.com/earendil-works/pi/blob/main/packages/coding-agent/README.md#context-files
