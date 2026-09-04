@@ -1,7 +1,7 @@
 ---
 title: "How to Override Part of AGENTS.md"
 date: 2026-09-04
-categories: ["AI", "Coding Agents", "Git"]
+categories: ["Coding Agents", "Git"]
 ---
 
 I wanted to change one paragraph in a project's `AGENTS.md` for my own coding-agent sessions.
@@ -31,12 +31,15 @@ Put the personal exception in `AGENTS.local.md`:
 ## Testing override
 
 The paragraph under `## Testing` in `AGENTS.md` beginning with
-"Always run the entire test suite" is superseded for my sessions.
+"Always run the entire test suite" does not apply to my sessions.
+
+Replace it with:
 
 Run the smallest relevant test subset first. Run the complete suite when the
 change is broad or before finalizing the work.
 
-All other instructions in `AGENTS.md` remain in effect.
+All other instructions under `## Testing`, and all other sections of
+`AGENTS.md`, remain in effect.
 ```
 
 This is a **semantic override**. Both instructions may remain in the model's context, but the local file identifies
@@ -103,7 +106,7 @@ All other instructions under `## Testing`, and all other sections of
 This gives the model a narrow conflict to resolve. It also makes the local file easy to audit after the project
 changes its instructions.
 
-:::warning
+:::warning[An override is an instruction, not a patch]
 A semantic override is still an instruction to a model. It is not a parser removing text from the context. Keep the
 replacement specific, short, and later than the shared instructions whenever the tool supports ordering.
 :::
@@ -193,6 +196,7 @@ Use Git's repository-local exclusion file instead of changing the project's `.gi
 ```bash
 exclude="$(git rev-parse --git-common-dir)/info/exclude"
 
+mkdir -p "$(dirname "$exclude")"
 touch "$exclude"
 for path in /AGENTS.local.md /CLAUDE.local.md /.worktreeinclude; do
     grep -qxF "$path" "$exclude" || printf '%s\n' "$path" >> "$exclude"
@@ -273,8 +277,8 @@ It is not a universal Markdown merge feature. It is a small convention built on 
 provides. Most importantly, it preserves the project's instructions instead of freezing a private copy that will
 silently become stale.
 
-[codex-agents]: https://developers.openai.com/codex/guides/agents-md/#how-codex-discovers-guidance
-[codex-worktrees]: https://learn.chatgpt.com/docs/environments/git-worktrees.md#copy-ignored-local-files-into-managed-worktrees
+[codex-agents]: https://learn.chatgpt.com/docs/agent-configuration/agents-md#how-codex-discovers-guidance
+[codex-worktrees]: https://learn.chatgpt.com/docs/environments/git-worktrees#copy-ignored-local-files-into-managed-worktrees
 [claude-memory]: https://code.claude.com/docs/en/memory#how-claudemd-files-load
 [claude-worktrees]: https://code.claude.com/docs/en/worktrees#copy-gitignored-files-into-worktrees
 [pi-context]: https://github.com/earendil-works/pi/blob/main/packages/coding-agent/README.md#context-files
