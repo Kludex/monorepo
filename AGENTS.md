@@ -1,6 +1,6 @@
 # Social posts
 
-Posts for X and LinkedIn live in `social/`. Every new file that lands on `main` is published immediately through Buffer.
+Posts for X and LinkedIn live in `social/`. Every new file that lands on `main` is sent to Buffer, which publishes it immediately or at the scheduled time.
 
 ```
 social/twitter/starlette-1-8-0.txt
@@ -37,6 +37,19 @@ Write as Marcelo, in first person, as a maintainer talking to other developers.
 - Keep it under 1300 characters.
 - One announcement line, a short paragraph on the most important change and why it matters, then a few bullets for the rest.
 - It can cover more than the X post, but it is not a changelog. Pick what a user would care about.
+
+## Scheduling
+
+A post is published when the pull request is merged. To schedule it instead, make the first line `at:` with an ISO 8601 time, then a blank line, then the post.
+
+```
+at: 2026-10-20T15:00+02:00
+
+Starlette 1.8.0 is out!
+```
+
+- Only schedule when the user asks for a time. Always include the UTC offset the user means.
+- Use the same `at:` line in both files unless the user wants different times.
 
 ## Images
 
