@@ -46,8 +46,29 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           URL: ${{ steps.deploy.outputs.deployment-url }}
+          PR: ${{ github.event.pull_request.number }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
         run: |
-          gh pr comment ${{ github.event.pull_request.number }} --repo ${{ github.repository }} \
-            --edit-last --body "Cloudflare Pages preview: $URL" \
-          || gh pr comment ${{ github.event.pull_request.number }} --repo ${{ github.repository }} \
-            --body "Cloudflare Pages preview: $URL"
+          status=0
+          social=$(.github/social-preview.sh) || status=$?
+          body="Cloudflare Pages preview: $URL"$'\n\n'"$social"
+          gh pr comment "$PR" --repo ${{ github.repository }} --edit-last --body "$body" \
+          || gh pr comment "$PR" --repo ${{ github.repository }} --body "$body"
+          exit $status
+
+  social:
+    needs: deploy
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Publish new social posts through Buffer
+        run: .github/social.sh
+        env:
+          BUFFER_API_KEY: ${{ secrets.BUFFER_API_KEY }}
+          BEFORE: ${{ github.event.before }}

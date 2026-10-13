@@ -1,0 +1,8 @@
+Starlette 1.8.0 is out! 🚀
+
+- HTTP 103 Early Hints with Request.send_early_hints()
+- FileResponse stops sending when the client disconnects
+- GZipMiddleware preserves response trailers
+- Python 3.11+ is now required
+
+https://github.com/Kludex/starlette/releases/tag/1.8.0
