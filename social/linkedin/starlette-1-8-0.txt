@@ -1,0 +1,14 @@
+Starlette 1.8.0 is out! 🚀
+
+The highlight is HTTP 103 Early Hints. With Request.send_early_hints(), your app can tell the browser which assets to preload while it is still building the response.
+
+Also in this release:
+
+- FileResponse stops the transfer when the client disconnects.
+- GZipMiddleware preserves response trailers, and skips gRPC media types by default.
+- Multipart range responses no longer loop forever when the file ends before a range is complete.
+- Python 3.10 support is dropped. Starlette now requires Python 3.11.
+
+Go ahead and bump your version. ⬆️
+
+https://github.com/Kludex/starlette/releases/tag/1.8.0
