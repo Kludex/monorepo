@@ -51,6 +51,10 @@ Starlette 1.8.0 is out!
 - Only schedule when the user asks for a time. Always include the UTC offset the user means.
 - Use the same `at:` line in both files unless the user wants different times.
 
+## First comment
+
+To add a first comment, put it after a `---` line at the end of the post. LinkedIn posts it as the first comment, X as a reply. The comment follows the same rules as the post, and on X it has its own 280 character limit.
+
 ## Images
 
 Put an image next to the text file with the same name, such as `starlette-1-8-0.png`. Use `starlette-1-8-0.1.png` and `starlette-1-8-0.2.png` for several. An image used on both networks must be copied into both directories.

@@ -1,0 +1,14 @@
+at: 2026-10-14T15:00+02:00
+
+Monty is a Python interpreter in Rust, built to run code written by AI 🦀
+
+- Starts in under 1ms vs ~1500ms for a sandbox service
+- No filesystem, env or network, just the functions you pass
+- In Pydantic AI, CodeMode() runs your agent's tools through it
+
+https://github.com/pydantic/monty
+
+---
+
+If you want to work on Monty, apply here:
+https://pydantic.dev/jobs/senior-rust-engineer-monty
