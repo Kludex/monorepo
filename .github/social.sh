@@ -39,19 +39,10 @@ print(datetime.fromisoformat(sys.argv[1]).astimezone(timezone.utc).strftime("%Y-
       continue
     }
   fi
-  comment=$(sed '1,/^---$/d' <<<"$text")
-  text=$(sed '/^---$/,$d' <<<"$text")
   for id in $ids; do
-    input=$(jq -n --arg text "$text" --arg comment "$comment" --arg service "$service" --arg due "$due" --arg id "$id" \
-      --argjson assets "$assets" '
-      def trim: sub("^\\s+"; "") | sub("\\s+$"; "");
-      ($text | trim) as $text | ($comment | trim) as $comment |
-      {input: ({text: $text, assets: $assets, channelId: $id, schedulingType: "automatic"}
-        + if $due == "" then {mode: "shareNow"} else {mode: "customScheduled", dueAt: $due} end
-        + if $comment == "" then {}
-          elif $service == "twitter" then
-            {metadata: {twitter: {thread: [{text: $text, assets: $assets}, {text: $comment, assets: []}]}}}
-          else {metadata: {($service): {firstComment: $comment}}} end)}')
+    input=$(jq -n --arg text "$text" --arg due "$due" --arg id "$id" --argjson assets "$assets" '{input: ({
+      text: ($text | sub("^\\s+"; "") | sub("\\s+$"; "")), assets: $assets, channelId: $id, schedulingType: "automatic"
+    } + if $due == "" then {mode: "shareNow"} else {mode: "customScheduled", dueAt: $due} end)}')
     response=$(buffer 'mutation($input: CreatePostInput!) { createPost(input: $input) {
       ... on PostActionSuccess { post { id } }
       ... on MutationError { message }
