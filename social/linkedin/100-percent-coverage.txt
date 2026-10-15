@@ -1,0 +1,15 @@
+at: 2026-10-19T15:00+02:00
+
+Every project I maintain runs with fail_under = 100. Not 95%, not 99%. I wrote down why. 🧪
+
+A percentage hides absolute numbers. A 10,000 line project at 95% coverage has 500 untested lines. Two years later it has 40,000 lines, still 95%, CI still green, and 2,000 untested lines nobody can name. At 100%, every uncovered line is either tested or carries a pragma that says why.
+
+It matters more now that I write a lot of code with agents. With a 100% gate, an agent cannot merge a line that no test reaches. The tighter the guardrails, the more autonomy you can safely give.
+
+The post also covers:
+
+- Why tests should go through the public API, never private functions.
+- What to do when a line is hard to reach.
+- How to adopt the gate on an existing project today, with a pragma: full coverage marker that keeps the debt visible.
+
+https://marcelotryle.com/blog/100-percent-coverage/

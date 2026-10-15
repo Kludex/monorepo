@@ -1,0 +1,9 @@
+at: 2026-10-19T15:00+02:00
+
+Every project I maintain runs with fail_under = 100. I wrote down why 🧪
+
+- 95% hides a blind spot that grows with the codebase
+- A 100% gate stops agents from landing untested code
+- Test through the public API, never private functions
+
+https://marcelotryle.com/blog/100-percent-coverage/
