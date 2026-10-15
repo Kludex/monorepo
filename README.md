@@ -23,6 +23,14 @@ The time is ISO 8601. Without an offset it is UTC. Merging hands the post to Buf
 
 To attach images, put them next to the text file with the same name: `starlette-1-0.png`, or `starlette-1-0.1.png` and `starlette-1-0.2.png` for several. Buffer downloads them from the public repository.
 
+To turn a code snippet into an image with the Pydantic colours and logo:
+
+```bash
+node website/scripts/snippet.mjs snippet.py social/twitter/httpx2.png
+```
+
+It highlights with Shiki and takes the screenshot with Google Chrome. Set `CHROME` if Chrome is not in `/Applications`.
+
 The directory name is the Buffer service name of the channel. Only added files are published - editing or deleting a file does nothing.
 
 !!! warning "Re-running a partially failed job posts twice"
