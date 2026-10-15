@@ -1,0 +1,9 @@
+at: 2026-10-21T15:00+02:00
+
+Pydantic AI has one prompt caching setting for every provider 💸
+
+- Add Caching() to your agent's capabilities
+- Pydantic AI places the cache breakpoints each provider needs
+- In my test, a 14k token request cost $0.030, and the cached follow-up $0.0034
+
+https://pydantic.dev/docs/ai/capabilities/caching/

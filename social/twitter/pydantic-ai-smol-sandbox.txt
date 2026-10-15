@@ -1,0 +1,10 @@
+at: 2026-10-23T15:00+02:00
+
+Pydantic AI agents can now run their commands in a microVM on your own machine 📦
+
+- SmolSandbox(), no cloud account
+- Own kernel and filesystem, no network unless you allow it
+- Same Coder, Shell and FileSystem tools
+- macOS on Apple silicon and Linux
+
+https://pydantic.dev/docs/ai/harness/smol-sandbox/

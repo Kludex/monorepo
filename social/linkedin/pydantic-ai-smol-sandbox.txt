@@ -1,0 +1,14 @@
+at: 2026-10-23T15:00+02:00
+
+Pydantic AI agents can now run their commands and file edits in a microVM on your own machine, with no cloud account. 📦
+
+Coding agents usually run commands as you, on your machine. SmolSandbox moves them into a smolvm microVM with its own kernel and filesystem, isolated from your files and processes. A new VM has no network access unless you pass allow_internet_access=True.
+
+Nothing else in the agent changes. The harness tools Coder, Shell and FileSystem work through the run's workspace, so swapping LocalWorkspace for SmolSandbox moves them into the VM. I ran the example on my Mac, and the agent wrote and ran its script inside the VM.
+
+- Use any OCI image, such as python:3.12-alpine.
+- Pass the message history to the next run, and it continues in the same VM.
+- The VM is never deleted for you. Store result.workspace.ref and call SmolSandbox().destroy(ref) when you are done.
+- Works on macOS on Apple silicon, and on Linux with access to /dev/kvm.
+
+https://pydantic.dev/docs/ai/harness/smol-sandbox/

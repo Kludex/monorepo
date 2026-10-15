@@ -1,0 +1,9 @@
+at: 2026-10-20T15:00+02:00
+
+Monty can pause agent-written code, turn it into bytes, and resume it later ⏸️
+
+- dump() serializes the whole interpreter
+- load_snapshot() resumes it in another process or machine
+- Wait hours for a human approval with nothing running
+
+https://pydantic.dev/docs/monty/concepts/snapshots/
