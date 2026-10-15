@@ -1,0 +1,14 @@
+at: 2026-10-22T15:00+02:00
+
+Pydantic AI now reports prompt cache health on its spans, and you can watch it in Logfire. 🔥
+
+A broken prompt cache is quiet. The answers are still right, they just cost more and take longer. I sent 14k tokens of docs to Claude Sonnet 5.5 with caching off, and the request span came back flagged with pydantic_ai.cache.not_enabled.
+
+Call logfire.instrument_pydantic_ai(), and every model request span gets:
+
+- pydantic_ai.cache.hit_ratio, the share of input tokens read from the cache.
+- pydantic_ai.cache.collapsed and a collapse_reason, such as ttl_expired or compacted, when a request reads back less than it could.
+- A pydantic_ai.cache.collapse event only when the collapse is unexpected, so you can alert on it.
+- pydantic_ai.cache.not_enabled when a long request goes to a model that needs caching configured, and none is.
+
+https://pydantic.dev/docs/ai/integrations/logfire/#prompt-cache-health

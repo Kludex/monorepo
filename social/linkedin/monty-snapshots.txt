@@ -1,0 +1,13 @@
+at: 2026-10-20T15:00+02:00
+
+Monty can pause agent-written Python mid-execution, serialize the whole interpreter to bytes, and resume it later. ⏸️
+
+That works because the sandbox holds no operating system resources. There are no file descriptors, sockets or threads to rebuild, so everything that matters is in the interpreter's own heap. You can store the bytes anywhere, and resume them in another process or on another machine.
+
+That makes long waits cheap. In the example, the code asks a human before issuing a refund. Monty stops at ask_human(), you store the snapshot, and nothing has to keep running while the human decides. Hours later, you load the snapshot and resume it with the answer.
+
+- feed_start() hands control back at every call to a host function.
+- snapshot.dump() serializes the paused interpreter, and session.load_snapshot() restores it.
+- Only restore snapshots you produced and stored yourself. Monty does not authenticate them.
+
+https://pydantic.dev/docs/monty/concepts/snapshots/

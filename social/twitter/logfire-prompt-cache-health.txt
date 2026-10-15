@@ -1,0 +1,9 @@
+at: 2026-10-22T15:00+02:00
+
+Pydantic AI now reports prompt cache health, and you can watch it in Logfire 🔥
+
+- Hit ratio on every model request span
+- An event when the cache collapses while it should still be warm
+- A flag when a long request goes out with caching off
+
+https://pydantic.dev/docs/ai/integrations/logfire/#prompt-cache-health
