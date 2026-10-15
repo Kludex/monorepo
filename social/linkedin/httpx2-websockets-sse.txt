@@ -1,0 +1,12 @@
+at: 2026-10-16T15:00+02:00
+
+HTTPX2 speaks WebSockets and Server-Sent Events out of the box, no extra client library needed. 🔌
+
+Both live on the client you already use for HTTP requests. The WebSocket handshake is a regular request, so your headers, cookies, authentication, proxies and timeouts apply as usual. client.sse() gives you an iterator of events, and event.json() decodes the payload when it is JSON.
+
+- Works with both httpx2.Client and httpx2.AsyncClient.
+- Send and receive text, bytes or JSON, with an optional timeout on receive.
+- Keepalive pings are sent for you, and a lost connection raises WebSocketNetworkError.
+- WebSockets need the ws extra: pip install "httpx2[ws]"
+
+https://pydantic.dev/docs/httpx2/guides/websockets/
