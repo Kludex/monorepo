@@ -55,3 +55,5 @@ Starlette 1.8.0 is out!
 ## Images
 
 Put an image next to the text file with the same name, such as `starlette-1-8-0.png`. Use `starlette-1-8-0.1.png` and `starlette-1-8-0.2.png` for several. An image used on both networks must be copied into both directories.
+
+For a code snippet, render it with `node website/scripts/snippet.mjs snippet.py image.png`. Never hand-roll the highlighting, and keep the snippet short enough to fit at 1600x900. Run the code before you render it.
