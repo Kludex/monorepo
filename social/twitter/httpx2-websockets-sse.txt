@@ -1,0 +1,10 @@
+at: 2026-10-16T15:00+02:00
+
+HTTPX2 speaks WebSockets and Server-Sent Events out of the box 🔌
+
+- client.websocket() and client.sse() on your existing client
+- Headers, cookies, auth, proxies and timeouts apply as usual
+- Sync and async
+- For WebSockets: pip install "httpx2[ws]"
+
+https://pydantic.dev/docs/httpx2/guides/websockets/
