@@ -1,0 +1,14 @@
+Monty is a Python interpreter written from scratch in Rust, for running code written by AI. 🦀
+
+Agents work faster, cheaper and more reliably when they write code instead of making one tool call at a time. That code needs somewhere safe to run, and a container is slow and expensive for a few lines of Python. A new Monty sandbox starts in under 1ms from a running pool, compared to around 1500ms for a sandbox service.
+
+- No filesystem, environment variables or network. Code reaches the host only through the functions and mounts you pass in.
+- Execution can be paused, dumped to bytes and resumed later.
+- It's MIT licensed, with Python, JavaScript and Rust packages.
+
+In Pydantic AI, install pydantic-ai-harness[codemode] and add CodeMode() to your agent's capabilities. Your tools become functions the model calls from a single Python snippet, with loops, conditionals and asyncio.gather, all running inside Monty.
+
+https://github.com/pydantic/monty
+
+If you want to work on Monty, apply here:
+https://pydantic.dev/jobs/senior-rust-engineer-monty
