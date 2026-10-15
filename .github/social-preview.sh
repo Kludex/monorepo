@@ -26,37 +26,28 @@ sys.exit(due < datetime.now(timezone.utc))' "$at"); then
   else
     echo "- Published on merge"
   fi
-  comment=$(sed '1,/^---$/d' <<<"$text")
-  text=$(sed '/^---$/,$d' <<<"$text")
+  if grep -qx -- '---' <<<"$text"; then
+    echo "- :x: First comments are not supported, Buffer needs a paid plan for them"
+    failed=1
+  fi
   if [[ $file == social/twitter/* ]]; then
-    for part in "$text" "$comment"; do
-      [ -n "$part" ] || continue
-      # ponytail: counts each code point of an emoji sequence, so it can overcount. Use twitter-text if that bites.
-      length=$(python3 -c '
+    # ponytail: counts each code point of an emoji sequence, so it can overcount. Use twitter-text if that bites.
+    length=$(python3 -c '
 import re, sys
-text = re.sub(r"https?://\S+", "x" * 23, sys.stdin.read().strip())
+text = re.sub(r"https?://\S+", "x" * 23, sys.stdin.read().rstrip())
 light = lambda o: o <= 4351 or 8192 <= o <= 8205 or 8208 <= o <= 8223 or 8242 <= o <= 8247
-print(sum(1 if light(ord(char)) else 2 for char in text))' <<<"$part")
-      if [ "$length" -gt 280 ]; then
-        echo "- :x: $length/280 characters"
-        failed=1
-      else
-        echo "- $length/280 characters"
-      fi
-    done
+print(sum(1 if light(ord(char)) else 2 for char in text))' <<<"$text")
+    if [ "$length" -gt 280 ]; then
+      echo "- :x: $length/280 characters"
+      failed=1
+    else
+      echo "- $length/280 characters"
+    fi
   fi
   echo
   echo '````text'
   echo "$text"
   echo '````'
-  if [ -n "$comment" ]; then
-    echo
-    echo 'First comment:'
-    echo
-    echo '````text'
-    echo "$comment" | sed '/./,$!d'
-    echo '````'
-  fi
   for image in "${file%.txt}".*; do
     [[ $image == *.txt ]] || echo "![$image](https://raw.githubusercontent.com/$GITHUB_REPOSITORY/$HEAD_SHA/$image)"
   done

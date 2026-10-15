@@ -17,6 +17,7 @@ social/linkedin/starlette-1-8-0.txt
 - **No em dashes or en dashes.** Use `-`.
 - **No hashtags.**
 - **Put the link on its own last line.** Use the full URL.
+- **No first comments or replies.** Buffer needs a paid plan for them, so CI fails a post with a `---` line.
 
 ## Voice
 
@@ -50,10 +51,6 @@ Starlette 1.8.0 is out!
 
 - Only schedule when the user asks for a time. Always include the UTC offset the user means.
 - Use the same `at:` line in both files unless the user wants different times.
-
-## First comment
-
-To add a first comment, put it after a `---` line at the end of the post. LinkedIn posts it as the first comment, X as a reply. The comment follows the same rules as the post, and on X it has its own 280 character limit.
 
 ## Images
 
