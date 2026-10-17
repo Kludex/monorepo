@@ -1,0 +1,12 @@
+at: 2026-10-25T15:00+01:00
+
+Pydantic AI supports Jev, TypeSafe's decision model. It answers typed questions about a text instead of writing text. 🎯
+
+Give an agent an output type, and Jev answers every field of it in one request, each with its own confidence. There is no text to parse and no answer outside the options. When Jev is unsure, such as a ticket that may or may not be urgent, you can send that answer to a person or to a language model behind it.
+
+- Install pydantic-ai-slim[typesafe] and set TYPESAFE_API_KEY.
+- Asking several questions costs little more than asking one, since Jev answers them in parallel.
+- jev-latest moves with each release. Once you tune a threshold, pin a version such as typesafe:jev-1.13.0.
+- Jev's limit is 32k tokens for the conversation plus the longest question, so keep long conversations compacted.
+
+https://pydantic.dev/docs/ai/models/typesafe/
