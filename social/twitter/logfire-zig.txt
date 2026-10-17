@@ -1,0 +1,10 @@
+at: 2026-10-17T19:00+02:00
+
+Logfire speaks OpenTelemetry, so you can send it traces from Zig ⚡
+
+- OpenTelemetry has an official Zig SDK, in alpha
+- Point OTEL_EXPORTER_OTLP_ENDPOINT at Logfire
+- Pass your write token as the Authorization header
+- Runs on Zig 0.16
+
+https://pydantic.dev/docs/logfire/guides/alternative-clients/

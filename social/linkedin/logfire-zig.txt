@@ -1,0 +1,15 @@
+at: 2026-10-17T19:00+02:00
+
+Logfire is built on OpenTelemetry, so any language with an OpenTelemetry SDK can send it traces. I tried Zig. ⚡
+
+OpenTelemetry has an official Zig SDK. It's in alpha, it targets Zig 0.16, and it already exports traces over OTLP. Point it at Logfire, and your Zig spans land in the same place as the ones from your Python services.
+
+What it takes:
+
+- OTEL_EXPORTER_OTLP_ENDPOINT=https://logfire-us.pydantic.dev, or logfire-eu for the EU region.
+- OTEL_SERVICE_NAME, which sdk.config.init() picks up.
+- Your write token as the Authorization header. The SDK does not read OTEL_EXPORTER_OTLP_HEADERS yet, so set otlp.headers in code.
+
+The whole program is in the image. If you write Zig, the SDK is looking for contributors.
+
+https://pydantic.dev/docs/logfire/guides/alternative-clients/
