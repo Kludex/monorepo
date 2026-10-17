@@ -1,0 +1,10 @@
+at: 2026-10-17T15:00+02:00
+
+Monty runs from TypeScript too: npm install @pydantic/monty 🦀
+
+- Run Python written by a model from your Node app
+- Expose your TypeScript functions to it, sync or async
+- Memory and time limits per session
+- A WebAssembly build for the browser
+
+https://pydantic.dev/docs/monty/quickstart/javascript/

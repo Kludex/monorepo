@@ -1,0 +1,12 @@
+at: 2026-10-17T15:00+02:00
+
+Monty, the Python sandbox we write in Rust, also runs from TypeScript: npm install @pydantic/monty. 🦀
+
+If your app runs on Node and your agent writes Python, you don't need a container or a separate Python service to run that code. The package is a native binding over the same Rust worker pool the Python package uses. Code runs in worker subprocesses, so a crash triggered by adversarial code only kills the worker.
+
+- feedRun() returns the value of the snippet's last expression.
+- externalLookup exposes your TypeScript functions to the sandbox, sync or async.
+- checkout() sets limits per session, such as maxMemory and maxFeedDurationSecs.
+- For browsers, @pydantic/monty/wasm runs the same sandbox as WebAssembly in a Web Worker.
+
+https://pydantic.dev/docs/monty/quickstart/javascript/
