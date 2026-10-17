@@ -51,7 +51,8 @@ print(sum(1 if light(ord(char)) else 2 for char in text))' <<<"$text")
   echo "$text"
   echo '````'
   for image in "${file%.txt}".*; do
-    [[ $image == *.txt ]] || echo "![$image](https://raw.githubusercontent.com/$GITHUB_REPOSITORY/$HEAD_SHA/$image)"
+    [[ $image == *.txt ]] ||
+      echo "<img src=\"https://raw.githubusercontent.com/$GITHUB_REPOSITORY/$HEAD_SHA/$image\" alt=\"$image\" width=\"600\">"
   done
   echo
   echo '</td></tr></table>'
