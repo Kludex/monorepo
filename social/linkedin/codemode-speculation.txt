@@ -8,6 +8,6 @@ I tried it with Claude Sonnet 5.5 and a weather tool that takes 2 seconds, askin
 
 - Only list tools that are safe to run early. A speculated call can run for a branch the code never takes.
 - speculate='declared' trusts tools marked read-only, and MCP tools that publish readOnlyHint.
-- code_mode.speculation_stats tells you how many calls were launched, adopted and evicted.
+- Only calls with literal keyword arguments start early. get_weather(city=c) in a loop waits for c.
 
 https://pydantic.dev/docs/ai/harness/code-mode/#speculative-execution
