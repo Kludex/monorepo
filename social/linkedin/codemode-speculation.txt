@@ -1,0 +1,13 @@
+at: 2026-10-17T19:00+02:00
+
+Pydantic AI's CodeMode can start your tool calls while the model is still writing the code that makes them. ⚡
+
+With CodeMode, the model writes Python that calls your tools, and Monty runs it. Add speculate=[...], and each call to a listed tool with literal keyword arguments starts as soon as its line has streamed in. When the finished code reaches that call, it takes the result that is already in flight.
+
+I tried it with Claude Sonnet 5.5 and a weather tool that takes 2 seconds, asking for three cities awaited one per line. The run went from about 8.7s to 4.7s, with all 3 calls started early and used.
+
+- Only list tools that are safe to run early. A speculated call can run for a branch the code never takes.
+- speculate='declared' trusts tools marked read-only, and MCP tools that publish readOnlyHint.
+- Only calls with literal keyword arguments start early. get_weather(city=c) in a loop waits for c.
+
+https://pydantic.dev/docs/ai/harness/code-mode/#speculative-execution

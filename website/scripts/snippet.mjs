@@ -71,7 +71,11 @@ const html = `<!doctype html>
   .shiki code { font: 500 26px/1.55 "IBM Plex Mono", monospace; }
 </style>
 <img class="logo" src="file://${logo}">
-${code}`;
+${code}
+<script>
+  const pre = document.querySelector(".shiki");
+  pre.style.zoom = Math.min(1, 1440 / pre.offsetWidth, 700 / pre.offsetHeight);
+</script>`;
 
 const page = join(mkdtempSync(join(tmpdir(), "snippet-")), "snippet.html");
 writeFileSync(page, html);

@@ -1,0 +1,9 @@
+at: 2026-10-17T19:00+02:00
+
+Pydantic AI's CodeMode can start your tools before the model finishes writing the code ⚡
+
+- CodeMode(speculate=['get_weather'])
+- A call with literal keyword arguments starts once its line streams in
+- In my test, 3 slow lookups went from 8.7s to 4.7s
+
+https://pydantic.dev/docs/ai/harness/code-mode/#speculative-execution
