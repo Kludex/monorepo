@@ -1,0 +1,9 @@
+at: 2026-10-17T15:00+02:00
+
+See every failed Pydantic validation in Logfire, with the input that failed 🔍
+
+- logfire.instrument_pydantic(record='failure')
+- Spans for failures, metrics for every validation
+- Each failure carries the errors and the input_data
+
+https://pydantic.dev/docs/logfire/integrations/pydantic/

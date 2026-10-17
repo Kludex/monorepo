@@ -1,0 +1,12 @@
+at: 2026-10-17T15:00+02:00
+
+Logfire can record every Pydantic validation that fails, along with the input that made it fail. 🔍
+
+Validation errors are often the first sign that a client, an LLM or an upstream API started sending something different. With logfire.instrument_pydantic(record='failure'), each failure becomes a span with the model name, the errors and the input_data. Every validation still counts toward a metric, so you can follow the failure rate over time.
+
+- Turn it on once: instrument_pydantic(), the LOGFIRE_PYDANTIC_PLUGIN_RECORD environment variable, or pyproject.toml.
+- record='all' also sends a span for every successful validation.
+- Third-party models are skipped by default. Opt them in with include={'openai.*'}.
+- Only models defined after the call are instrumented, so call it early.
+
+https://pydantic.dev/docs/logfire/integrations/pydantic/
