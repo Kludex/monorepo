@@ -1,0 +1,9 @@
+at: 2026-10-25T15:00+01:00
+
+Pydantic AI supports Jev, a model that answers questions instead of writing text 🎯
+
+- Ask a typed question, get a value of that type
+- Every answer comes with its confidence
+- Agent('typesafe:jev-latest', output_type=...)
+
+https://pydantic.dev/docs/ai/models/typesafe/

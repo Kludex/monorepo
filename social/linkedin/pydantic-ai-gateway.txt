@@ -1,0 +1,14 @@
+at: 2026-10-24T15:00+02:00
+
+Pydantic AI Gateway gives you one API key for OpenAI, Anthropic, Google, Groq and AWS Bedrock. 🔑
+
+In Pydantic AI, you switch to it by prefixing the model name with gateway/, such as gateway/anthropic:claude-sonnet-5-5. I sent the same question to GPT-6.1, Claude Sonnet 5.5 and Gemini 3.8 Flash with a single key, and only the model name changed.
+
+- Set spending limits per project, user and API key, with daily, weekly and monthly caps.
+- Bring your own provider keys, or pay for inference through the platform.
+- Configure endpoints that fail over between providers serving the same model, or balance traffic across them.
+- Requests go through in each provider's native format, so new model features work as soon as they ship.
+
+The Gateway is managed through Logfire. Activate it in your organization's settings.
+
+https://pydantic.dev/docs/ai/overview/gateway/

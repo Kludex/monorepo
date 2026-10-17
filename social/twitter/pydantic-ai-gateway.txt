@@ -1,0 +1,9 @@
+at: 2026-10-24T15:00+02:00
+
+One API key for OpenAI, Anthropic, Google, Groq and Bedrock: Pydantic AI Gateway 🔑
+
+- Prefix the model name with gateway/
+- Spending limits per project, user and key
+- Failover and load balancing between providers
+
+https://pydantic.dev/docs/ai/overview/gateway/
