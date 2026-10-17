@@ -9,8 +9,6 @@ echo "## Social posts"
 failed=0
 while read -r file; do
   echo
-  echo '<table><tr><td>'
-  echo
   echo "**$file**"
   at=$(sed -n '1s/^at: *//p' "$file")
   text=$(cat "$file")
@@ -51,10 +49,7 @@ print(sum(1 if light(ord(char)) else 2 for char in text))' <<<"$text")
   echo "$text"
   echo '````'
   for image in "${file%.txt}".*; do
-    [[ $image == *.txt ]] ||
-      echo "<img src=\"https://raw.githubusercontent.com/$GITHUB_REPOSITORY/$HEAD_SHA/$image\" alt=\"$image\" width=\"600\">"
+    [[ $image == *.txt ]] || echo "![$image](https://raw.githubusercontent.com/$GITHUB_REPOSITORY/$HEAD_SHA/$image)"
   done
-  echo
-  echo '</td></tr></table>'
 done <<<"$files"
 exit $failed
