@@ -1,0 +1,13 @@
+HTTPX2 2.14.0 is out! 🚀
+
+NO_PROXY now understands CIDR ranges.
+
+Until now, an entry like 192.168.0.0/16 in NO_PROXY or mounts only matched the network address itself. Now any address in the range bypasses the proxy, for IPv4 and IPv6, like [fe80::]/10. Bracketed IPv6 addresses such as [::1]:8080 work too, and an entry that cannot be parsed is ignored instead of failing when you create the client.
+
+- httpx2 now imports on FIPS-enforced Python builds without hashlib.md5.
+- HTTP/2 reads no longer block when a server lowers its concurrent stream limit mid-flight.
+- Sync WebSocket sessions no longer hang on exit when their event queue is full.
+
+If you have a mounts key like all://10.0.0.0/33, it now raises InvalidURL. Check it before you bump. ⬆️
+
+https://github.com/pydantic/httpx2/releases/tag/v2.14.0
