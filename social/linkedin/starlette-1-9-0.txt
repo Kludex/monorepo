@@ -1,0 +1,15 @@
+Starlette 1.9.0 is out! 🚀
+
+TestClient now streams response bodies.
+
+Until now, client.stream() waited for the application to send the whole body before it returned. A response that never ends, like a Server-Sent Events stream, could not be tested chunk by chunk. The issue had been open since 2020.
+
+Now client.stream() returns as soon as the response starts, and you read the body as the application sends it.
+
+- Closing an unfinished streamed response cancels the application.
+- Closing a finished response waits for background tasks instead of cancelling them.
+- Closing the client cancels any streamed response you forgot to close, so your tests don't hang.
+
+If your tests close a streamed response early and expect the application to run to completion, check them before you bump. ⬆️
+
+https://github.com/Kludex/starlette/releases/tag/1.9.0
