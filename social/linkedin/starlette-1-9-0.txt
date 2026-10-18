@@ -1,6 +1,6 @@
 Starlette 1.9.0 is out! 🚀
 
-The highlight is streaming in TestClient. client.stream() now returns as soon as the response starts, instead of waiting for the application to finish. You can now test streaming endpoints chunk by chunk. Closing an unfinished streamed response now cancels the application, so check your tests if they relied on the app running to completion.
+The highlight is streaming in TestClient. client.stream() now returns as soon as the response starts, instead of waiting for the application to finish. You can test streaming endpoints chunk by chunk. Closing an unfinished streamed response now cancels the application, so check your tests if they relied on the app running to completion.
 
 Also in this release:
 
