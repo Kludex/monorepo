@@ -1,8 +1,7 @@
 Starlette 1.9.0 is out! 🚀
 
-- TestClient streams response bodies, so client.stream() returns before the app finishes
-- request.url escapes ?, # and a leading //
-- Host names match case-insensitively
-- Every existing Vary header is kept
+TestClient now streams response bodies. client.stream() returns as soon as the response starts, instead of waiting for the app to finish.
+
+You can finally test streaming endpoints chunk by chunk, a gap open since 2020.
 
 https://github.com/Kludex/starlette/releases/tag/1.9.0
