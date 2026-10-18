@@ -1,0 +1,8 @@
+HTTPX2 2.14.0 is out! 🚀
+
+- NO_PROXY and mounts match CIDR ranges like 192.168.0.0/16
+- Bracketed IPv6 in NO_PROXY, like [::1]:8080
+- Imports on FIPS-enforced Python builds
+- HTTP/2 and WebSocket shutdown fixes
+
+https://github.com/pydantic/httpx2/releases/tag/v2.14.0
