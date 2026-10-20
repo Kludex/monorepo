@@ -1,0 +1,15 @@
+at: 2026-11-03T15:00+01:00
+
+Logfire has a hosted MCP server, so your coding agent can read your production telemetry 🔥
+
+Point Claude Code, Codex, Cursor or any other MCP client at the endpoint for your region, US or EU, and log in through your browser. There is nothing to install. The agent can then answer "why is this endpoint slow?" from the real traces, instead of guessing from the code.
+
+- Run SQL against your traces, logs and metrics, and find the exceptions raised in a given file.
+- Create and update dashboards, alerts and notification channels.
+- List exception issues and triage them.
+- Manage feature flags and their rollouts.
+- Organization admins can limit every MCP client to read-only tools.
+
+In Claude Code, claude plugin install logfire@claude-plugins-official sets up the server and the Logfire skills in one step.
+
+https://pydantic.dev/docs/logfire/guides/mcp-server/

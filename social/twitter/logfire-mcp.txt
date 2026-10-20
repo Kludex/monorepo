@@ -1,0 +1,9 @@
+at: 2026-11-03T15:00+01:00
+
+Logfire's MCP server lets your coding agent read your production traces 🔥
+
+- Run SQL against your traces, logs and metrics
+- Create dashboards and alerts, and triage issues
+- Hosted, with browser login. Nothing to install
+
+https://pydantic.dev/docs/logfire/guides/mcp-server/
