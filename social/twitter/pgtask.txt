@@ -4,7 +4,6 @@ pgtask: durable tasks and workflows that live entirely in PostgreSQL 🐘
 
 - No broker, no coordinator, no extension
 - Enqueue inside your own transaction
-- task.step() resumes a retry instead of starting over
-- Python, Rust, TypeScript and Go clients
+- Pydantic AI agents survive crashes with PGTaskDurability
 
 https://kludex.github.io/pgtask/

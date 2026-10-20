@@ -7,7 +7,7 @@ There is no broker, no coordinator, and no extension to install. If your databas
 - task.step() stores a step's result, so a retry resumes instead of starting over.
 - task.sleep_for() and task.wait_for_signal() release the worker. A task sleeping for six hours costs one row, not a worker slot.
 - Clients for Python, Rust, TypeScript and Go call the same SQL functions, so you can enqueue from one language and handle the task in another.
-- Pydantic AI agents can run on it too, with PGTaskDurability.
+- Pydantic AI agents run on it with PGTaskDurability, as in the image. Each model request and tool call is saved as a step, so a run that crashes resumes without paying for finished calls again.
 
 It needs PostgreSQL 16 or newer, and nothing else.
 
