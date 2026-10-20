@@ -1,0 +1,14 @@
+at: 2026-10-29T15:00+01:00
+
+I built pgtask: a queue, a scheduler, and a durable workflow runtime that live entirely in PostgreSQL 🐘
+
+There is no broker, no coordinator, and no extension to install. If your database is up, your queue is up. The main reason to keep the queue in the database: pass your own connection to Client.enqueue_on(), and the task commits with your data or not at all. Roll back and the task never existed, which is what an outbox table is usually for.
+
+- task.step() stores a step's result, so a retry resumes instead of starting over.
+- task.sleep_for() and task.wait_for_signal() release the worker. A task sleeping for six hours costs one row, not a worker slot.
+- Clients for Python, Rust, TypeScript and Go call the same SQL functions, so you can enqueue from one language and handle the task in another.
+- Pydantic AI agents can run on it too, with PGTaskDurability.
+
+It needs PostgreSQL 16 or newer, and nothing else.
+
+https://kludex.github.io/pgtask/

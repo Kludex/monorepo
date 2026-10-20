@@ -1,0 +1,9 @@
+at: 2026-11-02T15:00+01:00
+
+genai-prices now has an HTTP API: POST genai-prices.pydantic.dev/v1/price 💰
+
+- Send the model, provider and token usage, get the price back
+- New Java client, generated from its OpenAPI document
+- Native packages for Python, TypeScript and Go
+
+https://github.com/pydantic/genai-prices
