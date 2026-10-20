@@ -1,0 +1,11 @@
+at: 2026-11-02T15:00+01:00
+
+genai-prices now has an HTTP API, at genai-prices.pydantic.dev 💰
+
+genai-prices calculates what an LLM API call costs, from the model, the provider and the token usage. It tracks historic price changes, off-peak prices and tiered context pricing across dozens of providers. Until now you needed a package in your language to use it. Now any language can send one request to POST /v1/price and get the input, output and total price back.
+
+- A new Java client is generated from the API's OpenAPI document, served at /openapi.json.
+- Python, TypeScript and Go keep their native packages, which calculate prices in your process.
+- You can also send the provider's raw response instead of the usage counts, and the API extracts the usage for you.
+
+https://github.com/pydantic/genai-prices
