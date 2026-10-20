@@ -9,6 +9,6 @@ Database drivers return rows as Any, so nothing ties a query's columns to the co
 - Parameter counts and misspelled columns are caught on sqlite3, psycopg and asyncpg calls.
 - sqlty strip undoes it, so you can adopt it one module at a time.
 
-It needs Python 3.14+ and works with PostgreSQL, SQLite and MySQL. It's in beta.
+It needs Python 3.14+ and works with PostgreSQL, SQLite and MySQL. Jiri Kuncar built it, and it's in beta.
 
 https://github.com/jirikuncar/sqlty
