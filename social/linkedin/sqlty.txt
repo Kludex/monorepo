@@ -1,0 +1,14 @@
+at: 2026-10-26T15:00+01:00
+
+We've been running sqlty on our backend, and it has been finding real bugs in our raw SQL 🔍
+
+Database drivers return rows as Any, so nothing ties a query's columns to the code that reads them. sqlty reads your CREATE TABLE statements, infers the row type of each query, and wraps it as SQL[T]. mypy, pyright and ty then check the code that uses the rows. No database connection needed.
+
+- A migration that drops NOT NULL from a column fails CI, and your type checker points at every caller that now needs a None check.
+- TypedDict, NamedTuple, dataclass and Pydantic row types are checked against the query.
+- Parameter counts and misspelled columns are caught on sqlite3, psycopg and asyncpg calls.
+- sqlty strip undoes it, so you can adopt it one module at a time.
+
+It needs Python 3.14+ and works with PostgreSQL, SQLite and MySQL. It's in beta.
+
+https://github.com/jirikuncar/sqlty

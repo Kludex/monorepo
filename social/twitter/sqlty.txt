@@ -1,0 +1,9 @@
+at: 2026-10-26T15:00+01:00
+
+We've been running sqlty on our backend, and it finds real bugs in our raw SQL 🔍
+
+- Infers row types from your schema, no database needed
+- Catches a migration that makes a column nullable
+- Checks parameter counts and misspelled columns
+
+https://github.com/jirikuncar/sqlty
