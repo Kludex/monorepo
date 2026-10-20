@@ -36,6 +36,7 @@ const theme = {
     { scope: ["punctuation", "keyword.operator"], settings: { foreground: color.grey } },
     { scope: ["keyword", "storage.type", "storage.modifier", "keyword.operator.logical"], settings: { foreground: color.calcium } },
     { scope: ["string", "punctuation.definition.string"], settings: { foreground: color.aqua } },
+    { scope: ["string.unquoted.argument"], settings: { foreground: color.sugar } },
     { scope: ["constant", "support.type", "support.function.builtin", "variable.language"], settings: { foreground: color.purple } },
     {
       scope: ["entity.name", "entity.name.function.decorator", "punctuation.definition.decorator", "meta.function-call.generic"],
@@ -74,7 +75,7 @@ const html = `<!doctype html>
 ${code}
 <script>
   const pre = document.querySelector(".shiki");
-  pre.style.zoom = Math.min(1, 1440 / pre.offsetWidth, 700 / pre.offsetHeight);
+  pre.style.zoom = Math.min(1440 / pre.offsetWidth, 700 / pre.offsetHeight);
 </script>`;
 
 const page = join(mkdtempSync(join(tmpdir(), "snippet-")), "snippet.html");
