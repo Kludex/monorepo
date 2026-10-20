@@ -1,0 +1,9 @@
+at: 2026-10-28T15:00+01:00
+
+Users of your Pydantic AI app can now sign in with ChatGPT and run it on their own plan 🔐
+
+- New openai-chatgpt provider
+- Runs the browser sign-in and refreshes tokens
+- Users can see and limit your app's usage in ChatGPT
+
+https://pydantic.dev/docs/ai/models/openai-chatgpt/

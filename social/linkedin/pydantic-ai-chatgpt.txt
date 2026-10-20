@@ -1,0 +1,11 @@
+at: 2026-10-28T15:00+01:00
+
+Users of your Pydantic AI app can now sign in with ChatGPT and run it on their own plan, instead of an API key. 🔐
+
+The new openai-chatgpt provider is built on OpenAI's Sign in with ChatGPT. OpenAIChatGPTOAuthFlow runs the browser sign-in, and OpenAIChatGPTProvider sends Responses API requests with the user's token and refreshes it as it expires. Each user approves your app by name, and can see and limit its usage in their ChatGPT settings.
+
+- It's in the openai extra: pydantic-ai-slim[openai].
+- Give the provider an OpenAIChatGPTCredentialSource to save refreshed tokens between runs. Refresh tokens are single-use.
+- Open-source and local apps can use it today. A paid or hosted app needs OpenAI's approval first.
+
+https://pydantic.dev/docs/ai/models/openai-chatgpt/
