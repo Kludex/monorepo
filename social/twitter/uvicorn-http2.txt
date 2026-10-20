@@ -1,0 +1,10 @@
+at: 2026-10-27T15:00+01:00
+
+Uvicorn now speaks HTTP/2 ⚡
+
+- Opt in with uvicorn main:app --http zttp --http2
+- Negotiated over TLS with ALPN, or cleartext with prior knowledge
+- Response trailers and 103 Early Hints
+- Experimental, off by default
+
+https://uvicorn.dev/concepts/http2/
