@@ -1,9 +1,0 @@
-at: 2026-10-30T15:00+01:00
-
-zuvloop: a drop-in asyncio event loop, powered by libuv and written in Zig ⚡
-
-- Uvicorn plaintext: 70.1k req/s, vs 47.6k on asyncio and 65.6k on uvloop
-- Over 20x faster than asyncio at call_soon_threadsafe
-- One line: zuvloop.run(main())
-
-https://zuvloop.marcelotryle.com
