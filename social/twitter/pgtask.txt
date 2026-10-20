@@ -1,0 +1,9 @@
+at: 2026-10-29T15:00+01:00
+
+pgtask: durable tasks and workflows that live entirely in PostgreSQL 🐘
+
+- No broker, no coordinator, no extension
+- Enqueue inside your own transaction
+- Pydantic AI agents survive crashes with PGTaskDurability
+
+https://kludex.github.io/pgtask/
