@@ -1,0 +1,10 @@
+at: 2026-10-31T15:00+01:00
+
+Capabilities are how you extend a Pydantic AI agent 🧩
+
+- Tools, hooks, instructions and model settings in one unit
+- Pass them with Agent(capabilities=[...])
+- Built-ins like Thinking, WebSearch and Caching
+- Capability() bundles your own, no subclass
+
+https://pydantic.dev/docs/ai/capabilities/overview/

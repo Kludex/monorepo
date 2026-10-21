@@ -1,0 +1,14 @@
+at: 2026-10-31T15:00+01:00
+
+Capabilities are the main way to extend a Pydantic AI agent. 🧩
+
+A capability is a reusable unit of agent behavior. It can bring tools, lifecycle hooks, instructions, model settings and model selection, all as one object you pass to Agent(capabilities=[...]). A memory system, a guardrail, a cost tracker or an approval flow is one capability, instead of arguments spread across the Agent constructor.
+
+The image defines a refunds capability with Capability(), which bundles instructions and a tool without a subclass, and adds it next to Thinking and WebSearch. I ran it with Claude Sonnet 5.5: the model thought, called refund_status, and searched the web natively.
+
+- WebSearch, WebFetch and MCP are provider-adaptive: native where the model supports it, local otherwise.
+- Pass defer_loading=True and a capability stays a one-line catalog entry until the model loads it.
+- Pydantic AI Harness adds many more, from sandboxes and memory to guardrails and spend limits.
+- For hooks, model settings or native tools, subclass AbstractCapability.
+
+https://pydantic.dev/docs/ai/capabilities/overview/
