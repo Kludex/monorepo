@@ -1,0 +1,8 @@
+HTTPX2 2.16.0 is out! 🍪
+
+Requests with large cookie jars are much faster:
+- Cookie header about 18x faster with 1,000 cookies across 500 domains
+- The jar is reused, not copied on every request and redirect
+- Only domains matching the host are looked up
+
+https://github.com/pydantic/httpx2/releases/tag/v2.16.0
