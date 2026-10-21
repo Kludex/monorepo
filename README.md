@@ -21,6 +21,19 @@ Starlette 1.8.0 is out!
 
 The time is ISO 8601. Without an offset it is UTC. Merging hands the post to Buffer, which publishes it at that time, and you can still edit or cancel it there. CI fails the pull request if the time is invalid or already in the past.
 
+To add a first comment, put it after a `---` line:
+
+```
+Monty is a Python interpreter in Rust.
+
+---
+
+If you want to work on Monty, apply here:
+https://pydantic.dev/jobs/senior-rust-engineer-monty
+```
+
+On LinkedIn it is the first comment. X has no first comment, so it is posted as a reply instead.
+
 To attach images, put them next to the text file with the same name: `starlette-1-0.png`, or `starlette-1-0.1.png` and `starlette-1-0.2.png` for several. Buffer downloads them from the public repository.
 
 To turn a code snippet into an image with the Pydantic colours and logo:
