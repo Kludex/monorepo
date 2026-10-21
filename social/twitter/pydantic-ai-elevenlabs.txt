@@ -1,0 +1,9 @@
+at: 2026-11-01T15:00+01:00
+
+New in @pydantic AI: voice agents on @elevenlabsio Eleven Realtime 🎙️
+
+- agent.realtime('elevenlabs:eleven_realtime_v1_mini')
+- Same tools and instructions as your text agent
+- Cut it off mid-sentence, it only remembers what you heard
+
+https://pydantic.dev/docs/ai/realtime/elevenlabs/
