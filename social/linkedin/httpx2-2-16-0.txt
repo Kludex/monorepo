@@ -1,0 +1,10 @@
+HTTPX2 2.16.0 is out! 🍪
+
+Requests with large cookie jars are much faster.
+
+Building the Cookie header used to scan every cookie in the jar, and the client copied its jar on every request and redirect. Now the client reuses its jar, only looks up the domains that can match the request host, and skips the expired cookie sweep until a cookie is due. With 1,000 cookies across 500 domains, building the Cookie header is about 18 times faster.
+
+- A custom policy set with client.cookies.jar.set_policy() now applies to outgoing requests.
+- Cookies from different domains are now sent from the least to the most specific domain, like .example.org before sub.example.org. Cookies with longer paths still come first.
+
+https://github.com/pydantic/httpx2/releases/tag/v2.16.0
