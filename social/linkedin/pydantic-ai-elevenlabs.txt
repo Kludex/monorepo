@@ -1,0 +1,15 @@
+at: 2026-11-01T15:00+01:00
+
+New in @Pydantic AI 2.59.0: voice agents on @ElevenLabs Eleven Realtime speech-to-speech models. 🎙️
+
+Call agent.realtime('elevenlabs:eleven_realtime_v1_mini') on the agent you already have, and it holds a live spoken conversation. The instructions, tools and history come from your Pydantic AI agent, so mid-call it can check a table or look up an order with the same code your text agent runs.
+
+The image is a complete voice agent: microphone in, speaker out, one tool. The audio goes through listentome, my library for microphone and speaker access.
+
+- Two models: eleven_realtime_v1_mini for price and latency, eleven_realtime_v1_max to reason before it answers.
+- Pick the voice and language with elevenlabs_voice and elevenlabs_language.
+- With handle_barge_in=True, you can cut it off mid-sentence, and it only remembers what you heard.
+- When ElevenLabs closes a session, a reconnect policy replays the history and the call carries on.
+- An agent hosted on ElevenAgents works too, with elevenlabs-agents:<agent_id>.
+
+https://pydantic.dev/docs/ai/realtime/elevenlabs/
