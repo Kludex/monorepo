@@ -1,13 +1,9 @@
 Episode 7 of the Wednesday Web Wizards podcast with Giovanni Barillari is out. 🎙️
 
-We start with Anthropic's IPO and what "we're profitable" really means, which models are actually good right now, and why the subscription plans keep changing under our feet.
-
-The second half is about observability for AI agents. When your agent mostly runs bash and throwaway Python scripts, and the labs hide the reasoning traces, what can you actually see?
-
-- Rebooting a 16-year-old Diplomacy web game with AI
-- Distillation, Chinese open models and hidden reasoning traces
-- Do self-improving agents work?
-- A live demo of an open-weight model running locally on Gio's RTX 3090
+- Anthropic's IPO and what "we're profitable" really means
+- Which models are winning right now
+- Observability for AI agents that mostly run bash
+- A live demo of an open-weight model on Gio's RTX 3090
 
 ---
 
