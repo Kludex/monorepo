@@ -1,0 +1,7 @@
+A leaked gh token can turn off your branch protection. That's what LiteLLM's attacker did 🔓
+
+- gh auth login gives you a classic token, admin on your repos
+- Switch to a fine-grained token without Administration
+- Revoke the old one, logout doesn't
+
+https://marcelotryle.com/blog/gh-token-admin/

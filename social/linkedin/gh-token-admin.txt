@@ -1,0 +1,13 @@
+I wrote a post on why your GitHub CLI token is more dangerous than you think, and how to fix it in five minutes 🔓
+
+LiteLLM published their incident report yesterday. The attacker got GitHub CLI tokens from logs. One belonged to an organization owner, and they used it to disable branch protections, force push, and release a malicious package to PyPI.
+
+The token from gh auth login is a classic token with the repo scope. On every repository you administer, it can disable branch protection, remove environment protection rules, and add collaborators. Any tool that runs gh in your shell can use it, coding agents included.
+
+Fine-grained tokens split that power out into one permission: Administration. Leave it off, and the token still pushes, opens pull requests and creates releases, but can't touch the settings that protect your users.
+
+- Create a fine-grained token with Contents, Pull requests, Issues, Workflows and Actions.
+- Switch gh to it with gh auth login --with-token.
+- Revoke the old token. gh auth logout doesn't.
+
+https://marcelotryle.com/blog/gh-token-admin/
