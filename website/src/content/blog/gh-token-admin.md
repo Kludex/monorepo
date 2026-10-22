@@ -23,6 +23,7 @@ So whoever holds it can:
 - Remove protection rules from deployment environments, or let admins bypass them.
 - Change which actions may run, and the default permissions of `GITHUB_TOKEN`.
 - Add collaborators and deploy keys.
+- Approve deployments that wait for you as a required reviewer.
 
 That token lives on your machine, and any tool that runs `gh` in your shell can use it. That includes
 coding agents. In the LiteLLM case, the report says Claude Code embedded the token in a response body, and the
@@ -30,8 +31,13 @@ response ended up in logs.
 
 ## Fine-grained tokens split the dangerous part out
 
-Fine-grained personal access tokens have a permission called **Administration**. Every endpoint in the list above
-requires it. Releases, pull requests, issues and pushes don't.
+Fine-grained personal access tokens split that list into two permissions:
+
+- **Administration** covers the settings: branch protection, rulesets, environments, Actions settings,
+  collaborators and deploy keys.
+- **Deployments** covers approving a deployment that waits for a required reviewer.
+
+Releases, pull requests, issues, pushes and re-runs need neither.
 
 So you can have a token that does all your daily work, and still can't touch the settings that protect your
 releases.
@@ -49,6 +55,7 @@ Create a fine-grained token at
 - **Repository access:** All repositories.
 - **Read and write:** Contents, Pull requests, Issues, Workflows and Actions.
 - **Administration:** leave it off.
+- **Deployments:** leave it off, or Read-only.
 
 Then point `gh` at it. `git` goes through `gh` if you use it as the credential helper, so it switches too:
 
@@ -85,6 +92,11 @@ Resource not accessible by personal access token (HTTP 403)
 ```
 
 Pushing, opening pull requests, re-running workflows and `gh release create` kept working.
+
+:::note[Actions: write approves fork runs, not deployments]
+Actions: write lets the token approve a workflow run from a fork pull request. That only lets CI run on the pull
+request. Approving a deployment is a different endpoint, and needs Deployments: write.
+:::
 
 ## What you give up
 
