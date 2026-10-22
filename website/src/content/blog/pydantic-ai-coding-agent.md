@@ -144,3 +144,6 @@ The coding tools were the gap. The rest is why you picked Pydantic AI in the fir
 
 If the Claude Agent SDK fits your project, use it. But if "Pydantic AI can't code" is the reason you left, it can
 now. Start with the [Coder docs](https://pydantic.dev/docs/ai/harness/coder/).
+
+My colleague Aditya wrote about this a while back, from a different angle. Read his take in
+[Pydantic AI vs Claude Agent SDK: Who owns the agent?](https://pydantic.dev/articles/pydantic-ai-vs-claude-agent-sdk).
