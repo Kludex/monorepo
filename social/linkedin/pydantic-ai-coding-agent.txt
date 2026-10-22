@@ -2,7 +2,7 @@ at: 2026-11-04T15:00+01:00
 
 I wrote a post on how to get the Claude Agent SDK's coding capabilities in Pydantic AI. 🛠️
 
-At a conference, I heard someone say they moved from Pydantic AI to the Claude Agent SDK because it could read files, edit them and run commands. A bare Pydantic AI agent can't. But Pydantic AI Harness adds it in one line: Agent(model, capabilities=[LocalWorkspace('.'), Coder()]) gives the agent read_file, write_file, edit_file, grep, shell and delegate_task, and loads AGENTS.md and CLAUDE.md from the repository.
+At a conference, I heard someone say they moved from Pydantic AI to the Claude Agent SDK because it could read files, edit them and run commands. Pydantic AI Harness gives you that in one line: Agent(model, capabilities=[LocalWorkspace('.'), Coder()]) gives the agent read_file, write_file, edit_file, grep, shell and delegate_task, and loads AGENTS.md and CLAUDE.md from the repository.
 
 The post maps every Claude Agent SDK feature to its Pydantic AI equivalent:
 

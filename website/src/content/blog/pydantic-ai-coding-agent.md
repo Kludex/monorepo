@@ -7,8 +7,8 @@ categories: ["Pydantic AI", "Coding Agents"]
 At a conference, I heard someone say they moved from Pydantic AI to the Claude Agent SDK because it had more
 "coding" capabilities: reading files, editing them, running commands.
 
-That was true of a bare `Agent`. It is not true of Pydantic AI today. The coding tools live in
-[Pydantic AI Harness](https://pydantic.dev/docs/ai/harness/), and you add them in one line.
+Pydantic AI has those too. The coding tools live in [Pydantic AI Harness](https://pydantic.dev/docs/ai/harness/),
+and you add them in one line.
 
 ## A coding agent in one line
 
