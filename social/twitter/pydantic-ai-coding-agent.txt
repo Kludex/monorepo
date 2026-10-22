@@ -1,0 +1,9 @@
+at: 2026-11-04T15:00+01:00
+
+Someone at a conference said they left Pydantic AI for the Claude Agent SDK for its coding tools. You can get them in one line 🛠️
+
+- Coder() adds read, edit, grep and shell
+- Hooks, subagents, skills, MCP
+- Any model, typed output
+
+https://marcelotryle.com/blog/pydantic-ai-coding-agent/
