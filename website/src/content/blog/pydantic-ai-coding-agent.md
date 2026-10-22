@@ -79,28 +79,27 @@ need a different setting.
 This is the agent I tested, with a plan the model keeps up to date and a hook that stops it from pushing:
 
 ```python
+from typing import Any
+
 from pydantic_ai import Agent, RunContext, ToolDefinition
-from pydantic_ai.capabilities import Hooks, LocalWorkspace, ValidatedToolArgs
+from pydantic_ai.capabilities import Hooks, LocalWorkspace
 from pydantic_ai.exceptions import ModelRetry
 from pydantic_ai.messages import ToolCallPart
 from pydantic_ai_harness import Planning
 from pydantic_ai_harness.coder import Coder
 
-hooks = Hooks()
 
-
-@hooks.on.before_tool_execute(tools=['shell'])
 async def block_git_push(
-    ctx: RunContext, *, call: ToolCallPart, tool_def: ToolDefinition, args: ValidatedToolArgs
-) -> ValidatedToolArgs:
-    if 'git push' in args['command']:
+    ctx: RunContext, *, call: ToolCallPart, tool_def: ToolDefinition, args: dict[str, Any]
+) -> dict[str, Any]:
+    if call.tool_name == 'shell' and 'git push' in args['command']:
         raise ModelRetry('Pushing is not allowed. Leave the changes uncommitted.')
     return args
 
 
 agent = Agent(
     'anthropic:claude-sonnet-5-5',
-    capabilities=[LocalWorkspace('.'), Coder(), Planning(), hooks],
+    capabilities=[LocalWorkspace('.'), Coder(), Planning(), Hooks(before_tool_execute=block_git_push)],
 )
 result = agent.run_sync('Run the tests with `uv run pytest`, and fix the bug they catch.')
 print(result.output)
