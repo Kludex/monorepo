@@ -37,8 +37,9 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: website
           command: >-
-            pages deploy website/dist --project-name=marcelotryle
+            pages deploy dist --project-name=marcelotryle
             --branch=${{ github.event_name == 'pull_request' && github.head_ref || 'main' }}
 
       - name: Comment preview URL on PR
