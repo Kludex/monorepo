@@ -1,6 +1,5 @@
 type Context = {
   request: Request;
-  env: { CVEDEXD_URL?: string };
   next: () => Promise<Response>;
   waitUntil: (promise: Promise<unknown>) => void;
 };
@@ -17,18 +16,19 @@ type CveRecord = {
   };
 };
 
+const CVEDEXD = "https://cve.marcelotryle.com";
 const MAX_AGE = 600;
 
 /** Fills `#advisory-list` with the CNA's published CVEs. Any failure serves the static page. */
-export async function onRequestGet({ request, env, next, waitUntil }: Context): Promise<Response> {
+export async function onRequestGet({ request, next, waitUntil }: Context): Promise<Response> {
   const page = await next();
-  if (!env.CVEDEXD_URL || !page.ok || !page.headers.get("content-type")?.includes("text/html")) {
+  if (!page.ok || !page.headers.get("content-type")?.includes("text/html")) {
     return page;
   }
   const key = new Request(new URL("/cna/__advisories", request.url));
   let cached = await caches.default.match(key);
   if (!cached) {
-    const html = await advisories(env.CVEDEXD_URL).catch(() => null);
+    const html = await advisories().catch(() => null);
     if (html === null) {
       return page;
     }
@@ -48,8 +48,8 @@ export async function onRequestGet({ request, env, next, waitUntil }: Context): 
     .transform(page);
 }
 
-async function advisories(cvedexd: string): Promise<string | null> {
-  const feed = await fetch(new URL("/api/cvedexd/published", cvedexd));
+async function advisories(): Promise<string | null> {
+  const feed = await fetch(`${CVEDEXD}/api/cvedexd/published`);
   if (!feed.ok) {
     return null;
   }
