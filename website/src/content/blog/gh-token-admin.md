@@ -51,11 +51,13 @@ environment. With a classic token, that is one API call.
 Create a fine-grained token at
 [github.com/settings/personal-access-tokens/new](https://github.com/settings/personal-access-tokens/new):
 
-- **Resource owner:** your account, or your organization.
-- **Repository access:** All repositories.
+- **Resource owner:** your account. Each organization needs its own token, see
+  [Personal repositories and organizations](#personal-repositories-and-organizations).
+- **Repository access:** All repositories. The token never exceeds your own access, so this means "every repository
+  I can already reach".
 - **Read and write:** Contents, Pull requests, Issues, Workflows and Actions.
-- **Administration:** leave it off.
-- **Deployments:** leave it off, or Read-only.
+- **Read-only:** Commit statuses, for the CI status in `gh pr checks`.
+- **Leave off:** Administration, Deployments, Environments, Secrets, Variables and Webhooks.
 
 Then point `gh` at it. `git` goes through `gh` if you use it as the credential helper, so it switches too:
 
@@ -66,6 +68,48 @@ gh auth status
 ```
 
 `gh auth status` should show a token starting with `github_pat_`.
+
+## Personal repositories and organizations
+
+A fine-grained token has exactly one resource owner: your account, or one organization. GitHub lists "access multiple
+organizations at once" as a current limitation. So you need one token per owner, and a way to pick the right one.
+
+I keep my personal token as the default in `gh`, and switch to the organization token by folder, with
+[direnv](https://direnv.net/).
+
+Create a second token with the organization as **Resource owner**, and the same permissions as above. The
+organization may add rules: Pydantic's enterprise, for example, refuses tokens that live longer than 366 days, and an
+organization can require an owner to approve the token. If the organization doesn't show up as a resource owner, ask
+an owner to allow fine-grained tokens.
+
+Store the token in the macOS Keychain, not in a file. This prompts for it:
+
+```bash
+security add-generic-password -a "$USER" -s gh-pydantic -w
+```
+
+Load it in every folder under `~/dev/pydantic`:
+
+```bash
+echo 'export GH_TOKEN=$(security find-generic-password -a "$USER" -s gh-pydantic -w)' > ~/dev/pydantic/.envrc
+direnv allow ~/dev/pydantic
+```
+
+And make sure your shell runs direnv's hook. `direnv allow` is a one-time approval, the hook is what loads `.envrc`
+when you `cd` into a folder:
+
+```bash
+echo 'eval "$(direnv hook zsh)"' >> ~/.zshrc
+```
+
+`GH_TOKEN` takes precedence over the token `gh` stored at login, and `gh auth git-credential` returns it too, so
+`git push` inside `~/dev/pydantic` uses the organization token. Everywhere else, `gh` and `git` keep using your
+personal one.
+
+:::warning[Only shells see GH_TOKEN]
+direnv sets `GH_TOKEN` in your shell. An editor or agent started outside that shell falls back to your personal token,
+and gets a 403 on the organization's repositories.
+:::
 
 ## Revoke the old one
 
@@ -104,7 +148,7 @@ Fine-grained tokens are not a drop-in replacement. GitHub lists
 [the limitations](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#fine-grained-personal-access-tokens-limitations).
 These are the ones you will notice:
 
-- A token covers one user or one organization, not several.
+- A token covers one user or one organization, not several. You juggle one token per owner.
 - It can't contribute to repositories where you are an outside collaborator.
 - Organizations can require an owner to approve the token first.
 
