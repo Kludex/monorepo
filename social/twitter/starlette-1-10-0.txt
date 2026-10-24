@@ -1,0 +1,9 @@
+Starlette 1.10.0 is out! 🚀
+
+- Faster URL-encoded form parsing with less memory
+- url_path_for() keeps values that look like placeholders
+- Handled exceptions no longer pin requests in memory
+
+Have a nice weekend, and happy coding!
+
+https://github.com/Kludex/starlette/releases/tag/1.10.0
