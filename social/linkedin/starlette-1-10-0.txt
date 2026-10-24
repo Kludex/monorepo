@@ -1,0 +1,11 @@
+Starlette 1.10.0 is out! 🚀
+
+URL-encoded forms now parse with less memory and CPU. The parser builds each field as it goes, instead of queueing every event and replaying it, and it no longer drops the last field when a stream ends early.
+
+- url_path_for() keeps values that look like another placeholder, and fills in parameters faster.
+- Handled exceptions no longer keep requests alive when the same exception instance is reused.
+- QueryParams("a=1&a=2") and QueryParams("a=2&a=1") are no longer equal. Check your tests before you bump. ⬆️
+
+Have a nice weekend, and happy coding!
+
+https://github.com/Kludex/starlette/releases/tag/1.10.0
