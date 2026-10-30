@@ -60,3 +60,5 @@ To add a first comment, put it after a `---` line at the end of the post. Linked
 Put an image next to the text file with the same name, such as `starlette-1-8-0.png`. Use `starlette-1-8-0.1.png` and `starlette-1-8-0.2.png` for several. An image used on both networks must be copied into both directories.
 
 For a code snippet, render it with `node website/scripts/snippet.mjs snippet.py image.png`. Never hand-roll the highlighting, and keep the snippet short enough to fit at 1600x900. Run the code before you render it.
+
+Add `--pydantic` to put the Pydantic logo in the top right corner. Only use it for posts that promote Pydantic, such as Pydantic AI, Logfire, or Monty. Never use it for personal projects, such as pgtask, zuvloop, Starlette, Uvicorn, or HTTPX2.

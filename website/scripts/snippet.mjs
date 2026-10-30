@@ -2,11 +2,15 @@ import { execFileSync } from "node:child_process";
 import { mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { extname, join, resolve } from "node:path";
+import { parseArgs } from "node:util";
 import { codeToHtml } from "shiki";
 
-const [source, output] = process.argv.slice(2);
+const {
+  values: { pydantic },
+  positionals: [source, output],
+} = parseArgs({ options: { pydantic: { type: "boolean", default: false } }, allowPositionals: true });
 if (!source || !output) {
-  console.error("Usage: node website/scripts/snippet.mjs <code file> <image.png>");
+  console.error("Usage: node website/scripts/snippet.mjs [--pydantic] <code file> <image.png>");
   process.exit(1);
 }
 
@@ -71,7 +75,7 @@ const html = `<!doctype html>
   }
   .shiki code { font: 500 26px/1.55 "IBM Plex Mono", monospace; }
 </style>
-<img class="logo" src="file://${logo}">
+${pydantic ? `<img class="logo" src="file://${logo}">` : ""}
 ${code}
 <script>
   const pre = document.querySelector(".shiki");
