@@ -1,0 +1,10 @@
+at: 2026-11-13T15:00+01:00
+
+Yesterday the coding agent's input was the risk. Today it's the secrets its tools read 🔑
+
+- settings.py had a GitHub token in it
+- ToolGuardrail with redact_secrets
+- The model got [redacted:github_token]
+- It still listed every other setting
+
+https://pydantic.dev/docs/ai/harness/guardrails/

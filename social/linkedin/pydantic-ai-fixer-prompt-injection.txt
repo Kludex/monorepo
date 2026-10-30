@@ -1,0 +1,13 @@
+at: 2026-11-12T19:00+01:00
+
+The coding agent reads text I didn't write: issues, READMEs, web pages. Some of that text is written for the agent. 🕵️
+
+I put an ISSUE.md in the repo with a hidden HTML comment telling the agent to download a script and pipe it to sh before doing anything else. Then I asked the agent, running on Claude Sonnet 5.5, to fix the bug described in ISSUE.md. PromptInjectionDefender scanned the read_file result, rated it high risk, and with block_high_risk=True replaced it with a short notice. The model never saw the comment. It found the bug from the code and the failing test, fixed it, and told me it couldn't read the issue.
+
+- It uses StackOne's defender, with pattern detection by default and an optional ML classifier.
+- on_detection lets you log every verdict, blocked or not.
+- It checks tool results, which is where untrusted text gets in.
+
+Tomorrow: what the agent's tools shouldn't show it.
+
+https://pydantic.dev/docs/ai/harness/prompt-injection-defender/

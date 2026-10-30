@@ -1,0 +1,10 @@
+at: 2026-11-19T15:00+01:00
+
+Two weeks of the coding agent running from a script. With ACP, it runs in your editor 🧩
+
+- run_acp_stdio_sync serves any Agent
+- Zed and other ACP editors launch it
+- A Docker sandbox per session, at the folder you opened
+- Experimental, so it may change
+
+https://pydantic.dev/docs/ai/harness/acp/

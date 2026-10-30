@@ -1,0 +1,13 @@
+at: 2026-11-15T15:00+01:00
+
+This week the coding agent works on runs that last all day. A long run fills its context, and the first fix is to summarize. 🗜️
+
+A model only reads so many tokens per request, and every request re-sends the whole history. In the image, the agent has a tool that downloads the last CI log: 3 MB of debug output with the failure buried near the end. Even cut down, it pushed the next request to 40,000 tokens. SummarizingCompaction watches the size, and past 20,000 tokens it has Claude Haiku 5.5 summarize the older messages. I ran the agent with Claude Sonnet 5.5. After the summary, the next request was 4,580 tokens, and the agent fixed the bug.
+
+- keep_messages sets how many recent messages stay word for word.
+- The summary keeps the intent, decisions, files and next steps.
+- Other strategies clear old tool results, or slide a window over the history.
+
+Tonight: keeping the log out of the context to begin with.
+
+https://pydantic.dev/docs/ai/harness/compaction/

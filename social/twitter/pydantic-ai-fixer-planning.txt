@@ -1,0 +1,10 @@
+at: 2026-11-17T15:00+01:00
+
+A long task has many parts. Planning gives the coding agent a list to track them 📋
+
+- Three changes in one request
+- write_plan made a list of four tasks
+- It marked each one done
+- 17 tests passing at the end
+
+https://pydantic.dev/docs/ai/harness/planning/

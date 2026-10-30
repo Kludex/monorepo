@@ -1,0 +1,16 @@
+at: 2026-11-19T19:00+01:00
+
+This week's coding agent, built for runs that last all day. 🗂️
+
+It's the same Docker-sandboxed agent, with eight more capabilities. I gave it the 3 MB CI log again, on Claude Sonnet 5.5. The log went to a file, the agent grepped it for the failure, fixed the bug, and handed the change to the Opus reviewer. The reviewer agreed the fix was correct and listed older problems for me to decide on. The run took 38 seconds and cost $0.082, with every step saved to SQLite.
+
+- ToolOutputLimits: big tool output goes to a file, not the context.
+- SummarizingCompaction: older messages summarized when the context fills up.
+- StepPersistence and ConversationSearch: every run saved, and searchable later.
+- Memory: notes the agent keeps between runs.
+- Planning: a list of what's left.
+- SubAgents and Advisor: a stronger model to review or consult.
+
+Each one is a capability, so take the ones you need.
+
+https://pydantic.dev/docs/ai/harness/

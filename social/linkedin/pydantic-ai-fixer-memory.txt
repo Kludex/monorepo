@@ -1,0 +1,13 @@
+at: 2026-11-16T19:00+01:00
+
+Searching old runs works when the coding agent knows what to look for. Memory is what it chooses to keep. 🧠
+
+Memory gives the agent tools to write, search and delete notes, and puts MEMORY.md in front of every new run. With FileStore, the notes are Markdown files in the workspace. I ran the agent twice with Claude Sonnet 5.5. In the first run it tried pytest, found it wasn't installed, and switched to unittest. Before finishing it wrote: "pytest not installed; run tests with python -m unittest tests.test_parser. Don't run edit and test in parallel." The second run was a new task, adding days to parse_duration. It went straight to unittest.
+
+- I had to tell it when to write. Without that instruction, it saved nothing.
+- Stores: files, SQLite, Postgres or memory.
+- Namespaces keep one user's notes away from another's.
+
+Tomorrow: keeping track of a task with many parts.
+
+https://pydantic.dev/docs/ai/harness/memory/

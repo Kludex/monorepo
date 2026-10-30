@@ -1,0 +1,10 @@
+at: 2026-11-11T19:00+01:00
+
+Blocking is one answer. Sometimes I want to be asked, if it matters 🙋
+
+- Every shell call needs approval
+- ApprovalReviewer lets Haiku approve the harmless ones
+- 4 shell calls, 1 reached me: pip install pytest
+- My terminal asks y/N
+
+https://pydantic.dev/docs/ai/harness/approval-reviewer/

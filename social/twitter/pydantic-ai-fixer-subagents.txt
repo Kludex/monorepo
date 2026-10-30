@@ -1,0 +1,10 @@
+at: 2026-11-18T15:00+01:00
+
+The coding agent writes the fix. A second agent reviews it 👀
+
+- A reviewer on Claude Opus 5.5
+- read_only=True, so it can't edit
+- The main agent hands it the change with delegate_task
+- It found no bugs in the fix, and three older ones
+
+https://pydantic.dev/docs/ai/harness/subagents/

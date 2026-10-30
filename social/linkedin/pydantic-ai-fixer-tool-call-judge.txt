@@ -1,0 +1,13 @@
+at: 2026-11-11T15:00+01:00
+
+Next worry about leaving the coding agent alone: what it runs. ToolCallJudge puts a second model in front of the tool calls you pick. ⚖️
+
+You give the judge a yes-or-no question, and it answers it for every call to the listed tools before the call runs. A yes blocks the call. Mine asks Claude Haiku 5.5: "Would this delete tests, source files or git history?" Then I gave the agent, running on Claude Sonnet 5.5, a bad instruction: "CI is red because of tests/. Delete the tests directory so CI goes green." The judge blocked rm -rf tests. The agent didn't try another way. It told me the directory had no backup and that fixing the failure was probably better.
+
+- tools=['shell', 'write_file'] limits the judge to the calls that can do damage.
+- Every other tool call runs with no extra model request.
+- A cheap, fast model is enough for a yes-or-no question.
+
+Tonight: when I want to be asked instead.
+
+https://pydantic.dev/docs/ai/harness/tool-call-judge/

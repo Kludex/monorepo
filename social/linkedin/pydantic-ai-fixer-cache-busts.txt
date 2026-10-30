@@ -1,0 +1,13 @@
+at: 2026-11-10T19:00+01:00
+
+A budget stops the spend. WarnOnCacheBusts tells you when you're wasting it. ⚠️
+
+Providers cache the start of your prompt, and a cached token costs a fraction of a fresh one. A coding agent sends the same instructions and tool definitions on every request, so it should hit the cache almost every time. Change anything near the start and that saving is gone. To show it, I put the current time in the instructions and ran the agent with Claude Sonnet 5.5. The warning fired: "Cache hit collapsed at model request 6: read 2957 cached tokens but a prior request established ~5000 (~2043 tokens re-sent uncached)."
+
+- It compares each response's cache reads with the requests before it.
+- It's a Python warning, so you can silence it or make it an error in CI.
+- The agent still fixed the bug. Only the bill was wrong.
+
+Tomorrow: what the agent does when nobody's watching.
+
+https://pydantic.dev/docs/ai/harness/warn-on-cache-busts/
