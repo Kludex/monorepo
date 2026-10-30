@@ -1,0 +1,13 @@
+at: 2026-11-05T19:00+01:00
+
+This afternoon's coding agent ran its commands on my laptop. Now it runs them in a Docker container. 📦
+
+Swap LocalWorkspace for DockerSandbox and nothing else changes. Coder's shell and file tools now run inside the container. The only part of my machine it can change is the project directory I mount, and allow_internet_access=False starts it with --network none. I ran it on python:3.13-slim with Claude Sonnet 5.5, and it fixed the same bug in the mounted directory.
+
+- It uses the docker CLI you already have, so there is no SDK to install. Podman works too.
+- Each container gets --pids-limit 2048, so a fork loop can't exhaust the host.
+- The container is recorded in the message history, so a follow-up run works in the same one.
+
+Tomorrow: Docker is one box among many.
+
+https://pydantic.dev/docs/ai/harness/docker-sandbox/

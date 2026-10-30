@@ -1,0 +1,14 @@
+at: 2026-11-06T15:00+01:00
+
+Docker is one box. Pydantic AI Harness has more, and switching between them is one line. 🧰
+
+Each sandbox is a capability that gives the agent a workspace. Coder() doesn't care which one: read, edit, grep and shell work the same way. Pick by where you want the code to run. I ran the same agent in a smolvm microVM and a BoxLite microVM on my Mac, and each one reported its own Linux kernel.
+
+- DockerSandbox: a container, on the Docker or Podman you already have.
+- SmolSandbox and BoxLiteSandbox: a microVM with its own kernel, no cloud account.
+- E2BSandbox, ModalSandbox and DaytonaSandbox: isolated cloud machines.
+- Also Sprites, a Bubblewrap wrapper for Linux hosts, and SSH for a remote machine.
+
+Tonight: a box that can reach PyPI, and nothing else.
+
+https://pydantic.dev/docs/ai/core-concepts/workspace/

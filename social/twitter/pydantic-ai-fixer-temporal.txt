@@ -1,0 +1,9 @@
+at: 2026-11-07T19:00+01:00
+
+The coding agent now runs on Temporal, sandbox included ⏱️
+
+- TemporalDurability() next to DockerSandbox() and Coder()
+- Model requests, tool calls and workspace calls are activities
+- I killed the worker mid-run, a new one finished the fix
+
+https://pydantic.dev/docs/ai/capabilities/durable_execution/temporal/

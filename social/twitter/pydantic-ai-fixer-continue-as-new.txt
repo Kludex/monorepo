@@ -1,0 +1,9 @@
+at: 2026-11-09T15:00+01:00
+
+Long coding sessions can outgrow a Temporal workflow history. TemporalDurability can move the run to a fresh one 🔄
+
+- Pass continue_as_new to TemporalDurability
+- Checked before each model request
+- The conversation and sandbox carry over
+
+https://pydantic.dev/docs/ai/capabilities/durable_execution/temporal/#continuing-as-new-for-long-running-agents

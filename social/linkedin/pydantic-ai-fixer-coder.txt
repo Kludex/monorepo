@@ -1,0 +1,12 @@
+at: 2026-11-05T15:00+01:00
+
+Over the next five days I'm building a coding agent with Pydantic AI, one capability per post. 🛠️
+
+It starts small. The agent in the image has one job: find out why tests/test_parser.py fails and fix the bug. Coder() gives it tools to read, edit and search files and to run shell commands. LocalWorkspace('.') says where: the current directory on my machine. I ran it with Claude Sonnet 5.5. It found that parse_duration never cleared its digit buffer, added one line, and ran the tests to confirm.
+
+- Coder is built from FileSystem, Shell, RepoContext and SubAgents, so you can use it whole or take it apart.
+- Commands get your PATH, HOME and locale, and nothing else from your environment.
+
+The catch: its shell runs on my laptop. Tonight, it goes in a box.
+
+https://pydantic.dev/docs/ai/harness/coder/

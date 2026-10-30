@@ -1,0 +1,13 @@
+at: 2026-11-07T19:00+01:00
+
+The coding agent now runs on Temporal, sandbox included. ⏱️
+
+StepPersistence lets you resume a run yourself. A durable engine does it for you, including the step that was in flight. Add TemporalDurability() next to DockerSandbox() and Coder(), and run the agent inside a workflow. Every model request, tool call and workspace call becomes a Temporal activity. I killed the worker after five activities had completed. A new worker picked up the workflow, reused the same container and finished the fix.
+
+- Coder, Shell and FileSystem work under Temporal, DBOS and Prefect.
+- A command runs within its activity's timeout, 60 seconds by default, and you can raise it per tool.
+- A later run that continues from the message history, in a new workflow, works in the same sandbox.
+
+Tomorrow: Temporal is one engine among eight.
+
+https://pydantic.dev/docs/ai/capabilities/durable_execution/temporal/

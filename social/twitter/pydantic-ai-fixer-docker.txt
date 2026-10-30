@@ -1,0 +1,10 @@
+at: 2026-11-05T19:00+01:00
+
+This afternoon's coding agent ran its shell on my laptop. Now it runs in a container 📦
+
+- DockerSandbox() next to Coder()
+- Only the project directory is mounted
+- allow_internet_access=False means --network none
+- Same tools, same prompt
+
+https://pydantic.dev/docs/ai/harness/docker-sandbox/

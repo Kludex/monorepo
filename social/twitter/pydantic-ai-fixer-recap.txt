@@ -1,0 +1,10 @@
+at: 2026-11-09T19:00+01:00
+
+Five days, one coding agent. Every piece was a capability ✅
+
+- DockerSandbox: where the code runs
+- Coder: what it can do
+- StepPersistence: what it remembers
+- TemporalDurability: what keeps it alive
+
+https://pydantic.dev/docs/ai/harness/
