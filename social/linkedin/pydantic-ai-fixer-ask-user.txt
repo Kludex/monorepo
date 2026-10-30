@@ -1,0 +1,13 @@
+at: 2026-11-12T15:00+01:00
+
+Yesterday I approved the coding agent's commands. Today it asks me what I want. ❓
+
+"Make parse_duration handle bad input" leaves a lot open. Raise an error, or return None? Is " 1h30m " bad input? A model will usually pick something and move on. AskUser gives it a tool to ask multiple-choice questions instead, and you write the function that gets the answers. I ran it with Claude Sonnet 5.5. It read the code and asked two questions: what to do with invalid input, and which of three loose forms to still accept. I picked ValueError and surrounding whitespace. It built exactly that and listed what now raises.
+
+- Each question has a header, options and a description per option.
+- The answerer is yours: a terminal prompt, a form in your app, a Slack message.
+- One instruction tells it when to ask: before choosing behaviour the request leaves open.
+
+Tonight: text that asks the agent to do things I didn't.
+
+https://pydantic.dev/docs/ai/harness/ask-user/

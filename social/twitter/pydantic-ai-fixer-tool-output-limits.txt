@@ -1,0 +1,10 @@
+at: 2026-11-15T19:00+01:00
+
+The CI log filled the coding agent's context and had to be summarized. ToolOutputLimits keeps it out 📄
+
+- The 3 MB log went to a file
+- The model got a preview and the path
+- It grepped the file for the failure
+- Largest request: 5,901 tokens, not 40,000
+
+https://pydantic.dev/docs/ai/harness/tool-output-limits/

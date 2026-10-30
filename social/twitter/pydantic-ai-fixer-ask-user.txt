@@ -1,0 +1,10 @@
+at: 2026-11-12T15:00+01:00
+
+Yesterday I approved the coding agent's commands. Today it asks me what I want ❓
+
+- "Make parse_duration handle bad input" leaves a lot open
+- AskUser gives it multiple-choice questions
+- It asked 2, I answered in the terminal
+- It built what I picked
+
+https://pydantic.dev/docs/ai/harness/ask-user/

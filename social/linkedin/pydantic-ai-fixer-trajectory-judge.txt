@@ -1,0 +1,13 @@
+at: 2026-11-13T19:00+01:00
+
+Every check this week looked at one tool call. TrajectoryJudge reads the whole run and steers it. 🧭
+
+Some problems only show up across steps: drifting off the task, repeating the same failing command, doing work nobody asked for. TrajectoryJudge sends the run so far to a judge model with your instructions, and the judge either says all good or sends the agent a message. I asked the agent, on Claude Sonnet 5.5, to add days to parse_duration, and its instructions said to fix every TODO it came across. It rewrote two other functions. Claude Haiku 5.5, judging every step, flagged it as scope creep and told it to revert. The agent refused, quoting its instructions.
+
+- The judge steers. It doesn't override what you told the agent.
+- every sets how often it judges. every=1 caught it; every=3 didn't.
+- on_verdict gives you every verdict, so you can log or stop the run.
+
+Tomorrow: keeping the rules in front of it.
+
+https://pydantic.dev/docs/ai/harness/trajectory-judge/

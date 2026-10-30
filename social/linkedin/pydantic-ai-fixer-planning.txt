@@ -1,0 +1,13 @@
+at: 2026-11-17T15:00+01:00
+
+Memory helps the next run. Planning helps this one: a task with many parts needs a list of what's left. 📋
+
+Planning gives the agent tools to write a plan, read it back and update the status of each task. I gave the coding agent, on Claude Sonnet 5.5, three changes at once: days in parse_duration, a divmod rewrite of format_duration, and KB, MB and GB in parse_size, with tests for each. It wrote a four-task plan, worked through it, and marked every task completed. All 17 tests passed.
+
+- update_task_statuses marks several tasks in one call.
+- On a task this small, it only planned when the prompt asked it to keep a plan.
+- The plan is there for you too: you can see what the agent thinks is left.
+
+Tonight: steps that take minutes.
+
+https://pydantic.dev/docs/ai/harness/planning/

@@ -1,0 +1,13 @@
+at: 2026-11-17T19:00+01:00
+
+Some steps take minutes: a CI run, a build, a deploy. BackgroundTools lets the coding agent keep working while they run. ⏳
+
+Mark a tool with metadata={'background': True} and a call returns right away. When the tool finishes, its result reaches the model as a follow-up message. My run_ci tool runs the test suite, which has a 45-second integration test in it. I asked the agent, on Claude Sonnet 5.5, to start CI and add days to parse_duration while it ran. It started CI, then read the code, added days and two tests in the same turn. Then it ran CI again on the new code, and all 5 tests passed.
+
+- Only the tools you mark run in the background.
+- The run doesn't finish while a background tool is still going.
+- Coder's shell also has background processes for long commands.
+
+Tomorrow: a second agent to check the first.
+
+https://pydantic.dev/docs/ai/harness/background-tools/

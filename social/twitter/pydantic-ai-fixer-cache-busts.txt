@@ -1,0 +1,10 @@
+at: 2026-11-10T19:00+01:00
+
+A budget stops the spend. WarnOnCacheBusts tells you when you're wasting it ⚠️
+
+- I put the current time in the instructions
+- That changes the prompt prefix on every request
+- The warning named the request where the cache collapsed
+- One line, no config
+
+https://pydantic.dev/docs/ai/harness/warn-on-cache-busts/

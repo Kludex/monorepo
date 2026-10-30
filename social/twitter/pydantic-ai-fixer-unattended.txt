@@ -1,0 +1,10 @@
+at: 2026-11-14T19:00+01:00
+
+All of this week in one coding agent, so I can leave it alone 🤖
+
+- SpendLimits: $1 per run
+- ToolCallJudge: no deleting tests
+- PromptInjectionDefender: blocks a poisoned issue
+- ToolGuardrail: no secrets in tool output
+
+https://pydantic.dev/docs/ai/harness/

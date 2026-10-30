@@ -1,0 +1,13 @@
+at: 2026-11-13T15:00+01:00
+
+Yesterday the risk was what the coding agent reads. Today it's what its tools show the model: secrets. 🔑
+
+Repos have tokens in them, even when they shouldn't. Once a token is in a tool result, it's in the message history, the provider's logs and your traces. ToolGuardrail can rewrite a tool result before the model sees it, and redact_secrets is a guard that ships with the harness. I put a fake GitHub token in settings.py and asked the agent, running on Claude Sonnet 5.5, to list every setting with its value. It listed them all. The token came back as [redacted:github_token], and the agent told me to move it into an environment variable.
+
+- result_guard checks tool results. guard checks tool calls before they run.
+- for_tool_result_text applies a text guard to any tool's output.
+- A guard can allow, block, replace, retry or require approval.
+
+Tonight: a check on the whole run, not one call.
+
+https://pydantic.dev/docs/ai/harness/guardrails/
