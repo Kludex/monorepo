@@ -48,7 +48,7 @@ Add `--pydantic` to put the Pydantic logo in the top right corner:
 node website/scripts/snippet.mjs --pydantic snippet.py social/twitter/pydantic-ai.png
 ```
 
-The logo is off by default because most posts are about my own projects. Use it only for posts that promote Pydantic, such as Pydantic AI, Logfire, or Monty.
+The logo is off by default because most posts are about my own projects. Use it only when the post exists to promote Pydantic, such as a Pydantic AI, Logfire, or Monty feature. A post about one of my projects stays without the logo, even if it uses Pydantic AI.
 
 It highlights with Shiki and takes the screenshot with Google Chrome. Set `CHROME` if Chrome is not in `/Applications`.
 
