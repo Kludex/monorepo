@@ -36,11 +36,19 @@ On LinkedIn it is the first comment. X has no first comment, so it is posted as 
 
 To attach images, put them next to the text file with the same name: `starlette-1-0.png`, or `starlette-1-0.1.png` and `starlette-1-0.2.png` for several. Buffer downloads them from the public repository.
 
-To turn a code snippet into an image with the Pydantic colours and logo:
+To turn a code snippet into an image with the Pydantic colours:
 
 ```bash
 node website/scripts/snippet.mjs snippet.py social/twitter/httpx2.png
 ```
+
+Add `--pydantic` to put the Pydantic logo in the top right corner:
+
+```bash
+node website/scripts/snippet.mjs --pydantic snippet.py social/twitter/pydantic-ai.png
+```
+
+The logo is off by default because most posts are about my own projects. Use it only when the post exists to promote Pydantic, such as a Pydantic AI, Logfire, or Monty feature. A post about one of my projects stays without the logo, even if it uses Pydantic AI.
 
 It highlights with Shiki and takes the screenshot with Google Chrome. Set `CHROME` if Chrome is not in `/Applications`.
 
