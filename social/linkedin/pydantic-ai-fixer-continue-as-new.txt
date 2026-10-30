@@ -1,0 +1,13 @@
+at: 2026-11-09T15:00+01:00
+
+Long coding sessions can outgrow a Temporal workflow. TemporalDurability can move the run to a fresh one at a safe point. 🔄
+
+A Temporal workflow history is capped at about 50,000 events or 50MB. Pass continue_as_new to TemporalDurability, and before each model request it checks whether Temporal suggests continuing. If it does, your function calls workflow.continue_as_new() with the conversation so far, while no tool call is in flight. I lowered the server's threshold so it would trigger. The run continued as a new workflow once, kept the same Docker container and finished the fix.
+
+- Pass usage and usage_limits across too, so limits cover the whole run.
+- A tool can run as a child workflow, so a nested agent keeps its own history.
+- Arguments share Temporal's payload size limit, so compact long histories.
+
+Tonight: the whole agent in one place.
+
+https://pydantic.dev/docs/ai/capabilities/durable_execution/temporal/#continuing-as-new-for-long-running-agents

@@ -1,0 +1,10 @@
+at: 2026-11-06T15:00+01:00
+
+Docker is one box. The coding agent can run in others, and switching is one line 🧰
+
+- Containers: DockerSandbox
+- MicroVMs on your machine: SmolSandbox, BoxLiteSandbox
+- Cloud: E2BSandbox, ModalSandbox, DaytonaSandbox
+- Same Coder() tools in all of them
+
+https://pydantic.dev/docs/ai/core-concepts/workspace/

@@ -1,0 +1,13 @@
+at: 2026-11-07T15:00+01:00
+
+I killed the coding agent halfway through a run. With StepPersistence, a new process continued from the last settled step. 💾
+
+StepPersistence saves a snapshot of the message history at every settled step, to a store you choose: memory, files, SQLite, MongoDB or Postgres. After a crash, continue_run() loads the latest complete snapshot, and you pass it to agent.run() in a new process. I killed the agent right after its first shell command. The new process continued from there, edited the file and ran the tests.
+
+- It keeps a ledger of tool calls. A call marked started with no result may or may not have run, and you decide if redoing it is safe.
+- fork_run() branches a new run from a snapshot.
+- There's no server or engine to run.
+
+What it doesn't do is retry the step that was in flight. Tonight, durable execution does.
+
+https://pydantic.dev/docs/ai/harness/step-persistence/

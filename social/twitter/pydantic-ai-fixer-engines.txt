@@ -1,0 +1,10 @@
+at: 2026-11-08T15:00+01:00
+
+Temporal is one way to make the coding agent durable. Pydantic AI supports eight engines 🔁
+
+- Temporal, DBOS and Prefect in Pydantic AI
+- AWS Lambda, Absurd and pgtask in the Harness
+- Restate and Airflow in their own packages
+- Most are one capability
+
+https://pydantic.dev/docs/ai/capabilities/durable_execution/overview/

@@ -1,0 +1,10 @@
+at: 2026-11-06T19:00+01:00
+
+The coding agent needed pytest. So its sandbox can reach PyPI, and nothing else 🔒
+
+- BoxLiteSandbox with allowed_hosts
+- pip install pytest worked
+- A request to github.com failed
+- A microVM on my Mac, no cloud account
+
+https://pydantic.dev/docs/ai/harness/boxlite-sandbox/

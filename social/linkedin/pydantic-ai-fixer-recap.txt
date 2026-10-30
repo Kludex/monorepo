@@ -1,0 +1,16 @@
+at: 2026-11-09T19:00+01:00
+
+Five days, one coding agent, and every piece of it is a capability. ✅
+
+The agent in the image is the one from this week. It runs its commands in a Docker container, works on the code with Coder, saves a snapshot of every step to SQLite, and runs on Temporal so a dead worker doesn't lose the run. I ran it as a Temporal workflow, and it fixed the failing test with four snapshots saved along the way.
+
+- Coder: read, edit, grep and shell.
+- Sandboxes: Docker, smolvm, BoxLite, E2B, Modal and Daytona, one line each.
+- allowed_hosts: a box that reaches PyPI and nothing else.
+- StepPersistence: resume or fork a run, with no engine.
+- Durability: Temporal, DBOS, Prefect, AWS Lambda and more.
+- continue_as_new: runs that outlive one workflow history.
+
+Each one works on its own, so take the ones you need.
+
+https://pydantic.dev/docs/ai/harness/

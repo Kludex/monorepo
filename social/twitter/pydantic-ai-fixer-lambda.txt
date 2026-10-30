@@ -1,0 +1,9 @@
+at: 2026-11-08T19:00+01:00
+
+No workers to run: an agent can be durable on AWS Lambda ☁️
+
+- AWSLambdaDurability() on the agent
+- Model requests and tool calls are checkpointed steps
+- A timed-out invocation resumes without paying for finished work
+
+https://pydantic.dev/docs/ai/harness/aws-lambda/

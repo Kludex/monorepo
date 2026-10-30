@@ -1,0 +1,15 @@
+at: 2026-11-08T19:00+01:00
+
+No workers to run: an agent can also be durable on AWS Lambda. ☁️
+
+AWSLambdaDurability uses Lambda durable functions. Every model request, function tool call and MCP call is a checkpointed step. When an invocation times out or is retried, the handler runs from the top, finished steps return their stored results, and only the unfinished one runs. You don't pay again for model requests that already finished. I ran the handler in the image with AWS's local test runner, and it recorded three steps: a model request, the failing_tests tool call and a second model request.
+
+The image is a small triage agent rather than the coding agent, since workspace tools like Coder run under Temporal, DBOS and Prefect.
+
+- Wrap the handler with durable_agent_handler. Without it, the run works but isn't durable.
+- The agent needs a name, because it's part of every step name.
+- Pydantic and AWS maintain it together.
+
+Tomorrow: runs that outgrow a Temporal workflow.
+
+https://pydantic.dev/docs/ai/harness/aws-lambda/

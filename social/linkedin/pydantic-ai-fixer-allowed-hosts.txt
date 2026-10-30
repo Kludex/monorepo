@@ -1,0 +1,13 @@
+at: 2026-11-06T19:00+01:00
+
+The coding agent needed pytest, so I let its sandbox reach PyPI and nothing else. 🔒
+
+A sandbox with no network is safe, but the agent can't install anything. One with full network access can reach anything your machine can: your local network, services on localhost, a cloud metadata endpoint. BoxLiteSandbox has a middle ground. allowed_hosts lists the hostnames, IP addresses and CIDR ranges the box can reach. I gave it pypi.org and files.pythonhosted.org. The agent installed pytest and fixed the bug, and a request to github.com from the same box failed.
+
+- BoxLite runs a microVM on your machine, on macOS with Apple silicon or Linux.
+- box_options mounts the project, read-only if you want.
+- A new box has no network unless you pass allow_internet_access=True.
+
+Tomorrow: what happens when the process dies halfway.
+
+https://pydantic.dev/docs/ai/harness/boxlite-sandbox/

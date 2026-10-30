@@ -1,0 +1,9 @@
+at: 2026-11-05T15:00+01:00
+
+For five days I'm building a coding agent with Pydantic AI, one capability at a time. Day 1: it fixes a failing test 🛠️
+
+- Coder() adds read, edit, grep and shell
+- LocalWorkspace('.') points it at this directory
+- One Agent(...), any model
+
+https://pydantic.dev/docs/ai/harness/coder/
