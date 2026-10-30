@@ -1,0 +1,14 @@
+at: 2026-11-02T15:00+01:00
+
+Pydantic AI agents get durable with DBOS, and all you need is a database. 💾
+
+DBOS is a library that runs inside your process, with no separate server. It checkpoints workflow inputs and step outputs to Postgres or SQLite. Add DBOSDurability() to the agent and call agent.run() inside a @DBOS.workflow. Model requests and MCP calls become DBOS steps, so after a crash or restart the workflow resumes from its last completed step.
+
+The image is the whole setup on SQLite. I ran it with Claude Sonnet 5.5, and DBOS recorded the model request as a step of the answer workflow.
+
+- Your own tools are not wrapped for you. Decorate the ones that do I/O with @DBOS.step.
+- DBOS queues add concurrency limits, rate limits, timeouts and priorities, backed by the same database.
+- Try it on SQLite, use Postgres in production.
+- Outside a workflow, the agent is a normal Agent.
+
+https://pydantic.dev/docs/ai/capabilities/durable_execution/dbos/

@@ -1,0 +1,10 @@
+at: 2026-10-30T19:00+01:00
+
+Pydantic AI agents run on Temporal with one capability ⏱️
+
+- capabilities=[TemporalDurability()]
+- Model requests, tool calls and MCP run as activities
+- A crashed worker resumes from the last step
+- Tools can run as child workflows
+
+https://pydantic.dev/docs/ai/capabilities/durable_execution/temporal/
