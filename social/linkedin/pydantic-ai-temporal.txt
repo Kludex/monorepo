@@ -1,0 +1,14 @@
+at: 2026-10-30T19:00+01:00
+
+Pydantic AI agents run on Temporal with one capability. ⏱️
+
+Add TemporalDurability() to the agent and call agent.run() inside a Temporal workflow. Model requests, tool calls and MCP server calls become Temporal activities. If a worker crashes, the run picks up from the last completed activity instead of starting over. Outside a workflow, it is still a normal Agent.
+
+The image is a support agent with one tool. I ran it with Claude Sonnet 5.5, and the workflow history shows three activities: a model request, the refund_status tool call, and a second model request.
+
+- Long runs can move to a fresh workflow with continue_as_new before the history hits Temporal's limits.
+- A tool can run as a child workflow, so a nested agent keeps its own history.
+- Stream events to a frontend through Temporal Workflow Streams, with no message queue.
+- TemporalDurability composes with your other capabilities, with no Temporal-specific wrappers.
+
+https://pydantic.dev/docs/ai/capabilities/durable_execution/temporal/

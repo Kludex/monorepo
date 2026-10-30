@@ -1,0 +1,10 @@
+at: 2026-11-02T15:00+01:00
+
+Pydantic AI agents get durable with DBOS, and all you need is a database 💾
+
+- capabilities=[DBOSDurability()]
+- Wrap agent.run() in a @DBOS.workflow
+- Model and MCP calls are saved to Postgres or SQLite
+- A crash resumes from the last completed step
+
+https://pydantic.dev/docs/ai/capabilities/durable_execution/dbos/
