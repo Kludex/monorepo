@@ -1,0 +1,8 @@
+python-multipart 0.0.33 is out! 🚀
+
+- Opt-in MAX_FIELDS and MAX_FIELD_SIZE limits for URL-encoded forms
+- Fixes for nameless uploads and split quoted-printable data
+- Faster boundary matching
+- Python 3.11+ is now required
+
+https://github.com/Kludex/python-multipart/releases/tag/0.0.33
