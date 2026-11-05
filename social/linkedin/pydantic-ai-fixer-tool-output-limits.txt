@@ -1,0 +1,13 @@
+at: 2026-11-15T19:00+01:00
+
+This afternoon the 3 MB CI log went into the coding agent's context and had to be summarized. ToolOutputLimits keeps it out to begin with. 📄
+
+When a tool returns more than the limit, the output is stored instead of sent. Here it went to a file in the workspace, and the model got a short note with the size, a preview and the path. I ran it with Claude Sonnet 5.5. The agent grepped the file for errors, found "AssertionError: 11400 != 5400", and fixed the bug. Its largest request was 5,901 tokens. With compaction alone, two requests went past 40,000 and the run cost $0.120. This one cost $0.026.
+
+- Bands set what happens at each size: truncate, spill to a file, or summarize.
+- per_tool gives a noisy tool its own limits.
+- The agent reads the stored output with the same file and shell tools it already has.
+
+Tomorrow: finding what an earlier run did.
+
+https://pydantic.dev/docs/ai/harness/tool-output-limits/

@@ -1,0 +1,13 @@
+at: 2026-11-10T15:00+01:00
+
+Last week I built a coding agent with Pydantic AI. This week I want to leave it running alone, and the first thing it needs is a budget. 💸
+
+SpendLimits takes a list of budgets, each with a window. The one in the image allows $0.01 per run and $20 per day. I ran it with Claude Sonnet 5.5 on the same failing test as last week. It printed the cost of each model response as it went: $0.0011, $0.0019, $0.0045, $0.0026. Then it stopped with SpendLimitExceeded: "spent $0.0101829 of $0.01". With $0.10 per run, it finished the fix.
+
+- SpendRecordedEvent fires after every response, so you can log or chart the spend.
+- The error tells you which budget ran out and what to do about it.
+- A run budget catches one runaway task. A day budget catches a loop that starts many.
+
+Tonight: the money a budget can't see.
+
+https://pydantic.dev/docs/ai/harness/spend/

@@ -1,0 +1,13 @@
+at: 2026-11-18T19:00+01:00
+
+A reviewer comes after the work. An advisor comes before it. 💡
+
+Advisor lets a cheaper model do the work and consult a stronger one when it's about to commit to a decision. On Anthropic and OpenRouter it uses the provider's own advisor tool, and elsewhere a local one. I told the coding agent, on Claude Sonnet 5.5, to consult the advisor before changing how a public function behaves, and asked it to make parse_duration handle bad input. It read the code, consulted Claude Opus 5.5 once, then made every malformed input raise ValueError. It kept the signature, and it flagged that code catching KeyError would need to change.
+
+- max_uses caps how many times the run can consult.
+- The executor decides when to ask, so say when you want it to.
+- With the native tool, the advice comes back encrypted, so I can't show what Opus said.
+
+Tomorrow: the coding agent in an editor.
+
+https://pydantic.dev/docs/ai/harness/advisor/

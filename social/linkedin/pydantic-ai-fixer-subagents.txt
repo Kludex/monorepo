@@ -1,0 +1,13 @@
+at: 2026-11-18T15:00+01:00
+
+The coding agent writes the fix. A second agent reviews it. 👀
+
+SubAgents gives the main agent a delegate_task tool and a list of agents to hand work to. My reviewer is a separate Agent on Claude Opus 5.5 with the same Coder tools, added with read_only=True, so it can read the workspace but not change it. I asked the main agent, on Claude Sonnet 5.5, to add days to parse_duration and have the reviewer check it. The reviewer found no bugs in the change. It did find older problems: "90" returns 0, "1h30" drops the 30, and an unknown unit raises a bare KeyError. The main agent listed them and asked me before fixing any.
+
+- Each subagent has its own model, instructions and tools.
+- include_self=True also lets it delegate to a fresh run of itself.
+- Subagents work in the parent's workspace.
+
+Tonight: asking a stronger model before the work, not after.
+
+https://pydantic.dev/docs/ai/harness/subagents/

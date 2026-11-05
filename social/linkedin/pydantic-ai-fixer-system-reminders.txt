@@ -1,0 +1,13 @@
+at: 2026-11-14T15:00+01:00
+
+Long runs drift: the rules from the first message get buried under tool output. SystemReminders keeps them in front of the coding agent. 📌
+
+A reminder is a short message added to the conversation on a schedule. Mine says "Run the tests after every edit" every three requests, and GoalReanchor tells the model to re-read the original request and check that its next step serves it. I ran it with Claude Sonnet 5.5 and kept WarnOnCacheBusts on, because changing the instructions mid-run would bust the cache. It stayed quiet: reminders go at the end of the request, so the cached prefix grew on every request, from 2,957 tokens to 4,530.
+
+- interval sets how often a static reminder fires.
+- Dynamic reminders like GoalReanchor decide each time what to say.
+- The agent added days support and ran the tests before it finished.
+
+Tonight: all of this week in one agent.
+
+https://pydantic.dev/docs/ai/harness/system-reminders/

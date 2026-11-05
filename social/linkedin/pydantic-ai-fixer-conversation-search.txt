@@ -1,0 +1,12 @@
+at: 2026-11-16T15:00+01:00
+
+Summaries drop details, and a new run starts from nothing. ConversationSearch lets the coding agent look up what earlier runs did. 🔎
+
+Last week StepPersistence saved every step of a run to SQLite so a crash couldn't lose it. Those snapshots are also a record of everything the agent did, and ConversationSearch gives it a tool to search them. I ran the agent with Claude Sonnet 5.5 to fix the failing test. Then I started a second run, with no message history passed in, and asked: "Which line did you change last time, and why?" It called search_conversation_history and answered with the exact line, number = '', and the reason: the digit buffer was never cleared, so 1h30m came out as 11400 seconds.
+
+- scope='conversation' searches runs with the same conversation_id.
+- The history stays in your database, not the context window.
+
+Tonight: what the agent decides is worth keeping.
+
+https://pydantic.dev/docs/ai/harness/conversation-search/

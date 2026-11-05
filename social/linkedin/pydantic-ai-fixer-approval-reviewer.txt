@@ -1,0 +1,13 @@
+at: 2026-11-11T19:00+01:00
+
+Blocking a tool call is one answer. Sometimes I want to be asked, but only when it matters. 🙋
+
+In the image, every shell call needs approval. Approving every cat and every test run by hand gets old fast, so ApprovalReviewer answers first. Claude Haiku 5.5 gets one question: "Does this command do anything besides reading files or running the project's tests?" If not, the call runs. If so, it goes to me. I ran it with Claude Sonnet 5.5 and asked it to use pytest, which the container doesn't have. Of four shell calls, one reached my terminal: the one that ran pip install pytest.
+
+- ToolGuardrail decides which calls need approval in the first place.
+- HandleDeferredToolCalls is where the human answers: a terminal here, a web UI or Slack in your app.
+- A no from me goes back to the agent as a denied call, and it carries on.
+
+Tomorrow: the agent asks me a question.
+
+https://pydantic.dev/docs/ai/harness/approval-reviewer/

@@ -1,0 +1,10 @@
+at: 2026-11-17T19:00+01:00
+
+Some steps take minutes. BackgroundTools lets the coding agent keep working while they run ⏳
+
+- A run_ci tool that takes about a minute
+- metadata={'background': True}
+- The agent started CI and kept coding
+- It ran CI again at the end: 5 tests passed
+
+https://pydantic.dev/docs/ai/harness/background-tools/

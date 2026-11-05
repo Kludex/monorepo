@@ -1,0 +1,13 @@
+at: 2026-11-19T15:00+01:00
+
+For two weeks the coding agent ran from a script. With ACP, it runs inside your editor. 🧩
+
+ACP, the Agent Client Protocol, is how editors like Zed talk to an external agent over stdin and stdout. run_acp_stdio_sync turns any Pydantic AI Agent into one. session_config runs once per session, and mine gives each one a Docker sandbox with the folder the editor opened mounted. I drove it with the ACP Python client. It started a session on the repo, streamed the agent's messages and tool calls, and the agent, on Claude Sonnet 5.5, fixed the failing test.
+
+- In Zed, you add the script to agent_servers in settings.json.
+- Edits show up as diffs, and tool approvals become editor prompts.
+- It lives under pydantic_ai_harness.experimental, so it may change or go away.
+
+Tonight: all of this week in one agent.
+
+https://pydantic.dev/docs/ai/harness/acp/

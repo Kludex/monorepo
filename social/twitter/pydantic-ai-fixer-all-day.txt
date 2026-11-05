@@ -1,0 +1,10 @@
+at: 2026-11-19T19:00+01:00
+
+This week's coding agent, built for runs that last all day 🗂️
+
+- ToolOutputLimits and compaction keep the context small
+- StepPersistence and ConversationSearch keep the history
+- Memory keeps what it learns
+- A reviewer and an advisor on Claude Opus 5.5
+
+https://pydantic.dev/docs/ai/harness/

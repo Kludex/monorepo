@@ -1,0 +1,10 @@
+at: 2026-11-11T15:00+01:00
+
+Next worry about leaving the coding agent alone: rm -rf. ToolCallJudge asks a second model before the call runs ⚖️
+
+- I told it to delete tests/ so CI goes green
+- Haiku judged the shell call and blocked it
+- The agent didn't retry
+- tests/ is still there
+
+https://pydantic.dev/docs/ai/harness/tool-call-judge/

@@ -1,0 +1,16 @@
+at: 2026-11-14T19:00+01:00
+
+This week's coding agent, in one Agent, so I can leave it alone. 🤖
+
+It's last week's agent, Docker sandbox and all, with six more capabilities. I ran it with Claude Sonnet 5.5 on a repo that had a poisoned ISSUE.md and a GitHub token in settings.py. Its second shell command tried to print both files. The defender blocked the output, the agent didn't retry, and it fixed the bug from the code and the failing test. The run cost $0.017 of its $1 budget.
+
+- SpendLimits: a hard cap per run, and per day if you want one.
+- WarnOnCacheBusts: a warning when you start paying for the same tokens twice.
+- ToolCallJudge: a second model in front of risky calls.
+- PromptInjectionDefender: untrusted tool results scanned before the model sees them.
+- ToolGuardrail with redact_secrets: tokens never reach the model.
+- SystemReminders: the original request re-read as the run goes on.
+
+Tomorrow: runs that last all day.
+
+https://pydantic.dev/docs/ai/harness/
