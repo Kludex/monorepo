@@ -11,4 +11,6 @@ The image is the whole DAG. I ran it with Claude Sonnet 5.5, and Airflow recorde
 - Airflow toolsets like SQLToolset are cached too.
 - durable=True doesn't support streaming or human-in-the-loop review yet.
 
+---
+
 https://pydantic.dev/docs/ai/capabilities/durable_execution/airflow/

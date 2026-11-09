@@ -16,7 +16,7 @@ social/linkedin/starlette-1-8-0.txt
 - **Plain text only.** Neither network renders Markdown, so no backticks, no `**bold**`, no `[text](url)` links. Write `Request.send_early_hints()` bare.
 - **No em dashes or en dashes.** Use `-`.
 - **No hashtags.**
-- **Put the link on its own last line.** Use the full URL.
+- **Put the link in the first comment, not in the post.** Use the full URL. See First comment below.
 
 ## Voice
 
@@ -30,7 +30,7 @@ Write as Marcelo, in first person, as a maintainer talking to other developers.
 ## X
 
 - **280 characters is a hard limit.** A URL always counts as 23, an emoji counts as 2. Check the length before you finish.
-- One announcement line, then up to 4 short bullets with `-`, then the link.
+- One announcement line, then up to 4 short bullets with `-`.
 
 ## LinkedIn
 

@@ -7,4 +7,6 @@ Pydantic AI agents can run as durable Apache Airflow tasks 🛟
 - A retry replays finished steps and continues
 - On Airflow 3.3+, no storage to configure
 
+---
+
 https://pydantic.dev/docs/ai/capabilities/durable_execution/airflow/
