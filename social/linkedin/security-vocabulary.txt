@@ -1,0 +1,13 @@
+"I've received a CVE." I hear this from maintainers a lot. It's wrong. 📖
+
+You don't receive a CVE. You receive a report. You turn it into an advisory. Then you request a CVE ID from a CNA, a CVE Numbering Authority. That's usually GitHub, but it doesn't have to be.
+
+"We released several CVEs" is wrong too. You release versions with the fixes, and you publish advisories.
+
+I wrote a short guide to the words maintainers mix up: report, advisory, GHSA ID, CVE ID and CVE Record, CNA, and Root. It uses the Starlette BadHost advisory as the example, and it covers why you might want to become a CNA yourself. I'm applying to become one for Starlette, python-multipart, Uvicorn, and Mangum.
+
+Thanks to Seth Larson, whose guide on becoming a CNA as an open source project is linked in the post.
+
+---
+
+https://marcelotryle.com/blog/security-vocabulary
