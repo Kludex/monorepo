@@ -135,7 +135,7 @@ You become a CNA when you want to own the process:
 
 The cost is a commitment. You must answer CVE disputes within days, and stay active, or you're removed.
 
-Seth Larson went through this for the Python Software Foundation, and turned his notes into
+[Seth Larson](https://sethmlarson.dev/) went through this for the Python Software Foundation, and turned his notes into
 [a guide for open source projects](https://github.com/ossf/wg-vulnerability-disclosures/blob/main/docs/guides/becoming-a-cna-as-an-open-source-org-or-project.md).
 It covers the requirements, the steps, and the questions you will have. Start with
 [his announcement on the OpenSSF blog](https://openssf.org/blog/2023/11/27/openssf-introduces-guide-to-becoming-a-cve-numbering-authority-as-an-open-source-project/).
