@@ -1,0 +1,15 @@
+python-multipart 0.0.33 is out! 🚀
+
+The highlight is streaming limits for URL-encoded forms. FormParser now accepts MAX_FIELDS and MAX_FIELD_SIZE, and raises FormParserError before an oversized field is buffered. Both are opt-in, and multipart forms are unaffected.
+
+Also in this release:
+
+- Uploads without a filename no longer crash when UPLOAD_KEEP_FILENAME or UPLOAD_KEEP_EXTENSIONS is set.
+- Quoted-printable escapes split across writes decode correctly, and decoding finishes before your callbacks run.
+- parse_options_header() lowercases content types that have parameters.
+- Faster boundary matching, parser state lookups, and querystring callbacks.
+- Python 3.10 support is dropped. python-multipart now requires Python 3.11.
+
+Thanks to everyone who contributed, and to my GitHub sponsors. 💜
+
+https://github.com/Kludex/python-multipart/releases/tag/0.0.33
