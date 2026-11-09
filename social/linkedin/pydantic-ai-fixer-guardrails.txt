@@ -1,0 +1,11 @@
+at: 2026-11-14T15:00+01:00
+
+I put a fake GitHub token in settings.py. My coding agent's model saw [redacted:github_token] instead. 🔑
+
+ToolGuardrail rewrites tool results before the model sees them, and redact_secrets ships with the harness. Once a token is in a tool result, it's in the message history, the provider's logs and your traces. This keeps it out of all three.
+
+Tonight: a check on the whole run, not one call.
+
+---
+
+https://pydantic.dev/docs/ai/harness/guardrails/

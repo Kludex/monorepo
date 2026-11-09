@@ -1,0 +1,9 @@
+at: 2026-11-12T19:00+01:00
+
+4 shell calls. 1 reached my terminal: pip install pytest 🙋
+
+ApprovalReviewer lets Claude Haiku 5.5 approve the harmless calls, like reading files and running tests, and sends the rest to me.
+
+---
+
+https://pydantic.dev/docs/ai/harness/approval-reviewer/

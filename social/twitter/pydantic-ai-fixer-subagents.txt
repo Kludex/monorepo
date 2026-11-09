@@ -1,0 +1,9 @@
+at: 2026-11-19T15:00+01:00
+
+My coding agent wrote the fix. A read-only reviewer on Claude Opus 5.5 checked it 👀
+
+No bugs in the change. Three older ones in the code around it. The main agent asked me before fixing any.
+
+---
+
+https://pydantic.dev/docs/ai/harness/subagents/

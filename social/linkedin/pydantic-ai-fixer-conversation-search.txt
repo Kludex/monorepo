@@ -1,0 +1,15 @@
+at: 2026-11-17T15:00+01:00
+
+"Which line did you change last time, and why?" 🔎
+
+I asked my coding agent that in a new run, with no message history passed in. On Claude Sonnet 5.5, it called search_conversation_history and answered with the exact line, number = '', and the reason: the digit buffer was never cleared, so 1h30m came out as 11400 seconds.
+
+That's ConversationSearch. Last week StepPersistence saved every step of a run to SQLite so a crash couldn't lose it. Those snapshots are also a record of everything the agent did, and ConversationSearch gives the agent a tool to search them.
+
+scope='conversation' searches runs with the same conversation_id, and the history stays in your database, not the context window.
+
+Tonight: what the agent decides is worth keeping.
+
+---
+
+https://pydantic.dev/docs/ai/harness/conversation-search/

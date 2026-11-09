@@ -1,0 +1,15 @@
+at: 2026-11-15T15:00+01:00
+
+Cache reads went from 2,957 tokens to 4,530 while my coding agent got a reminder every few requests. 📌
+
+Long runs drift: the rules from the first message get buried under tool output. SystemReminders adds a short message to the conversation on a schedule. Mine says "Run the tests after every edit" every three requests, and GoalReanchor tells the model to re-read the original request and check that its next step serves it.
+
+Changing the instructions mid-run would bust the cache, so I kept WarnOnCacheBusts on. It stayed quiet. Reminders go at the end of the request, so the cached prefix grew on every request instead.
+
+The agent, on Claude Sonnet 5.5, added days support and ran the tests before it finished.
+
+Tonight: all of this week in one agent.
+
+---
+
+https://pydantic.dev/docs/ai/harness/system-reminders/

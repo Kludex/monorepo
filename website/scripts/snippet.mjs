@@ -50,7 +50,17 @@ const theme = {
   ],
 };
 
-const code = await codeToHtml(readFileSync(source, "utf8").trimEnd(), {
+const snippet = readFileSync(source, "utf8").trimEnd();
+const lines = snippet.split("\n");
+const columns = Math.max(...lines.map((line) => line.length));
+if (lines.length > 20 || columns > 90) {
+  console.error(
+    `${source} is ${lines.length} lines by ${columns} columns. Keep it within 20 by 90 so it stays readable.`,
+  );
+  process.exit(1);
+}
+
+const code = await codeToHtml(snippet, {
   lang: extname(source).slice(1),
   theme,
 });

@@ -1,0 +1,9 @@
+at: 2026-11-13T15:00+01:00
+
+Problem: "Make parse_duration handle bad input" leaves a lot open ❓
+
+Fix: AskUser gives the coding agent multiple-choice questions to ask me. It asked 2, I answered in the terminal, and it built what I picked.
+
+---
+
+https://pydantic.dev/docs/ai/harness/ask-user/

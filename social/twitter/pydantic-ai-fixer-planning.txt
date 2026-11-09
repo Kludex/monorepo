@@ -1,0 +1,9 @@
+at: 2026-11-18T15:00+01:00
+
+Three changes in one request. A four-task plan. 17 tests passing 📋
+
+Planning gives the coding agent a list of what's left, and you can read it too.
+
+---
+
+https://pydantic.dev/docs/ai/harness/planning/

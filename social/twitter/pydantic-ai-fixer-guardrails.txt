@@ -1,0 +1,9 @@
+at: 2026-11-14T15:00+01:00
+
+settings.py had a GitHub token. The model saw [redacted:github_token] 🔑
+
+ToolGuardrail with redact_secrets cleans tool results before they reach the model.
+
+---
+
+https://pydantic.dev/docs/ai/harness/guardrails/

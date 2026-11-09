@@ -1,0 +1,9 @@
+at: 2026-11-12T15:00+01:00
+
+I told my coding agent to delete tests/ so CI goes green ⚖️
+
+ToolCallJudge asked Claude Haiku 5.5 "Would this delete tests, source files or git history?" before the shell call ran. It blocked rm -rf tests, and the agent didn't try another way.
+
+---
+
+https://pydantic.dev/docs/ai/harness/tool-call-judge/

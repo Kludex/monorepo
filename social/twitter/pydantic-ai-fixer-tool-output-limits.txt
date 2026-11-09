@@ -1,0 +1,9 @@
+at: 2026-11-16T19:00+01:00
+
+Problem: a 3 MB CI log in my coding agent's context 📄
+
+Fix: ToolOutputLimits sends it to a file and gives the model a preview and the path. The agent grepped it, fixed the bug, and the run cost $0.026 instead of $0.120.
+
+---
+
+https://pydantic.dev/docs/ai/harness/tool-output-limits/

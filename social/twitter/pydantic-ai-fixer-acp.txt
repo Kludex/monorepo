@@ -1,0 +1,9 @@
+at: 2026-11-20T15:00+01:00
+
+With ACP, the coding agent runs inside your editor 🧩
+
+run_acp_stdio_sync serves any Pydantic AI Agent to Zed and other ACP editors, with a Docker sandbox per session.
+
+---
+
+https://pydantic.dev/docs/ai/harness/acp/

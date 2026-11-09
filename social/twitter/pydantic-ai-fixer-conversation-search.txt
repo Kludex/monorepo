@@ -1,0 +1,9 @@
+at: 2026-11-17T15:00+01:00
+
+"Which line did you change last time, and why?" 🔎
+
+A new run of my coding agent, no history passed in. ConversationSearch let it search the runs StepPersistence saved to SQLite, and it gave the exact line.
+
+---
+
+https://pydantic.dev/docs/ai/harness/conversation-search/

@@ -1,0 +1,9 @@
+at: 2026-11-15T15:00+01:00
+
+Cache reads went from 2,957 tokens to 4,530 while SystemReminders kept nudging my coding agent 📌
+
+Reminders go at the end of the request, so the cached prefix keeps growing. Mine: "Run the tests after every edit", every 3 requests.
+
+---
+
+https://pydantic.dev/docs/ai/harness/system-reminders/
