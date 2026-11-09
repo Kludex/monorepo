@@ -1,0 +1,16 @@
+at: 2026-11-10T11:00+01:00
+
+Pydantic AI agents can run as durable Apache Airflow tasks. 🛟
+
+The integration ships in Airflow's apache-airflow-providers-common-ai package. Add durable=True to an AgentOperator or @task.agent, and Airflow records each model request and tool call. When the task retries after a crash, it replays the finished steps and continues from the first one that did not complete. You don't pay for the same model request twice, and a tool's side effect doesn't run again.
+
+The image is the whole DAG. I ran it with Claude Sonnet 5.5, and Airflow recorded the model request as a durable step.
+
+- Recovery is plain Airflow task retries, so set retries and retry_delay.
+- On Airflow 3.3+, the step cache lives in Airflow's task state store, with no storage to configure.
+- Airflow toolsets like SQLToolset are cached too.
+- durable=True doesn't support streaming or human-in-the-loop review yet.
+
+---
+
+https://pydantic.dev/docs/ai/capabilities/durable_execution/airflow/
