@@ -1,4 +1,4 @@
-at: 2026-11-10T19:00+01:00
+at: 2026-11-11T19:00+01:00
 
 A budget stops the spend. WarnOnCacheBusts tells you when you're wasting it. ⚠️
 
@@ -9,5 +9,7 @@ Providers cache the start of your prompt, and a cached token costs a fraction of
 - The agent still fixed the bug. Only the bill was wrong.
 
 Tomorrow: what the agent does when nobody's watching.
+
+---
 
 https://pydantic.dev/docs/ai/harness/warn-on-cache-busts/

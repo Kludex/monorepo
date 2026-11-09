@@ -1,4 +1,4 @@
-at: 2026-11-13T19:00+01:00
+at: 2026-11-14T19:00+01:00
 
 Every check so far looked at one tool call. TrajectoryJudge reads the whole run 🧭
 
@@ -6,5 +6,7 @@ Every check so far looked at one tool call. TrajectoryJudge reads the whole run 
 - Its instructions said to fix every TODO
 - Haiku flagged the extra work as scope creep
 - The agent kept it anyway
+
+---
 
 https://pydantic.dev/docs/ai/harness/trajectory-judge/

@@ -1,4 +1,4 @@
-at: 2026-11-19T19:00+01:00
+at: 2026-11-20T19:00+01:00
 
 This week's coding agent, built for runs that last all day. 🗂️
 
@@ -12,5 +12,7 @@ It's the same Docker-sandboxed agent, with eight more capabilities. I gave it th
 - SubAgents and Advisor: a stronger model to review or consult.
 
 Each one is a capability, so take the ones you need.
+
+---
 
 https://pydantic.dev/docs/ai/harness/

@@ -1,4 +1,4 @@
-at: 2026-11-17T19:00+01:00
+at: 2026-11-18T19:00+01:00
 
 Some steps take minutes: a CI run, a build, a deploy. BackgroundTools lets the coding agent keep working while they run. ⏳
 
@@ -9,5 +9,7 @@ Mark a tool with metadata={'background': True} and a call returns right away. Wh
 - Coder's shell also has background processes for long commands.
 
 Tomorrow: a second agent to check the first.
+
+---
 
 https://pydantic.dev/docs/ai/harness/background-tools/

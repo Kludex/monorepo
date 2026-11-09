@@ -1,10 +1,9 @@
-at: 2026-11-14T15:00+01:00
+at: 2026-11-15T15:00+01:00
 
-Long runs drift. SystemReminders keeps the rules in front of the coding agent, cache intact 📌
+Cache reads went from 2,957 tokens to 4,530 while SystemReminders kept nudging my coding agent 📌
 
-- "Run the tests after every edit", every 3 requests
-- GoalReanchor repeats the original request
-- WarnOnCacheBusts stayed quiet
-- Cache reads kept growing
+Reminders go at the end of the request, so the cached prefix keeps growing. Mine: "Run the tests after every edit", every 3 requests.
+
+---
 
 https://pydantic.dev/docs/ai/harness/system-reminders/

@@ -1,10 +1,9 @@
-at: 2026-11-10T15:00+01:00
+at: 2026-11-11T15:00+01:00
 
-Last week's coding agent works. This week I leave it alone, and the first thing it needs is a budget 💸
+SpendLimitExceeded: spent $0.0101829 of $0.01 💸
 
-- SpendLimits caps a run and a day
-- I set $0.01 per run to watch it stop
-- It stopped at $0.0102, mid-fix
-- SpendRecordedEvent logs each cost
+My coding agent hit its budget mid-fix. SpendLimits caps spend per run and per day, and SpendRecordedEvent logs the cost of every response.
+
+---
 
 https://pydantic.dev/docs/ai/harness/spend/

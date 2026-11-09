@@ -1,4 +1,4 @@
-at: 2026-11-13T19:00+01:00
+at: 2026-11-14T19:00+01:00
 
 Every check this week looked at one tool call. TrajectoryJudge reads the whole run and steers it. 🧭
 
@@ -9,5 +9,7 @@ Some problems only show up across steps: drifting off the task, repeating the sa
 - on_verdict gives you every verdict, so you can log or stop the run.
 
 Tomorrow: keeping the rules in front of it.
+
+---
 
 https://pydantic.dev/docs/ai/harness/trajectory-judge/

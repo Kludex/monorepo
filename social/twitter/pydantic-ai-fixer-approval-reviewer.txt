@@ -1,10 +1,9 @@
-at: 2026-11-11T19:00+01:00
+at: 2026-11-12T19:00+01:00
 
-Blocking is one answer. Sometimes I want to be asked, if it matters 🙋
+4 shell calls. 1 reached my terminal: pip install pytest 🙋
 
-- Every shell call needs approval
-- ApprovalReviewer lets Haiku approve the harmless ones
-- 4 shell calls, 1 reached me: pip install pytest
-- My terminal asks y/N
+ApprovalReviewer lets Claude Haiku 5.5 approve the harmless calls, like reading files and running tests, and sends the rest to me.
+
+---
 
 https://pydantic.dev/docs/ai/harness/approval-reviewer/

@@ -1,4 +1,4 @@
-at: 2026-11-16T19:00+01:00
+at: 2026-11-17T19:00+01:00
 
 Searching old runs needs a good query. Memory is what the coding agent chooses to keep 🧠
 
@@ -6,5 +6,7 @@ Searching old runs needs a good query. Memory is what the coding agent chooses t
 - It wrote that to MEMORY.md
 - Run 2: went straight to unittest
 - A Markdown file you can read and edit
+
+---
 
 https://pydantic.dev/docs/ai/harness/memory/

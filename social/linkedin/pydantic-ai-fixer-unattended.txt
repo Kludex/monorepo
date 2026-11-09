@@ -1,4 +1,4 @@
-at: 2026-11-14T19:00+01:00
+at: 2026-11-15T19:00+01:00
 
 This week's coding agent, in one Agent, so I can leave it alone. 🤖
 
@@ -12,5 +12,7 @@ It's last week's agent, Docker sandbox and all, with six more capabilities. I ra
 - SystemReminders: the original request re-read as the run goes on.
 
 Tomorrow: runs that last all day.
+
+---
 
 https://pydantic.dev/docs/ai/harness/

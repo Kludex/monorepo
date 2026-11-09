@@ -1,10 +1,9 @@
-at: 2026-11-18T19:00+01:00
+at: 2026-11-19T19:00+01:00
 
-A reviewer comes after the work. An advisor comes before it 💡
+Problem: the cheaper model is about to change how a public function behaves 💡
 
-- Claude Sonnet 5.5 writes the code
-- Advisor gives it Claude Opus 5.5 to consult
-- It asked once before rewriting parse_duration
-- max_uses caps the calls to the bigger model
+Fix: Advisor lets Claude Sonnet 5.5 consult Claude Opus 5.5 first. It asked once, kept the signature, and flagged code that catches KeyError.
+
+---
 
 https://pydantic.dev/docs/ai/harness/advisor/

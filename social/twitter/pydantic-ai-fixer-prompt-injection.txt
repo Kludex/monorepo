@@ -1,10 +1,9 @@
-at: 2026-11-12T19:00+01:00
+at: 2026-11-13T19:00+01:00
 
-The coding agent reads text I didn't write. Some of it is written for the agent 🕵️
+I hid an instruction to curl | sh a script in an ISSUE.md for my coding agent 🕵️
 
-- ISSUE.md hid an instruction to curl | sh a script
-- PromptInjectionDefender scanned the read
-- High risk: the model never saw it
-- The agent fixed the bug anyway
+PromptInjectionDefender rated the file high risk and blocked it. The model never saw the instruction, and the agent fixed the bug from the code anyway.
+
+---
 
 https://pydantic.dev/docs/ai/harness/prompt-injection-defender/

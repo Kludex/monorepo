@@ -1,10 +1,9 @@
-at: 2026-11-16T15:00+01:00
+at: 2026-11-17T15:00+01:00
 
-Summaries drop details. ConversationSearch lets the coding agent look them up 🔎
+"Which line did you change last time, and why?" 🔎
 
-- StepPersistence keeps every run in SQLite
-- A new run, with no history
-- "Which line did you change last time, and why?"
-- It searched and gave the exact line
+A new run of my coding agent, no history passed in. ConversationSearch let it search the runs StepPersistence saved to SQLite, and it gave the exact line.
+
+---
 
 https://pydantic.dev/docs/ai/harness/conversation-search/

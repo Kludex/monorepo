@@ -1,10 +1,9 @@
-at: 2026-11-15T15:00+01:00
+at: 2026-11-16T15:00+01:00
 
-Next: runs that last all day. They fill the context, and the first fix is to summarize 🗜️
+40,000 tokens, then 4,580 🗜️
 
-- The coding agent fetched a 3 MB CI log
-- The next request was 40,000 tokens
-- SummarizingCompaction kicked in at 20,000
-- The request after it was 4,580
+A 3 MB CI log blew up my coding agent's context. Past 20,000 tokens, SummarizingCompaction had Claude Haiku 5.5 summarize the older messages.
+
+---
 
 https://pydantic.dev/docs/ai/harness/compaction/
