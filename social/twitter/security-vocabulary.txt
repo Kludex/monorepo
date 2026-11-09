@@ -2,7 +2,7 @@
 
 You receive a report. You publish an advisory. Then you request a CVE ID from a CNA, usually GitHub.
 
-I wrote a short guide to the security words maintainers mix up, and how to become a CNA.
+I wrote a short guide to the security words maintainers mix up.
 
 ---
 
