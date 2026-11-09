@@ -1,0 +1,10 @@
+at: 2026-11-10T11:00+01:00
+
+Pydantic AI agents can run as durable Apache Airflow tasks 🛟
+
+- AgentOperator(durable=True)
+- Each model request and tool call is recorded
+- A retry replays finished steps and continues
+- On Airflow 3.3+, no storage to configure
+
+https://pydantic.dev/docs/ai/capabilities/durable_execution/airflow/
