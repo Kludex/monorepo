@@ -9,7 +9,10 @@ categories: ["Open Source", "Security"]
 You don't receive a CVE. You receive a **report**. You turn it into an **advisory**. Then you **request** a CVE ID
 from a **CNA**, which is usually GitHub, but doesn't have to be.
 
-If that sentence has three words you're not sure about, this post is for you.
+"We released several CVEs" is wrong too. It sounds like you shipped vulnerabilities. You release versions with the
+fixes, and you publish advisories. The CNA publishes the CVE Records, unless you're a CNA yourself.
+
+If those sentences have words you're not sure about, this post is for you.
 
 ## The short version
 
