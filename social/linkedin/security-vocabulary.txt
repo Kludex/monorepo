@@ -1,6 +1,6 @@
 "I've received a CVE." I hear this from maintainers a lot. It's wrong. 📖
 
-You receive a report. You publish an advisory. Then you request a CVE ID from a CNA, usually GitHub.
+You receive a report. You publish an advisory. Then you request a CVE ID from a CNA.
 
 I wrote a short guide to the security words maintainers mix up.
 
