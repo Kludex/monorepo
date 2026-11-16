@@ -1,0 +1,13 @@
+Two tool calls asked for /etc/passwd in the same agent run. One was rejected, the other printed the file. 🚪
+
+The first was read_file('/etc/passwd'). FileSystem in Pydantic AI Harness resolves every path, symlinks included, and checks it against root_dir before any I/O. The model got back: "/etc/passwd is outside the project root". The same message ends with "or use a shell tool if you have one".
+
+The second was cat /etc/passwd through Shell. It ran, because Shell commands ignore root_dir entirely.
+
+The docs say it plainly: root_dir and the allow, deny and read-only patterns are a guardrail, not isolation. They keep the file tools in bounds. They don't bound a command.
+
+If you need a real boundary, run the agent in a sandbox workspace, such as a container or a microVM, and configure that boundary to protect what matters.
+
+---
+
+https://pydantic.dev/docs/ai/harness/filesystem/
