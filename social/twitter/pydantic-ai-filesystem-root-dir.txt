@@ -1,7 +1,0 @@
-read_file('/etc/passwd') was rejected. cat /etc/passwd printed the file 🚪
-
-FileSystem keeps the file tools inside root_dir. Shell ignores root_dir. Neither is a security boundary. For that, run the agent in a sandbox.
-
----
-
-https://pydantic.dev/docs/ai/harness/filesystem/
