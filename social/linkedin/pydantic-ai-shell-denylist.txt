@@ -1,0 +1,16 @@
+"Command 'rm' is denied." That's what the model gets back when it tries rm -rf dist. 🛑
+
+Shell() in Pydantic AI Harness gives an agent shell commands, and it comes with a denylist of destructive ones: rm, rmdir, mkfs, dd, format, shutdown, reboot, halt, poweroff and init. You don't configure anything. In the same run, pytest -q ran and returned its output.
+
+The check is on the executable name, extracted with shlex, so arguments don't get around it. The rejection goes back as the tool result, so the model can try something else.
+
+- denied_commands replaces the default list.
+- allowed_commands turns it into an allowlist, such as ls, cat and rg.
+- denied_operators rejects shell operators such as > and |.
+- Commands that expect a terminal, like vi, sudo and ssh, are blocked too.
+
+It's a guardrail against accidents, not a security boundary. For untrusted work, run the same Shell() in a sandbox.
+
+---
+
+https://pydantic.dev/docs/ai/harness/shell/

@@ -1,0 +1,9 @@
+The problem: an agent's shell command can change any file your user can.
+
+The fix: BubblewrapSandbox runs each command in bwrap on the Linux host 🫧
+
+The result: writes only in the working directory, host files read-only, no network.
+
+---
+
+https://pydantic.dev/docs/ai/harness/bubblewrap-sandbox/
