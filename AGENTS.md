@@ -61,7 +61,10 @@ at: 2026-10-20T15:00+02:00
 Starlette 1.8.0 is out!
 ```
 
-- Only schedule when the user asks for a time. Always include the UTC offset the user means.
+- **Schedule a post that is like the ones already scheduled.** A post on a feature or a how-to, such as the Pydantic AI, Monty and Logfire posts, gets an `at:` line even when the user gives no time. Publish it on merge only when the user explicitly says to post it now.
+- A post on something that just happened, such as a release, a new blog post or a podcast episode, is published on merge unless the user asks for a time.
+- When the user gives no time, use 15:00 local time on the first day after the last `at:` in `social/`, one post per day, and tell the user the times you picked.
+- Always include the UTC offset the user means.
 - Use the same `at:` line in both files unless the user wants different times.
 
 ## First comment

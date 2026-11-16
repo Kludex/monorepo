@@ -1,0 +1,9 @@
+at: 2026-11-21T15:00+01:00
+
+"Command 'rm' is denied." That's what the model gets back for rm -rf dist 🛑
+
+Shell() in Pydantic AI Harness rejects destructive commands by default: rm, dd, mkfs, shutdown and more. pytest -q ran in the same run.
+
+---
+
+https://pydantic.dev/docs/ai/harness/shell/
