@@ -39,7 +39,6 @@ There are two tiers for companies.
 | Your company description on the sponsors page | No | Yes |
 | A week's notice of security releases | No | Yes |
 | Priority triage on your issues | No | Yes |
-| One private one-hour session a year | No | Yes |
 
 Your company can pay by card, or GitHub can invoice it, so the payment goes through normal procurement.
 
