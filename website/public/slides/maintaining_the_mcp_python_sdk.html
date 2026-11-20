@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What I've Learned Maintaining the MCP Python SDK - EuroPython 2026</title>
+<style>
+  :root {
+    --paper: #092224;
+    --paper-deep: #04161a;
+    --panel-bg: #0c2b2e;
+    --ink: #fbffea;
+    --muted: #94b0ac;
+    --rule: #24484b;
+    --red: #ff6550;
+    --red-soft: #3a1f21;
+    --magenta: #e520e9;
+    --green: #9cffe9;
+    --green-soft: #123a38;
+    --serif: "Baskerville", "Iowan Old Style", "Palatino", "Book Antiqua", Georgia, serif;
+    --mono: ui-monospace, "SF Mono", Menlo, "Cascadia Mono", "Courier New", monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body { height: 100%; background: var(--paper-deep); overflow: hidden; }
+  body { font-family: var(--serif); color: var(--ink); }
+
+  /* ---------- stage ---------- */
+  #stage {
+    position: absolute; top: 50%; left: 50%;
+    width: 1280px; height: 720px;
+    transform-origin: center center;
+    background: var(--paper);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, .55);
+  }
+  #stage::before { /* grain */
+    content: ""; position: absolute; inset: 0; z-index: 40; pointer-events: none;
+    opacity: .28; mix-blend-mode: screen;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.55 0 0 0 0 0.52 0 0 0 0 0.45 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  section {
+    position: absolute; inset: 0;
+    padding: 72px 84px 88px;
+    display: flex; flex-direction: column; justify-content: center;
+    visibility: hidden; opacity: 0;
+  }
+  section.current {
+    visibility: visible; opacity: 1;
+    animation: slidein .45s cubic-bezier(.22,.9,.3,1);
+  }
+  @keyframes slidein {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  aside.notes { display: none; }
+
+  /* ---------- chrome ---------- */
+  #progress {
+    position: absolute; top: 0; left: 0; height: 4px; z-index: 50;
+    background: var(--magenta); width: 0; transition: width .3s ease;
+  }
+  #whoami {
+    position: absolute; left: 84px; bottom: 34px; z-index: 45;
+    font-family: var(--mono); font-size: 13px; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  #counter {
+    position: absolute; right: 84px; bottom: 34px; z-index: 45;
+    font-family: var(--mono); font-size: 13px; letter-spacing: .12em; color: var(--muted);
+  }
+  #brand {
+    position: absolute; top: 42px; right: 84px; z-index: 45;
+    height: 22px; width: auto; color: var(--ink); opacity: .85;
+  }
+
+  /* ---------- typography ---------- */
+  .kicker {
+    font-family: var(--mono); font-size: 15px; letter-spacing: .22em;
+    text-transform: uppercase; color: var(--magenta); margin-bottom: 34px;
+  }
+  .kicker .sep { color: var(--muted); }
+  h1 { font-size: 84px; line-height: 1.02; font-weight: 500; letter-spacing: -.015em; }
+  h1 em, h2 em { font-style: italic; color: var(--magenta); }
+  h2 { font-size: 56px; line-height: 1.06; font-weight: 500; letter-spacing: -.01em; }
+  .sub { font-size: 27px; color: var(--muted); margin-top: 28px; line-height: 1.45; max-width: 880px; }
+  .sub strong { color: var(--ink); font-weight: 600; }
+
+  .footline {
+    margin-top: auto; padding-top: 30px;
+    font-family: var(--mono); font-size: 15px; color: var(--muted); letter-spacing: .06em;
+  }
+
+  /* ---------- strike (signature) ---------- */
+  .strike { position: relative; display: inline-block; }
+  .strike::after {
+    content: ""; position: absolute; left: -2%; right: -2%; top: 54%;
+    height: .09em; min-height: 3px; background: var(--red);
+    transform: scaleX(0) rotate(-1.1deg); transform-origin: left center;
+    transition: transform .5s cubic-bezier(.6,0,.2,1) .15s;
+  }
+  section.current .strike.on::after,
+  section.current .fragment.visible .strike::after { transform: scaleX(1) rotate(-1.1deg); }
+  .fragment.visible .struck-dim, section.current .struck-dim.on { color: var(--muted); }
+
+  /* ---------- fragments ---------- */
+  .fragment { opacity: 0; transform: translateY(10px); transition: opacity .4s ease, transform .4s ease; }
+  .fragment.visible { opacity: 1; transform: none; }
+
+  /* ---------- components ---------- */
+  .chips { display: flex; flex-wrap: wrap; gap: 14px; }
+  .chips span {
+    font-family: var(--mono); font-size: 19px; padding: 10px 20px;
+    border: 1.5px solid var(--ink); border-radius: 999px; background: var(--paper);
+  }
+  .chips span.green { border-color: var(--green); color: var(--green); }
+  .chips span.dead { border-color: var(--rule); color: var(--muted); }
+
+  .stamp {
+    display: inline-block; font-family: var(--mono); font-size: 17px; letter-spacing: .2em;
+    text-transform: uppercase; color: var(--red); border: 2.5px solid var(--red);
+    padding: 10px 18px; transform: rotate(-2.5deg); border-radius: 4px;
+  }
+
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
+  .cols > *, .moves > * { min-width: 0; }
+  .cols pre.code, .moves pre.code { overflow-x: hidden; }
+
+  .panel { border: 1.5px solid var(--rule); background: var(--panel-bg); padding: 28px 30px; border-radius: 6px; }
+  .panel h4 { font-family: var(--mono); font-size: 14px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+  .panel.bad h4 { color: var(--red); }
+  .panel.good { border-color: var(--green); }
+  .panel.good h4 { color: var(--green); }
+
+  ul.plain { list-style: none; font-size: 25px; line-height: 1.75; }
+  ul.plain li::before { content: "→"; color: var(--muted); margin-right: 14px; }
+
+  /* redline list */
+  ol.redline { list-style: none; counter-reset: rl; }
+  ol.redline li {
+    counter-increment: rl;
+    font-family: var(--mono); font-size: 29px; line-height: 1.0;
+    padding: 15px 0; border-bottom: 1px solid var(--rule);
+    display: flex; align-items: baseline; gap: 26px;
+  }
+  ol.redline li::before {
+    content: counter(rl, decimal-leading-zero);
+    font-size: 15px; color: var(--muted); letter-spacing: .1em;
+  }
+  ol.redline .note { margin-left: auto; font-size: 16px; color: var(--red); font-family: var(--mono); letter-spacing: .05em; }
+
+  /* timeline */
+  .timeline { position: relative; margin-top: 26px; }
+  .timeline .rail { position: absolute; left: 6px; right: 6px; top: 9px; height: 2px; background: var(--ink); }
+  .timeline .stops { display: grid; grid-template-columns: repeat(5, 1fr); }
+  .stop { position: relative; padding-top: 34px; }
+  .stop::before {
+    content: ""; position: absolute; top: 2px; left: 0; width: 16px; height: 16px;
+    border-radius: 50%; background: var(--paper); border: 3px solid var(--ink);
+  }
+  .stop .date { font-family: var(--mono); font-size: 16px; letter-spacing: .04em; margin-bottom: 10px; }
+  .stop .what { font-size: 18.5px; color: var(--muted); line-height: 1.45; padding-right: 22px; }
+  .stop.hot::before { border-color: var(--magenta); background: var(--magenta); }
+  .stop.hot .date { color: var(--magenta); font-weight: 700; }
+
+  /* hub diagram */
+  .hub { position: relative; height: 430px; margin-top: 30px; }
+  .hub svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .hub .node { position: absolute; transform: translate(-50%, -50%); }
+  .hub svg line { stroke: var(--muted); stroke-width: 1.5; opacity: .55; }
+  .hub svg text { font-family: var(--mono); font-size: 14px; fill: var(--green); letter-spacing: .08em; }
+
+  /* diagram: boxes & flows */
+  .flow { display: flex; align-items: center; gap: 26px; }
+  .box {
+    border: 2px solid var(--ink); border-radius: 6px; background: var(--panel-bg);
+    padding: 20px 26px; text-align: center; min-width: 168px;
+  }
+  .box .name { font-family: var(--mono); font-size: 20px; display: block; }
+  .box .tag { font-family: var(--mono); font-size: 14.5px; display: block; margin-top: 8px; }
+  .box.ok { border-color: var(--green); } .box.ok .tag { color: var(--green); }
+  .box.no { border-color: var(--rule); color: var(--muted); } .box.no .tag { color: var(--red); }
+  .flow .arr { font-size: 34px; color: var(--muted); }
+  .stackv { display: flex; flex-direction: column; gap: 18px; }
+
+  /* trace waterfall */
+  .trace { margin-top: 38px; max-width: 1020px; }
+  .trace .span { display: grid; grid-template-columns: 280px 1fr; align-items: center; gap: 22px; padding: 8px 0; }
+  .trace .span .lab { font-family: var(--mono); font-size: 16px; color: var(--muted); text-align: right; }
+  .trace .span .bar { height: 17px; border-radius: 3px; }
+  .trace .caption { font-family: var(--mono); font-size: 15px; color: var(--muted); letter-spacing: .04em; margin-top: 14px; padding-left: 302px; }
+
+  /* sequence diagram */
+  .seq { font-family: var(--mono); margin-top: 30px; }
+  .seq .lanes { display: grid; grid-template-columns: 200px 1fr 200px; align-items: center; }
+  .seq .actor {
+    border: 2px solid var(--ink); border-radius: 6px; text-align: center;
+    padding: 12px 0; font-size: 20px; background: var(--panel-bg);
+  }
+  .seq .msg { display: grid; grid-template-columns: 200px 1fr 200px; align-items: center; margin-top: 58px; }
+  .seq .wire { position: relative; height: 2px; background: var(--ink); margin: 0 10px; }
+  .seq .wire::after {
+    content: ""; position: absolute; top: -5px; width: 12px; height: 12px;
+    border-top: 2px solid var(--ink); border-right: 2px solid var(--ink);
+  }
+  .seq .msg.right .wire::after { right: 0; transform: rotate(45deg); }
+  .seq .msg.left  .wire::after { left: 0; transform: rotate(-135deg); }
+  .seq .msg.left .wire { background: var(--red); } .seq .msg.left .wire::after { border-color: var(--red); }
+  .seq .lbl {
+    position: absolute; left: 50%; top: -32px; transform: translateX(-50%);
+    font-size: 17px; white-space: nowrap; background: var(--paper); padding: 0 12px;
+  }
+  .seq .msg.left .lbl { color: var(--red); }
+  .seq .aside-note { text-align: center; font-size: 17px; color: var(--muted); margin-top: 46px; }
+
+  /* code */
+  pre.code {
+    font-family: var(--mono); font-size: 21px; line-height: 1.6;
+    background: #041518; color: #fbffea; border-radius: 8px;
+    border: 1px solid var(--rule);
+    padding: 28px 34px; overflow: hidden;
+  }
+  pre.code .c { color: #6d8a87; } /* comment */
+  pre.code .k { color: #ff6550; } /* keyword */
+  pre.code .s { color: #9cffe9; } /* string */
+  pre.code .f { color: #9579f7; } /* func */
+  code.inline {
+    font-family: var(--mono); font-size: .82em; background: var(--paper-deep);
+    padding: 3px 9px; border-radius: 5px; border: 1px solid var(--rule);
+  }
+
+  .bignum { font-family: var(--mono); font-size: 15px; letter-spacing: .2em; color: var(--magenta); text-transform: uppercase; }
+
+  .qr { border: 2px solid var(--ink); border-radius: 8px; padding: 12px; background: #fff; }
+
+  /* moves list on act slide */
+  .moves { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 34px; margin-top: 10px; }
+  .move .n { font-family: var(--mono); font-size: 16px; letter-spacing: .2em; color: var(--magenta); margin-bottom: 14px; }
+  .move h3 { font-size: 33px; font-weight: 500; margin-bottom: 12px; }
+  .move p { font-size: 19.5px; color: var(--muted); line-height: 1.5; }
+
+  /* ---------- notes overlay ---------- */
+  #notes {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 100;
+    background: rgba(2, 16, 18, .95); color: #fbffea;
+    font-family: var(--mono); font-size: 15px; line-height: 1.7;
+    padding: 22px 36px; max-height: 38vh; overflow-y: auto; display: none;
+  }
+  #notes.open { display: block; }
+  #notes .hint { color: #9a8f79; margin-bottom: 8px; font-size: 12px; letter-spacing: .15em; text-transform: uppercase; }
+
+  #help {
+    position: fixed; right: 14px; bottom: 12px; z-index: 90;
+    font-family: var(--mono); font-size: 11px; color: rgba(251,255,234,.35); letter-spacing: .08em;
+  }
+
+  /* ---------- print / PDF ---------- */
+  @media print {
+    html, body { overflow: visible; background: #fff; }
+    #stage { position: static; transform: none !important; width: 1280px; height: auto; box-shadow: none; }
+    section {
+      position: relative; visibility: visible !important; opacity: 1 !important;
+      width: 1280px; height: 720px; page-break-after: always; animation: none;
+    }
+    .fragment { opacity: 1 !important; transform: none !important; }
+    .strike::after { transform: scaleX(1) rotate(-1.1deg) !important; }
+    .struck-dim { color: var(--muted) !important; }
+    #notes, #help, #progress, #counter { display: none !important; }
+    #whoami { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div id="stage">
+  <div id="progress"></div>
+  <svg id="brand" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 605 120" aria-label="Pydantic"><path fill="currentColor" d="M178.25 93.2v-76h32.665c7.04 0 12.485 2.065 16.33 6.2 3.85 4.14 5.775 9.695 5.775 16.665 0 6.97-1.925 12.52-5.775 16.66-3.85 4.135-9.29 6.205-16.33 6.205H190.55V93.2h-12.3Zm12.3-41.05h19.6c3.125 0 5.55-.8 7.3-2.395 1.74-1.67 2.61-4.03 2.61-7.08V37.45c0-3.05-.87-5.37-2.615-6.97-1.74-1.67-4.17-2.5-7.295-2.5h-19.6v24.17Zm89.835-15.575h11.43l-23.845 67.84c-.65 1.885-1.415 3.485-2.285 4.79a9.895 9.895 0 0 1-2.94 3.265 9.846 9.846 0 0 1-4.03 1.85c-1.6.44-3.485.655-5.66.655h-6.86v-9.69h9.58l3.265-9.58-20.58-59.13h11.87l11.325 33.32L264.92 82.2h.55l3.59-12.3 11.325-33.325Zm56.185 47.26h-.545a15.682 15.682 0 0 1-6.1 7.84c-2.755 1.885-6.02 2.83-9.8 2.83-7.185 0-12.735-2.575-16.655-7.73-3.92-5.225-5.88-12.52-5.88-21.885 0-9.365 1.96-16.625 5.88-21.78 3.92-5.225 9.47-7.84 16.655-7.84 3.775 0 7.045.945 9.8 2.83 2.835 1.815 4.865 4.43 6.1 7.84h.545V12.62h11.87V93.2h-11.87v-9.365Zm-12.85.435c3.63 0 6.68-.87 9.15-2.615 2.465-1.81 3.7-4.17 3.7-7.075V55.195c0-2.9-1.235-5.225-3.7-6.965-2.47-1.815-5.52-2.725-9.15-2.725-4.135 0-7.44 1.345-9.91 4.03-2.465 2.615-3.7 6.1-3.7 10.45v9.8c0 4.36 1.235 7.88 3.7 10.565 2.47 2.615 5.775 3.92 9.91 3.92Zm83.19 8.93c-3.12 0-5.515-.87-7.185-2.61-1.67-1.815-2.685-4.1-3.05-6.86h-.545c-1.09 3.555-3.085 6.24-5.99 8.055-2.9 1.815-6.425 2.725-10.56 2.725-5.88 0-10.415-1.525-13.61-4.575-3.12-3.05-4.685-7.15-4.685-12.3 0-5.665 2.035-9.915 6.1-12.745 4.135-2.83 10.16-4.25 18.075-4.25h10.235v-4.785c0-3.485-.945-6.17-2.83-8.06-1.89-1.885-4.83-2.83-8.82-2.83-3.34 0-6.06.725-8.165 2.175-2.11 1.45-3.885 3.305-5.34 5.555l-7.075-6.425a22.24 22.24 0 0 1 7.95-7.84c3.41-2.1 7.875-3.155 13.39-3.155 7.335 0 12.96 1.7 16.88 5.115 3.92 3.415 5.88 8.315 5.88 14.7v28.42h5.99v9.69h-6.645Zm-23.95-7.73c3.7 0 6.75-.8 9.14-2.395 2.4-1.67 3.6-3.885 3.6-6.64v-8.17h-10.025c-8.2 0-12.3 2.54-12.3 7.625v1.96c0 2.54.835 4.465 2.5 5.77 1.745 1.235 4.105 1.85 7.085 1.85Zm42.245 7.73V36.58h11.87v9.365h.545a18.87 18.87 0 0 1 5.55-7.625c2.54-2.03 5.99-3.05 10.35-3.05 5.8 0 10.3 1.925 13.5 5.775 3.265 3.775 4.9 9.185 4.9 16.225V93.2h-11.87V58.8c0-8.86-3.56-13.285-10.67-13.285-1.525 0-3.05.215-4.575.65-1.45.365-2.76.95-3.92 1.745a9.502 9.502 0 0 0-2.83 3.05c-.65 1.23-.98 2.685-.98 4.35v37.9H425.2l.005-.01Zm78.835 0c-4.14 0-7.26-1.05-9.365-3.155-2.105-2.18-3.16-5.225-3.16-9.15v-34.62H482.7V36.58h4.79c1.96 0 3.3-.435 4.025-1.305.8-.87 1.2-2.29 1.2-4.25V21.12h10.67v15.46h11.87v9.69h-11.87v37.24h11v9.69H504.04Zm30.055-66.75c-2.47 0-4.285-.58-5.445-1.74-1.09-1.16-1.635-2.65-1.635-4.465v-1.85c0-1.815.545-3.3 1.635-4.465 1.16-1.16 2.975-1.745 5.445-1.745 2.465 0 4.245.585 5.335 1.745 1.09 1.16 1.635 2.65 1.635 4.465v1.85c0 1.815-.545 3.3-1.635 4.465-1.09 1.16-2.87 1.74-5.335 1.74Zm-5.99 10.13h11.87V93.2h-11.87V36.58Zm50.74 57.93c-4.065 0-7.695-.69-10.885-2.07a21.88 21.88 0 0 1-8.06-5.88 27.68 27.68 0 0 1-5.01-9.365c-1.16-3.7-1.74-7.8-1.74-12.3 0-4.5.58-8.57 1.74-12.2 1.165-3.7 2.835-6.825 5.01-9.365a21.352 21.352 0 0 1 8.06-5.99c3.19-1.375 6.82-2.065 10.885-2.065 5.665 0 10.31 1.27 13.94 3.81a21.959 21.959 0 0 1 7.95 10.125l-9.8 4.575a11.846 11.846 0 0 0-4.25-6.205c-1.96-1.6-4.57-2.4-7.84-2.4-4.355 0-7.655 1.38-9.905 4.14-2.18 2.685-3.27 6.205-3.27 10.56v10.13c0 4.35 1.09 7.91 3.27 10.67 2.25 2.685 5.55 4.03 9.905 4.03 3.485 0 6.245-.835 8.28-2.505 2.105-1.745 3.77-4.03 5.005-6.86l9.04 4.79c-1.89 4.65-4.72 8.2-8.495 10.67-3.775 2.47-8.385 3.7-13.83 3.7v.005Z"></path><path fill="#E520E9" d="M137.385 90.65 73.515 2.075c-2.01-2.765-6.645-2.765-8.635 0L1.01 90.65a5.335 5.335 0 0 0 2.65 8.175l63.87 20.91h.01a5.303 5.303 0 0 0 3.3 0h.01l63.87-20.91a5.278 5.278 0 0 0 3.4-3.415 5.263 5.263 0 0 0-.75-4.76h.015ZM69.2 14.28l25.6 35.505-23.94-7.835c-.185-.06-.38-.05-.565-.095a3.502 3.502 0 0 0-.55-.09c-.185-.025-.36-.095-.545-.095-.185 0-.355.07-.54.095a4.245 4.245 0 0 0-.55.09c-.19.035-.385.035-.555.095L43.76 49.74l-.15.05 25.6-35.51h-.01ZM33.03 64.45l27.87-9.13 2.975-.97v52.99l-49.97-16.365L33.03 64.45Zm41.5 42.88V54.35l30.845 10.1L124.5 90.96l-49.975 16.37h.005Z"></path></svg>
+
+  <!-- ═══ 1 · COVER ═══ -->
+  <section>
+    <div class="kicker">EUROPYTHON 2026 · KRAKÓW</div>
+    <h1>What I've Learned<br>Maintaining the <em>MCP</em> Python SDK</h1>
+    <p class="sub">SDK <strong>v2</strong> ships on July 28. What changes, why, and how to be ready.</p>
+    <div class="footline">Marcelo Trylesinski · Pydantic · MCP Python SDK maintainer</div>
+    <aside class="notes">
+      Hi! I maintain the MCP Python SDK. This talk is the story of how I ended up doing that, what MCP actually is and why it won, and what you need to know before the new spec and SDK v2 land in two weeks.
+    </aside>
+  </section>
+
+  <!-- ═══ 2 · WHOAMI ═══ -->
+  <section>
+    <div class="kicker">§ HELLO</div>
+    <h2>I'm Marcelo 🇧🇷 · <em>Kludex</em> on GitHub</h2>
+    <p class="sub">Open source maintainer. My day-to-day on PyPI:</p>
+    <div style="margin-top: 44px" class="chips">
+      <span>Uvicorn</span>
+      <span>Starlette</span>
+      <span>Pydantic AI</span>
+      <span class="green">MCP Python SDK</span>
+    </div>
+    <aside class="notes">
+      Quick intro - Kludex on GitHub. I maintain Uvicorn, Starlette, HTTPX2, I work on Pydantic AI, and for the last while the MCP Python SDK.
+      Remember Starlette and Uvicorn - they come back in this story in a fun way.
+    </aside>
+  </section>
+
+  <!-- ═══ 3 · PYDANTIC ═══ -->
+  <section>
+    <div class="kicker">§ DAY JOB</div>
+    <h2>I work at <em>Pydantic</em></h2>
+    <p class="sub">We build the best observability platform for the AI era.</p>
+    <div style="margin-top: 44px" class="chips">
+      <span>Pydantic Validation</span>
+      <span>Pydantic AI</span>
+      <span class="green">Pydantic Logfire</span>
+      <span>Monty</span>
+    </div>
+    <aside class="notes">
+      Day job: Pydantic. You know the validation library - we also build Pydantic AI, Logfire for observability, and Monty.
+      Logfire matters for this talk: it's literally the reason I ended up on the MCP SDK. That story is coming.
+    </aside>
+  </section>
+
+  <!-- ═══ 19 · HIRING ═══ -->
+  <section style="align-items: center; text-align: center; justify-content: center">
+    <div class="kicker">§ ONE MORE THING</div>
+    <h2>We are <em>hiring</em></h2>
+    <p class="sub" style="margin: 18px 0 36px">Come build the observability platform for the AI era with us.</p>
+    <img class="qr" width="230" height="230" alt="QR code - Pydantic careers"
+      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASIAAAEiCAIAAADS3EjhAAAE8klEQVR4nO3dQY7jNhBA0e5gLjCrAL7/2QxkNUdQtlkJA3B+WJTf27sl2f5gAy6Q39d1fQGlv9K/DsgM/g9WM8jJDHIyg5zMICczyMkMcjKDnMwgJzPIyQxyMoOczCAnM8jJDHIyg5zMICczyP1YefHr759fz/L+59eW696/kyt3tfIZ7bruTCvvhtUMcjKDnMwgJzPIyQxyMoOczCAnM8jJDGZPgcycqOimE7rJhk+bt3g/7rtxz2oGOZlBTmaQkxnkZAY5mUFOZpCTGeRkBidPgZw4UbHyl3fNl3R3tcvrwO/GPasZ5GQGOZlBTmaQkxnkZAY5mUFOZpCTGTx3CuTTzJzVmLknx/NYzSAnM8jJDHIyg5zMICczyMkMcjKDnMwgZwrko/eo6PYg4b+sZpCTGeRkBjmZQU5mkJMZ5GQGOZlBTmbw3CmQE2cIVvbzcObLs78b96xmkJMZ5GQGOZlBTmaQkxnkZAY5mUFOZnDyFMiuU052PdHKjMiJr13xetx3457VDHIyg5zMICczyMkMcjKDnMwgJzPIyQxy39d19Vf5CCdONjxv142ZrGaQkxnkZAY5mUFOZpCTGeRkBjmZQU5mMHsvkJl7VHSv7axct3uiXe/V63FPZDWDnMwgJzPIyQxyMoOczCAnM8jJDHIyg9wDT4TZdQbKzOmEEyc53tld7ZoQsppBTmaQkxnkZAY5mUFOZpCTGeRkBjmZwcknwjgh5U+9GyfubnLiHM89UyAwmn8aISczyMkMcjKDnMwgJzPIyQxyMoPnnghz4nVnznmseN4n+B45MWM1g5zMICczyMkMcjKDnMwgJzPIyQxyMoPZe4GcOPewYtfJLDPfjc47m+TYdeKP1QxyMoOczCAnM8jJDHIyg5zMICczyMkMZu8FMvNsjhP3t9g1nXBv5ukqJ35jrWaQkxnkZAY5mUFOZpCTGeRkBjmZQU5mkDvyRJgV3bzFp53qsuue3wfum2I1g5zMICczyMkMcjKDnMwgJzPIyQxyMoPZJ8Lcm7m/xcwzbk6cbJh5es7MiRmrGeRkBjmZQU5mkJMZ5GQGOZlBTmaQkxnMngLZ9Wv9idMYM0/Pufdp0ycdqxnkZAY5mUFOZpCTGeRkBjmZgczgfFYzOHkvkOfZNRUxc2eU7q5eI6dtVp7XagY5mUFOZpCTGeRkBjmZQU5mkJMZ5GQGuR8rLz5xr4iVX/pnnkUy81PYNUEyk9UMcjKDnMwgJzPIyQxyMoOczCAnM8jJDGZPgdyb+Uv/zJmJzsxzeXbZdVdWM8jJDHIyg5zMICczyMkMcjKDnMwgJzM4eQpk1zTGzJNKnse78fusZpCTGeRkBjmZQU5mkJMZ5GQGOZlBTmbw3CmQE93Pl3RTETNPk5l5is1r5Ek0VjPIyQxyMoOczCAnM8jJDHIyg5zMICczyJkCOX7CoLur7oneC/M0u/Z6Wbmu1QxyMoOczCAnM8jJDHIyg5zMICczyMkMct/XdT1sKmLmvhqfdk7NzB1KXps+I6sZ5GQGOZlBTmaQkxnkZAY5mUFOZpCTGZw8BXKiXWe+dNfd9UQr3iMnZuwFAqP5pxFyMoOczCAnM8jJDHIyg5zMICczmD0FAvwOqxnkZAY5mUFOZpCTGeRkBjmZQU5mkJMZ5GQGOZlBTmaQkxnkZAY5mUFOZpCTGeRkBjmZwVftX4jbggyCTm4XAAAAAElFTkSuQmCC">
+    <div class="footline" style="text-align: center; margin-top: 30px">pydantic.dev/jobs</div>
+    <aside class="notes">
+      Before I wrap up: Pydantic is hiring. If you enjoyed any of this - protocols, SDKs, observability - come talk to me, or scan the QR: pydantic.dev/jobs.
+    </aside>
+  </section>
+
+  <!-- ═══ 5 · SHOW OF HANDS ═══ -->
+  <section style="align-items: center; text-align: center; justify-content: center">
+    <div class="kicker">§ SHOW OF HANDS</div>
+    <h1 style="font-size: 76px">Who knows what <em>MCP</em> is?</h1>
+    <aside class="notes">
+      Quick show of hands - who here knows what MCP is? And keep it up if you've built a server with it.
+      [Calibrate the next two slides to the room: lots of hands, go faster through the basics; few hands, slow down.]
+    </aside>
+  </section>
+
+  <!-- ═══ 5 · WHAT IS MCP ═══ -->
+  <section>
+    <div class="kicker">§ THE BASICS</div>
+    <h2>MCP is the <em>OpenAPI</em> for your agents</h2>
+    <div class="timeline">
+      <div class="rail"></div>
+      <div class="stops">
+        <div class="stop fragment">
+          <div class="date">2024-11-25</div>
+          <div class="what">Anthropic open-sources MCP</div>
+        </div>
+        <div class="stop fragment">
+          <div class="date">2025</div>
+          <div class="what">ChatGPT, Claude, Cursor, Gemini, Copilot, VS Code…</div>
+        </div>
+        <div class="stop fragment">
+          <div class="date">2025-12-09</div>
+          <div class="what">Donated to the Agentic AI Foundation</div>
+        </div>
+        <div class="stop fragment">
+          <div class="date">Today</div>
+          <div class="what">300M monthly downloads (Python SDK)</div>
+        </div>
+        <div class="stop hot fragment">
+          <div class="date">2026-07-28</div>
+          <div class="what">The largest spec revision since launch</div>
+        </div>
+      </div>
+    </div>
+    <aside class="notes">
+      Let's start from the basics. MCP - Model Context Protocol - is the OpenAPI for your agents: one standard contract between any AI application and any external system.
+      It was born from a real need inside Anthropic - every integration was bespoke, the classic N-times-M problem - and open-sourced in November 2024.
+      2025 was the adoption year: ChatGPT, Cursor, Gemini, Copilot, VS Code - everyone speaks it. And in December, Anthropic donated MCP to the Agentic AI Foundation, a directed fund under the Linux Foundation co-founded with Block and OpenAI. It's not a vendor protocol anymore; it's infrastructure.
+      Today: the Python SDK alone is at about 300 million downloads a month. And in two weeks, the largest revision since launch ships - we'll get there.
+    </aside>
+  </section>
+
+  <!-- ═══ 6 · TRANSPORTS ═══ -->
+  <section>
+    <div class="kicker">§ WHY IT WON</div>
+    <h2>One agent, <em>any</em> server</h2>
+    <div class="hub">
+      <svg viewBox="0 0 1112 430" preserveAspectRatio="none">
+        <line x1="556" y1="215" x2="996" y2="215"/>
+        <line x1="556" y1="215" x2="556" y2="70"/>
+        <line x1="556" y1="215" x2="116" y2="215"/>
+        <line x1="556" y1="215" x2="336" y2="360"/>
+        <line x1="556" y1="215" x2="776" y2="360"/>
+        <text x="776" y="200" text-anchor="middle">MCP</text>
+        <text x="596" y="140" text-anchor="start">MCP</text>
+        <text x="336" y="200" text-anchor="middle">MCP</text>
+        <text x="446" y="305" text-anchor="middle">MCP</text>
+        <text x="666" y="305" text-anchor="middle">MCP</text>
+      </svg>
+      <div class="node" style="left: 50%; top: 50%"><div class="box" style="border-color: var(--magenta)"><span class="name">Agent</span><span class="tag">Claude · Cursor · Pydantic AI</span></div></div>
+      <div class="node" style="left: 89.5%; top: 50%"><div class="box ok" style="min-width: 0; padding: 12px 22px"><span class="name">github</span></div></div>
+      <div class="node" style="left: 50%; top: 16%"><div class="box ok" style="min-width: 0; padding: 12px 22px"><span class="name">logfire</span></div></div>
+      <div class="node" style="left: 10.5%; top: 50%"><div class="box ok" style="min-width: 0; padding: 12px 22px"><span class="name">filesystem</span></div></div>
+      <div class="node" style="left: 30.2%; top: 84%"><div class="box ok" style="min-width: 0; padding: 12px 22px"><span class="name">slack</span></div></div>
+      <div class="node" style="left: 69.8%; top: 84%"><div class="box ok" style="min-width: 0; padding: 12px 22px"><span class="name">your internal API</span></div></div>
+    </div>
+    <aside class="notes">
+      Why did it win? This picture. Your agent in the middle, and everything it touches around it - GitHub, Postgres, Slack, your filesystem, Logfire, your internal API. Every wire is the same protocol.
+      Before MCP this was the N-times-M problem: every agent times every tool meant a custom integration - function calling glue per provider, a plugin format per framework. MCP collapses it: a server is written once and works with any client; a client speaks MCP and gets the whole ecosystem for free.
+      Locally a server runs as a subprocess over stdio; remote ones are plain HTTP endpoints with OAuth. Same messages either way - but the point is this shape: one agent, any server.
+    </aside>
+  </section>
+
+  <!-- ═══ 7 · WHY NOT A CLI ═══ -->
+  <section style="align-items: center; text-align: center; justify-content: center">
+    <div class="kicker">§ THE QUESTION IN YOUR HEAD</div>
+    <h1 style="font-size: 76px">Why not just a <em>CLI</em>?</h1>
+    <aside class="notes">
+      The question half this room is thinking: my agent runs bash - why not just give it a CLI? Honest answer: often you should! Models are excellent at text, and a local trusted one-shot task needs no protocol.
+      But four things a CLI can't give you. A typed, discoverable contract - the model gets JSON schemas, not --help scraping. Interaction mid-call - a tool can ask the user a question and resume; a CLI can only fail. Auth - an MCP server does OAuth on the user's behalf; a CLI wants your credentials in env vars. And remote - a server can run far away from the agent, multi-tenant, observable, with structured results and streaming.
+      So: not either-or. Text-shaped local work: CLI. Types, auth, interaction, remote: that's what MCP is for.
+    </aside>
+  </section>
+
+  <!-- ═══ 9½ · SECTION BREAK ═══ -->
+  <section style="align-items: center; text-align: center; justify-content: center">
+    <h1 style="font-size: 72px">Let's talk about the <em>future</em> of MCP</h1>
+    <aside class="notes">
+      That's the past and the present. Now the part you came for: what's about to change - the new spec revision and SDK v2, both landing in two weeks.
+    </aside>
+  </section>
+
+  <!-- ═══ 10 · THE SPEC MOVES ═══ -->
+  <section>
+    <div class="kicker">§ THE GROUND IS MOVING <span class="sep">·</span> SPEC 2026-07-28</div>
+    <h2>July 28: the largest revision since launch - and it's a <em>subtraction</em></h2>
+    <div class="flow" style="margin-top: 44px">
+      <div class="box"><span class="name">Client</span><span class="tag"><code class="inline">_meta</code>: version + capabilities</span></div>
+      <div class="arr">→</div>
+      <div class="box"><span class="name">Load balancer</span></div>
+      <div class="arr">→</div>
+      <div class="stackv">
+        <div class="box ok"><span class="name">Server A</span><span class="tag">can answer ✓</span></div>
+        <div class="box ok"><span class="name">Server B</span><span class="tag">can answer ✓</span></div>
+      </div>
+    </div>
+    <p class="sub fragment" style="margin-top: 40px">Stateless by default: no sessions, no <code class="inline">initialize</code> - <code class="inline">server/discover</code> replaces the handshake. <strong>Any node answers any request.</strong></p>
+    <aside class="notes">
+      On July 28 the largest spec revision since launch ships - RC locked in May, and the headline is what got deleted, not what got added.
+      The protocol becomes stateless by default. Every request is self-contained: version and capabilities travel in _meta. The initialize handshake is replaced by server/discover.
+      What that buys you is this diagram: any node can answer any request. No sticky sessions, no session stores, no resumability machinery. You deploy an MCP server like any HTTP service.
+      Best practice starting today: write handlers that assume nothing survives between requests. If your logic lives in plain functions behind the MCP layer, this costs you nothing.
+    </aside>
+  </section>
+
+  <!-- ═══ 11 · REDLINE ═══ -->
+  <section>
+    <div class="kicker">§ REMOVED IN 2026-07-28 <span class="sep">·</span> DON'T BUILD ON THESE</div>
+    <ol class="redline">
+      <li class="fragment"><span class="strike struck-dim">Mcp-Session-Id</span><span class="note">sessions are gone · SEP-2567</span></li>
+      <li class="fragment"><span class="strike struck-dim">initialize handshake</span><span class="note">→ server/discover · SEP-2575</span></li>
+      <li class="fragment"><span class="strike struck-dim">ping</span><span class="note">removed</span></li>
+      <li class="fragment"><span class="strike struck-dim">logging/setLevel</span><span class="note">removed</span></li>
+      <li class="fragment"><span class="strike struck-dim">SSE resumability</span><span class="note">Last-Event-ID, gone</span></li>
+      <li class="fragment"><span class="strike struck-dim">tasks in core</span><span class="note">→ extension · SEP-2663</span></li>
+    </ol>
+    <p class="sub fragment" style="margin-top: 30px">Also deprecated, on a ≥ 12-month clock: <strong>sampling · roots · logging</strong>. Elicitation stays. Prompts stay.</p>
+    <aside class="notes">
+      The redline. Not deprecated - removed. Sessions gone, handshake gone, ping gone, setLevel gone, SSE resumability gone, tasks moved out to an extension.
+      The good news: most of this is SDK plumbing - v2 handles both eras for you and you'll barely notice.
+      The part that IS your problem: sampling, roots and logging are deprecated with a formal lifecycle - at least twelve months, then removal. If your product depends on them, plan now: call your LLM provider directly, pass paths as arguments, log to stderr or OpenTelemetry.
+      Elicitation stays - and got better. Next slide.
+    </aside>
+  </section>
+
+  <!-- ═══ 11½ · ELICITATION TODAY ═══ -->
+  <section>
+    <div class="kicker">INTERACTIVE TOOLS <span class="sep">·</span> UNTIL TODAY</div>
+    <h2>The server calls <em>back</em></h2>
+    <div class="seq">
+      <div class="lanes">
+        <div class="actor">Client</div>
+        <div></div>
+        <div class="actor">Server</div>
+      </div>
+      <div class="msg right"><div></div><div class="wire"><span class="lbl">tools/call weather() · stream stays open</span></div><div></div></div>
+      <div class="msg left fragment"><div></div><div class="wire"><span class="lbl">elicitation/create · which units?</span></div><div></div></div>
+      <div class="msg right fragment"><div></div><div class="wire"><span class="lbl">result: metric · must reach the same session</span></div><div></div></div>
+      <div class="msg left fragment"><div></div><div class="wire"><span class="lbl" style="color: var(--green)">result: 22 °C</span></div><div></div></div>
+    </div>
+    <aside class="notes">
+      Before I show you the new way, here's how an interactive tool works today, on the current spec.
+      The client calls the tool and the HTTP stream stays open. Mid-call, the server turns around and initiates its own request - elicitation/create, "which units?" - pushed back over that open stream. The answer has to come back to the same session, on the same node that's holding the call.
+      On stdio this is fine - one process, one pipe. Over HTTP at scale it's the sticky-session problem from two slides ago: sessions, resumable streams, one exact node that knows you.
+      That server-initiated callback is exactly what the new revision removes. So how can a tool still ask questions? Next slide.
+    </aside>
+  </section>
+
+  <!-- ═══ 12 · MRTR ═══ -->
+  <section>
+    <div class="kicker">INTERACTIVE TOOLS <span class="sep">·</span> FROM JULY 28 <span class="sep">·</span> SEP-2322</div>
+    <h2>MRTR: the server can still <em>ask</em></h2>
+    <div class="seq">
+      <div class="lanes">
+        <div class="actor">Client</div>
+        <div></div>
+        <div class="actor">Server</div>
+      </div>
+      <div class="msg right"><div></div><div class="wire"><span class="lbl">tools/call weather()</span></div><div></div></div>
+      <div class="msg left fragment"><div></div><div class="wire"><span class="lbl">resultType: "input_required" · which units?</span></div><div></div></div>
+      <div class="msg right fragment"><div></div><div class="wire"><span class="lbl">tools/call + inputResponses + requestState</span></div><div></div></div>
+      <div class="msg left fragment"><div></div><div class="wire"><span class="lbl" style="color: var(--green)">resultType: "complete" · 22 °C</span></div><div></div></div>
+    </div>
+    <aside class="notes">
+      Multi round-trip requests, my favorite part of the new spec. A tool that needs input doesn't push over a side channel - it returns early with input_required and the question embedded. The client answers and re-calls with an opaque requestState. All state travels in the request, so round two can hit a different node.
+      And here's the SDK v2 payoff: resolver dependency injection. You declare what you need as a typed parameter; the SDK asks the user - over classic elicitation on 2025 sessions, over MRTR on 2026 sessions. Same tool code, both protocol eras.
+      Statelessness didn't cost interactivity. It moved it into the type system, where it belongs.
+    </aside>
+  </section>
+
+  <!-- ═══ 12½ · RESOLVERS ═══ -->
+  <section>
+    <div class="kicker">§ THE V2 API <span class="sep">·</span> RESOLVERS</div>
+    <h2>Declare what you need - the SDK <em>asks</em></h2>
+    <pre class="code" style="font-size: 16.5px; margin-top: 26px; padding: 24px 30px"><span class="k">async def</span> <span class="f">confirm_backorder</span>(title: str) -> Backorder | Elicit[Backorder]:
+    <span class="k">if</span> <span class="f">stock</span>(title) > 0:
+        <span class="k">return</span> <span class="f">Backorder</span>(confirm=<span class="k">True</span>)
+    <span class="k">return</span> <span class="f">Elicit</span>(<span class="s">f"{title!r} is out of stock. Order anyway?"</span>, Backorder)
+
+@mcp.<span class="f">tool</span>()
+<span class="k">async def</span> <span class="f">order_book</span>(
+    title: str,
+    backorder: Annotated[Backorder, <span class="f">Resolve</span>(confirm_backorder)],
+) -> str:
+    <span class="k">if not</span> backorder.confirm:
+        <span class="k">return</span> <span class="s">"No order placed."</span>
+    <span class="k">return</span> <span class="s">f"Ordered {title!r}."</span></pre>
+    <aside class="notes">
+      And this is what that looks like in v2 - straight from the docs, lightly trimmed.
+      The tool declares backorder as a typed parameter with a Resolve annotation. The resolver runs server-side; if it can compute the answer, it just returns it. If it needs the user, it returns Elicit with a message and a schema - and the SDK handles the round trip: classic elicitation on a 2025 session, input_required plus requestState on a 2026 session.
+      Your tool body never knows the difference - by the time it runs, backorder is just a validated Pydantic model.
+      One caveat: this is beta API - b2 today - so details may still shift slightly before stable.
+    </aside>
+  </section>
+
+  <!-- ═══ 14½ · SHOW OF HANDS: TESTS ═══ -->
+  <section style="align-items: center; text-align: center; justify-content: center">
+    <div class="kicker">§ SHOW OF HANDS <span class="sep">·</span> AGAIN</div>
+    <h1 style="font-size: 72px">Who has <em>tests</em> for their MCP servers?</h1>
+    <aside class="notes">
+      Second show of hands: who has tests for their MCP server? Actual tests, in CI.
+      [Usually very few hands stay up - acknowledge it, no shaming: it's genuinely been awkward to test these. That's the setup for the next slide.]
+    </aside>
+  </section>
+
+  <!-- ═══ 15 · TESTING ═══ -->
+  <section>
+    <div class="kicker">§ PROVE IT WORKS <span class="sep">·</span> THE HILL I DIE ON</div>
+    <h2>Test your server - <em>in memory</em></h2>
+    <pre class="code" style="font-size: 19px; margin-top: 32px; max-width: 880px"><span class="k">from</span> mcp <span class="k">import</span> Client
+<span class="k">from</span> server <span class="k">import</span> mcp
+
+@pytest.fixture
+<span class="k">async def</span> <span class="f">client</span>():
+    <span class="k">async with</span> <span class="f">Client</span>(mcp, raise_exceptions=<span class="k">True</span>) <span class="k">as</span> c:
+        <span class="k">yield</span> c
+
+<span class="k">async def</span> <span class="f">test_add</span>(client: Client):
+    result = <span class="k">await</span> client.<span class="f">call_tool</span>(<span class="s">"add"</span>, {<span class="s">"a"</span>: 1, <span class="s">"b"</span>: 2})
+    <span class="k">assert</span> result.structured_content == {<span class="s">"result"</span>: 3}</pre>
+    <aside class="notes">
+      The hill I will die on. Reviewing community servers, almost nobody tests them - people spin up an inspector, click a tool once, ship.
+      In v2 this is the whole pattern: Client takes your server object directly, in memory. No transport, no subprocess, no fixtures with ports. raise_exceptions=True gives you real tracebacks instead of sanitized protocol errors.
+      Assert on structured_content for the data, snapshot-test the full result if you want belt and suspenders. It runs in CI like any other test.
+      And notice: if you kept logic at the edge, you barely need this - you unit-test the functions and keep a handful of these as contract tests.
+    </aside>
+  </section>
+
+  <!-- ═══ LOW-LEVEL V1 ═══ -->
+  <section>
+    <div class="kicker">§ THE LOW-LEVEL SERVER <span class="sep">·</span> V1</div>
+    <h2>v1: decorators and <em>magic</em></h2>
+    <pre class="code" style="font-size: 16px; margin-top: 26px"><span class="k">from</span> mcp.server.lowlevel <span class="k">import</span> Server
+<span class="k">from</span> mcp.types <span class="k">import</span> TextContent, Tool
+
+server = <span class="f">Server</span>(<span class="s">"echo"</span>)
+
+@server.<span class="f">list_tools</span>()
+<span class="k">async def</span> <span class="f">list_tools</span>() -> list[Tool]:
+    <span class="k">return</span> [<span class="f">Tool</span>(name=<span class="s">"echo"</span>, inputSchema=SCHEMA)]
+
+@server.<span class="f">call_tool</span>()
+<span class="k">async def</span> <span class="f">call_tool</span>(name: str, args: dict) -> list[TextContent]:
+    <span class="k">return</span> [<span class="f">TextContent</span>(type=<span class="s">"text"</span>, text=args[<span class="s">"text"</span>])]</pre>
+    <aside class="notes">
+      For those on the low-level Server, here's a full minimal v1 server: an echo tool.
+      Registration happens through decorators on the server instance. Fields are camelCase - inputSchema - and handlers return bare lists that the SDK wraps into result types for you, magically.
+      Convenient, but implicit: the wrapping rules were never obvious, and the decorator coupling made the internals hard to evolve. Now the same server in v2.
+    </aside>
+  </section>
+
+  <!-- ═══ LOW-LEVEL V2 ═══ -->
+  <section>
+    <div class="kicker" style="margin-bottom: 20px">§ THE LOW-LEVEL SERVER <span class="sep">·</span> V2</div>
+    <h2 style="font-size: 46px">v2: constructor parameters, <em>no magic</em></h2>
+    <pre class="code" style="font-size: 13px; line-height: 1.5; margin-top: 14px; padding: 18px 28px"><span class="k">from</span> mcp.server <span class="k">import</span> Server, ServerRequestContext
+<span class="k">import</span> mcp_types <span class="k">as</span> t
+
+<span class="k">async def</span> <span class="f">list_tools</span>(
+    ctx: ServerRequestContext,
+    params: t.PaginatedRequestParams | <span class="k">None</span>,
+) -> t.ListToolsResult:
+    <span class="k">return</span> t.<span class="f">ListToolsResult</span>(tools=[t.<span class="f">Tool</span>(name=<span class="s">"echo"</span>, input_schema=SCHEMA)])
+
+<span class="k">async def</span> <span class="f">call_tool</span>(
+    ctx: ServerRequestContext,
+    params: t.CallToolRequestParams,
+) -> t.CallToolResult:
+    text = params.arguments[<span class="s">"text"</span>]
+    <span class="k">return</span> t.<span class="f">CallToolResult</span>(content=[t.<span class="f">TextContent</span>(type=<span class="s">"text"</span>, text=text)])
+
+server = <span class="f">Server</span>(
+    <span class="s">"echo"</span>,
+    on_list_tools=list_tools,
+    on_call_tool=call_tool,
+)</pre>
+    <aside class="notes">
+      The same echo server in v2. Handlers are plain functions, registered as constructor parameters - on_list_tools, on_call_tool.
+      Everything is typed: a ServerRequestContext plus typed params in, a full result type out - ListToolsResult, CallToolResult. No auto-wrapping: what you return is what goes on the wire, validated against the negotiated spec version.
+      Fields are snake_case, the types come from the standalone mcp_types package. More explicit, slightly more verbose - and it's what made the stateless dispatcher core possible.
+    </aside>
+  </section>
+
+  <!-- ═══ 16 · OTEL ═══ -->
+  <section>
+    <div class="kicker">§ OBSERVABILITY <span class="sep">·</span> SEP-414</div>
+    <h2>Your server is <em>already traced</em></h2>
+    <div class="flow" style="margin-top: 42px">
+      <div class="box"><span class="name">Agent</span></div>
+      <div class="arr">→</div>
+      <div class="box"><span class="name">MCP client</span></div>
+      <div class="arr">→</div>
+      <div class="box ok"><span class="name">MCP server</span></div>
+      <div style="font-family: var(--mono); font-size: 16px; color: var(--muted); margin-left: 20px"><code class="inline">traceparent</code> travels in <code class="inline">_meta</code></div>
+    </div>
+    <div class="trace">
+      <div class="span"><span class="lab">agent · run</span><span class="bar" style="margin-left: 0; width: 100%; background: var(--magenta)"></span></div>
+      <div class="span"><span class="lab">client · tools/call weather()</span><span class="bar" style="margin-left: 16%; width: 58%; background: #9579f7"></span></div>
+      <div class="span"><span class="lab">server · fetch_forecast()</span><span class="bar" style="margin-left: 28%; width: 32%; background: var(--green)"></span></div>
+    </div>
+    <aside class="notes">
+      The change I personally fought for. SEP-414: W3C trace context in _meta, so you get one distributed trace across your agent, the client, and every server it calls.
+      In v2 the docs' own words are "your server is already traced" - every message gets an OpenTelemetry span, and without an exporter it's a no-op, so it costs nothing. Install logfire, call configure, and the traces just appear. Any OTel backend works - the Pydantic bias is showing again.
+      The number to remember: ten months from proposal to acceptance. That's not dysfunction - that's what keeping a standard boring costs.
+    </aside>
+  </section>
+
+  <!-- ═══ 16½ · LOGFIRE BEFORE/AFTER ═══ -->
+  <section>
+    <div class="kicker">§ OBSERVABILITY <span class="sep">·</span> IN PRACTICE</div>
+    <h2>Instrumenting with Logfire: one line <em>less</em></h2>
+    <div class="cols" style="margin-top: 38px; gap: 40px">
+      <div class="panel">
+        <h4>v1 · today</h4>
+        <pre class="code" style="font-size: 16px; padding: 20px 24px"><span class="k">from</span> mcp.server.fastmcp <span class="k">import</span> FastMCP
+<span class="k">import</span> logfire
+
+logfire.<span class="f">configure</span>()
+logfire.<span class="f">instrument_mcp</span>()
+
+mcp = <span class="f">FastMCP</span>(<span class="s">"Bookshop"</span>)
+
+@mcp.<span class="f">tool</span>()
+<span class="k">def</span> <span class="f">search_books</span>(query: str) -> str: ...</pre>
+      </div>
+      <div class="panel good">
+        <h4>v2 · from July 28</h4>
+        <pre class="code" style="font-size: 16px; padding: 20px 24px"><span class="k">from</span> mcp.server <span class="k">import</span> MCPServer
+<span class="k">import</span> logfire
+
+logfire.<span class="f">configure</span>()
+
+
+mcp = <span class="f">MCPServer</span>(<span class="s">"Bookshop"</span>)
+
+@mcp.<span class="f">tool</span>()
+<span class="k">def</span> <span class="f">search_books</span>(query: str) -> str: ...</pre>
+      </div>
+    </div>
+    <aside class="notes">
+      In practice, with Logfire. On v1 you configure Logfire and call logfire.instrument_mcp() - that patches the SDK to emit spans.
+      On v2, spot the difference: instrument_mcp is gone. The SDK emits OpenTelemetry spans natively - every message, out of the box, a no-op if you have no exporter. logfire.configure() alone picks them up, and any OTel backend works the same way.
+      Instrumentation you delete instead of add - my favorite kind.
+    </aside>
+  </section>
+
+  <!-- ═══ 13 · SDK V2 TODAY ═══ -->
+  <section>
+    <div class="kicker">§ THE SDK TODAY <span class="sep">·</span> PYTHON</div>
+    <h2>v2 is in beta - stable lands <em>with the spec</em></h2>
+    <div class="moves" style="grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; margin-top: 36px">
+      <ul class="plain" style="font-size: 21.5px; line-height: 1.7">
+        <li><code class="inline">2.0.0b2</code> out July 14 · stable targeted <strong>July 27</strong></li>
+        <li><code class="inline">uv add mcp</code> still gets 1.x - betas are opt-in, pin exact</li>
+        <li><code class="inline">FastMCP</code> → <code class="inline">MCPServer</code></li>
+        <li>snake_case field names</li>
+        <li>types split into <code class="inline">mcp-types</code></li>
+        <li>HTTP stack is now <code class="inline">httpx2</code></li>
+      </ul>
+      <div>
+        <pre class="code" style="font-size: 19px"><span class="k">from</span> mcp.server <span class="k">import</span> MCPServer
+
+mcp = <span class="f">MCPServer</span>(<span class="s">"Bookshop"</span>)
+
+@mcp.<span class="f">tool</span>()
+<span class="k">def</span> <span class="f">search_books</span>(query: str) -> str:
+    <span class="s">"""Search the catalog."""</span>
+    ...</pre>
+        <p style="font-family: var(--mono); font-size: 15px; color: var(--muted); margin-top: 12px">the signature <em>is</em> the schema</p>
+      </div>
+    </div>
+    <aside class="notes">
+      Where the SDK is today: second beta shipped July 14, stable v2 targeted for July 27 - the day before the spec. uv add mcp still resolves to 1.x; betas are strictly opt-in, and pin exact versions.
+      The renames: FastMCP is now MCPServer - same decorator API, look at the code, your signature is the schema. Fields are snake_case. The wire types live in a standalone mcp-types package that only depends on pydantic - build tooling without dragging the transport stack.
+      And the HTTP stack moved from httpx to httpx2 - which I maintain, so consider the bias disclosed. SSE support built in, OS trust store for TLS.
+    </aside>
+  </section>
+
+  <!-- ═══ 16 · CLOSING ═══ -->
+  <section>
+    <div class="kicker">§ THE ASK</div>
+    <h1 style="font-size: 68px; max-width: 1080px">Try v2 <em>today</em>. Tell us what breaks.</h1>
+    <p class="sub fragment" style="margin-top: 40px"><code class="inline">uv add "mcp==2.0.0b2"</code> - two weeks to find the bugs before stable ships. <strong>If it breaks, we want to know.</strong></p>
+    <p class="fragment" style="font-family: var(--mono); font-size: 21px; color: var(--green); margin-top: 30px; letter-spacing: .03em">py.sdk.modelcontextprotocol.io/v2</p>
+    <aside class="notes">
+      One ask before I let you go. Don't wait for stable: install the beta today and point your real server or client at it. It's two commands and an afternoon.
+      We have two weeks. Every bug you find now is a bug that doesn't ship on July 28 - and beta bug reports are the most valuable thing you can give a maintainer. If something breaks, if the migration guide misses your case, if an error message confuses you: open an issue. That's the contribution we need right now.
+    </aside>
+  </section>
+
+  <!-- ═══ 20 · THANKS ═══ -->
+  <section style="align-items: center; text-align: center; justify-content: center">
+    <h1>Thanks!</h1>
+    <p class="sub" style="margin: 22px 0 40px">Questions? Now, or wherever you find me.</p>
+    <img class="qr" width="230" height="230" alt="QR code - marcelotryle.com/links"
+      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUoAAAFKCAIAAAD0S4FSAAAGIUlEQVR4nO3dS45juRFA0SyjNtAjA9r/2gR45CWoN2A8wGCxg7w6Z556H+mCOQiQvz6fzw9Q9K/pGwB2kTdkyRuy5A1Z8oYseUOWvCFL3pAlb8iSN2TJG7LkDVnyhix5Q5a8IUvekCVvyJI3ZMkbsn6v/PHr33/9tLz/89+f86y855Unmvp+b7znM9+G1Ruy5A1Z8oYseUOWvCFL3pAlb8iSN2TJG7KWpta+bQJs33X3vaszJ96eP3nfu3p/2W/S6g1Z8oYseUOWvCFL3pAlb8iSN2TJG7LkDVkbp9amJnWmJpPO3OVrat+yqbm0Fa/cb9LqDVnyhix5Q5a8IUvekCVvyJI3ZMkbsuQNWWNTa9/mxkksJ3XezuoNWfKGLHlDlrwhS96QJW/IkjdkyRuy5A1Zptb+mBtnvFZ2RNt3Xf4UqzdkyRuy5A1Z8oYseUOWvCFL3pAlb8iSN2SNTa3dOLe0b9+yqemxqTm8qR3ger/JZ1ZvyJI3ZMkbsuQNWfKGLHlDlrwhS96QJW/I2ji1NjVrNWVl8mxlXmrfxNuN9/zs9WW/Sas3ZMkbsuQNWfKGLHlDlrwhS96QJW/Ikjdk/fp8PtP3EHHm/mH7Js9u3AHu21i9IUvekCVvyJI3ZMkbsuQNWfKGLHlDlrwha2lqbWoiat9OXb2TOm+cadu3a91r2/OeyeoNWfKGLHlDlrwhS96QJW/IkjdkyRuy5A1ZSyeETk0InTl7dObMU2/S7tmNv7rXtk+2ekOWvCFL3pAlb8iSN2TJG7LkDVnyhix5Q9bS1NrU9NjUXmtnTo8933Nvv7Qzr/s68ldn9YYseUOWvCFL3pAlb8iSN2TJG7LkDVnyhqylE0JvnOO58YnOPC/12779G5/X6g1Z8oYseUOWvCFL3pAlb8iSN2TJG7LkDVmHTq1x+/5wUxNvz95fNjto9YYseUOWvCFL3pAlb8iSN2TJG7LkDVnyhqxDp9amznmcMvVEZ153xY3f/j5Wb8iSN2TJG7LkDVnyhix5Q5a8IUvekCVvyPr9k9ObiLpxtuz5rqZ2YnsN7Ze2wl5rwP/gn3PIkjdkyRuy5A1Z8oYseUOWvCFL3pC1NLW2b47nzMmzqemxqdMnb/x+p7yP3B3Q6g1Z8oYseUOWvCFL3pAlb8iSN2TJG7LkDVkbTwjd58aZp6ndxb7tec+cHnuZWgP+LP+cQ5a8IUvekCVvyJI3ZMkbsuQNWfKGrI1Ta2ful/bszH3LzpymOnMCbMV76Hn3fbLVG7LkDVnyhix5Q5a8IUvekCVvyJI3ZMkbspam1sw8/TPOnB57duaM12todnDqulZvyJI3ZMkbsuQNWfKGLHlDlrwhS96QJW/I+r3yxyvzNFPTRWdONU35trNHe9/gM6s3ZMkbsuQNWfKGLHlDlrwhS96QJW/IkjdkXbnX2pl/u+LG553ae2zK+8Id76zekCVvyJI3ZMkbsuQNWfKGLHlDlrwhS96QtTS19m3OnEy68cTMM9/z68KJxmdWb8iSN2TJG7LkDVnyhix5Q5a8IUvekCVvyFo6IfTGHbP2nS76bGo+bN91ezN8K858V1ZvyJI3ZMkbsuQNWfKGLHlDlrwhS96QJW/IWppaezY1t7RviuvGKb19E29nfr9TO7Gt2Peerd6QJW/IkjdkyRuy5A1Z8oYseUOWvCFL3pC1cWrt2ZknKq588tRualMnV555juc+7wvn/6zekCVvyJI3ZMkbsuQNWfKGLHlDlrwhS96QNTa1dqOV2aOp6bF9pvZau/E9v4fOD7V6Q5a8IUvekCVvyJI3ZMkbsuQNWfKGLHlDlqm1C3ZE23fdfVaeaOpdvS48AfaZ1Ruy5A1Z8oYseUOWvCFL3pAlb8iSN2TJG7LGptampqmmTM2l3TjjNXWe5nvoVFMnhAL/N/+cQ5a8IUvekCVvyJI3ZMkbsuQNWfKGrI1Ta72dq6bOiOw9b++M1/eRz2v1hix5Q5a8IUvekCVvyJI3ZMkbsuQNWfKGrF+fz2f6HoAtrN6QJW/IkjdkyRuy5A1Z8oYseUOWvCFL3pAlb8iSN2TJG7LkDVnyhix5Q5a8IUvekCVvyJI3/FT9DRSvL8txddTlAAAAAElFTkSuQmCC">
+    <div class="footline" style="text-align: center; margin-top: 34px">marcelotryle.com/links · @Kludex · Pydantic</div>
+    <aside class="notes">
+      Thank you! Scan the QR for all my links - marcelotryle.com/links. Happy to take questions - here or in the hallway.
+    </aside>
+  </section>
+
+  <div id="whoami">Marcelo Trylesinski · Kludex</div>
+  <div id="counter">01 / 23</div>
+</div>
+
+<div id="notes"><div class="hint">Speaker notes · press N to hide</div><div id="notes-body"></div></div>
+<div id="help">← → navigate · N notes · F fullscreen</div>
+
+<script>
+(function () {
+  const slides = Array.from(document.querySelectorAll("#stage > section"));
+  const stage = document.getElementById("stage");
+  const counter = document.getElementById("counter");
+  const progress = document.getElementById("progress");
+  const notes = document.getElementById("notes");
+  const notesBody = document.getElementById("notes-body");
+  let i = 0;
+
+  function fragments(slide) { return Array.from(slide.querySelectorAll(".fragment")); }
+
+  function sync() {
+    slides.forEach((s, k) => s.classList.toggle("current", k === i));
+    counter.textContent = String(i + 1).padStart(2, "0") + " / " + slides.length;
+    progress.style.width = ((i + 1) / slides.length * 100) + "%";
+    const aside = slides[i].querySelector("aside.notes");
+    notesBody.innerHTML = aside ? aside.innerHTML : "<em>no notes</em>";
+    location.hash = i + 1;
+  }
+
+  function next() {
+    const pending = fragments(slides[i]).filter(f => !f.classList.contains("visible"));
+    if (pending.length) { pending[0].classList.add("visible"); return; }
+    if (i < slides.length - 1) { i++; sync(); }
+  }
+
+  function prev() {
+    const shown = fragments(slides[i]).filter(f => f.classList.contains("visible"));
+    if (shown.length) { shown[shown.length - 1].classList.remove("visible"); return; }
+    if (i > 0) { i--; fragments(slides[i]).forEach(f => f.classList.add("visible")); sync(); }
+  }
+
+  function goto(n) {
+    i = Math.min(Math.max(n, 0), slides.length - 1);
+    fragments(slides[i]).forEach(f => f.classList.remove("visible"));
+    sync();
+  }
+
+  function fit() {
+    const s = Math.min(innerWidth / 1280, innerHeight / 720);
+    stage.style.transform = "translate(-50%, -50%) scale(" + s + ")";
+  }
+
+  addEventListener("keydown", (e) => {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    switch (e.key) {
+      case "ArrowRight": case "ArrowDown": case " ": case "PageDown": next(); e.preventDefault(); break;
+      case "ArrowLeft": case "ArrowUp": case "PageUp": prev(); e.preventDefault(); break;
+      case "Home": goto(0); break;
+      case "End": goto(slides.length - 1); break;
+      case "n": case "N": notes.classList.toggle("open"); break;
+      case "f": case "F":
+        document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+        break;
+    }
+  });
+
+  addEventListener("resize", fit);
+
+  const fromHash = parseInt(location.hash.slice(1), 10);
+  if (!isNaN(fromHash)) i = Math.min(Math.max(fromHash - 1, 0), slides.length - 1);
+  fit();
+  sync();
+})();
+</script>
+</body>
+</html>

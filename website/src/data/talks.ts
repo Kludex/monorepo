@@ -11,6 +11,29 @@ export type Talk = {
 
 export const talks: Talk[] = [
   {
+    event: "EuroPython",
+    year: 2026,
+    title: "What I've Learned Maintaining the MCP Python SDK",
+    url: "https://ep2026.europython.eu/session/what-i-ve-learned-maintaining-the-mcp-python-sdk",
+    youtubeId: "vELVhor6xp0",
+    slides: "/slides/maintaining_the_mcp_python_sdk.html",
+  },
+  {
+    event: "PyCon Italy",
+    year: 2026,
+    title: "What I've Learned Maintaining the MCP Python SDK",
+    url: "https://2026.pycon.it/en/event/what-ive-learned-maintaining-the-mcp-python-sdk",
+    youtubeId: "uC3NHiuE8dM",
+  },
+  {
+    event: "PyCon Singapore",
+    year: 2025,
+    title: "Generative AI Monitoring with PydanticAI and Logfire",
+    url: "https://pythonsingapore.github.io/pyconsg-2025/schedule.html",
+    youtubeId: "nmVane-Y3NE",
+    keynote: true,
+  },
+  {
     event: "PyCon DE & PyData",
     year: 2025,
     title: "Generative AI Monitoring with PydanticAI and Logfire",
