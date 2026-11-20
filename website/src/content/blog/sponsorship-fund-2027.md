@@ -14,7 +14,7 @@ For 2027, I'm changing that.
 
 ## What changed this year
 
-This year I got 520% more security reports than last year: 124 so far, against 20 in 2025.
+This year I got 718% more security reports than last year: 180 so far, against 22 in 2025.
 
 I close a lot of them without an advisory. [Most reports I get are not valid](/blog/security-vocabulary/). But
 every one has to be read, reproduced and answered before I know that.
@@ -31,7 +31,7 @@ There are two tiers for companies.
 | | Supporter | Partner |
 | --- | --- | --- |
 | Price | $500 a month | $1,000 a month |
-| Logo on the README and docs of both projects | Yes | Yes, with top placement and the docs sidebar |
+| Logo on the README and docs of the projects I maintain | Yes | Yes, with top placement and the docs sidebar |
 | Credit in the release notes | Yes | Yes |
 | A sponsor badge for your own site | Yes | Yes |
 | A social post when you join | Yes | Yes |
