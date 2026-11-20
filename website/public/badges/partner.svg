@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" width="200" height="60" role="img" aria-labelledby="t">
+  <title id="t">Partner sponsor of Starlette, Uvicorn and python-multipart</title>
+  <rect x=".75" y=".75" width="198.5" height="58.5" rx="8" fill="#171b26" stroke="#d6336c" stroke-width="1.5"/>
+  <rect x="12" y="10" width="24" height="24" rx="5" fill="#d6336c"/>
+  <text x="24" y="26.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="700" fill="#fff" text-anchor="middle">~/</text>
+  <text x="44" y="28" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="17" font-weight="700" fill="#fff">Partner</text>
+  <text x="12" y="49" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="9.5" fill="#c3c8d4" textLength="176">Starlette · Uvicorn · python-multipart</text>
+</svg>
