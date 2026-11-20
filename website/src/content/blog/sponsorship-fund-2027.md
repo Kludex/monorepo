@@ -22,13 +22,6 @@ every one has to be read, reproduced and answered before I know that.
 This work doesn't ship a feature. It is also the part of maintenance that matters most to a company running
 these projects in production.
 
-## Security is not a business
-
-I hope this doesn't get misinterpreted. Security is not a business, and I'm not selling it. Every user gets the
-same fix on the same day, sponsor or not.
-
-But I can't work for free. The sponsorship I get today wouldn't even pay for my Claude subscription.
-
 ## The 2027 fund
 
 The target is $60,000 for 2027, raised through [GitHub Sponsors](https://github.com/sponsors/Kludex).
@@ -62,13 +55,10 @@ details, and a Partner signs a confidentiality term before the first notice.
 
 If a vulnerability is already being exploited, I ship the fix without waiting.
 
-## What priority triage is
+I hope this doesn't get misinterpreted. Security is not a business, and I'm not selling it. Every user gets the
+same fix on the same day, sponsor or not.
 
-I look at a Partner's issues first. It is not a guarantee of a fix or a merge.
-
-## What I promise
-
-At the end of 2027, I'll publish a report on what the fund paid for.
+But I can't work for free. The sponsorship I get today wouldn't even pay for my Claude subscription.
 
 ## How you can help
 
