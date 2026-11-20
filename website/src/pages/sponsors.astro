@@ -122,6 +122,23 @@ https://marcelotryle.com/sponsors`;
     <p class="mt-4 max-w-xl text-base text-muted">
       If you use these projects at work, you can forward this message to whoever holds the budget.
     </p>
-    <p class="panel mt-6 max-w-2xl px-5 py-5 font-mono text-sm whitespace-pre-line sm:px-7">{employerMessage}</p>
+    <div class="panel mt-6 max-w-2xl font-mono text-sm">
+      <div class="flex items-center justify-between border-b border-line px-5 py-3 text-muted sm:px-7">
+        <span>message</span>
+        <button id="copy-message" type="button" aria-live="polite" class="transition-colors hover:text-accent">
+          Copy
+        </button>
+      </div>
+      <p id="employer-message" class="px-5 py-5 whitespace-pre-line sm:px-7">{employerMessage}</p>
+    </div>
   </section>
+
+  <script>
+    const button = document.getElementById("copy-message");
+    button?.addEventListener("click", async () => {
+      await navigator.clipboard.writeText(document.getElementById("employer-message")?.textContent ?? "");
+      button.textContent = "Copied";
+      setTimeout(() => (button.textContent = "Copy"), 2000);
+    });
+  </script>
 </Layout>
