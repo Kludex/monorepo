@@ -11,5 +11,6 @@ npm run build   # static build to dist/
 - Blog posts live in `src/content/blog/` (plain markdown; `:::note` / `:::info` / `:::tip` containers render as callouts).
 - Talks are data in `src/data/talks.ts`.
 - The YouTube grid is built from the channel RSS feed at build time; the sponsors grid from the GitHub GraphQL API (needs `GH_TOKEN`). Both degrade gracefully when unavailable.
+- Partners and Supporters on `/sponsors` come from GitHub Sponsors webhooks, received by `functions/sponsors/index.ts` at `POST /sponsors`. It needs a KV namespace bound as `SPONSORS` and the webhook's secret as `GITHUB_WEBHOOK_SECRET`.
 - Slide decks are served as static HTML from `public/slides/`.
 - `public/_redirects` maps the old MkDocs blog URLs to the new ones on Cloudflare Pages.

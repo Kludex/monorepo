@@ -1,0 +1,7 @@
+name = "marcelotryle"
+pages_build_output_dir = "dist"
+compatibility_date = "2026-03-22"
+
+[[kv_namespaces]]
+binding = "SPONSORS"
+id = "a99bb54e7fc6422891e6f53739c812e5"

@@ -3,6 +3,40 @@ import { fetchSponsors } from "../lib/sponsors";
 import Layout from "../layouts/Layout.astro";
 
 const sponsors = await fetchSponsors();
+
+const tiers = [
+  {
+    name: "Supporter",
+    price: "$500 / month",
+    perks: [
+      "Your logo on the README and docs of Starlette, Uvicorn and python-multipart",
+      "Credit in the release notes",
+      "A sponsor badge for your own site",
+      "A social post when you join",
+      "A mention in the yearly report",
+    ],
+  },
+  {
+    name: "Partner",
+    price: "$1,000 / month",
+    perks: [
+      "Everything in Supporter",
+      "Top logo placement, and your logo in the docs sidebar",
+      "Your company description on this page",
+      "A week's notice of security releases, after you sign a confidentiality term",
+      "Priority triage on your issues, with no guarantee of a fix or a merge",
+      "One private one-hour session a year for your engineering team",
+    ],
+  },
+];
+
+const employerMessage = `We depend on Starlette, Uvicorn or python-multipart. Marcelo Trylesinski maintains them, and sponsors fund that work.
+
+For $1,000 a month, the Partner tier gives us a week's notice of security releases and priority triage on the issues we file. There is a $500 tier too.
+
+GitHub can invoice us for it, so it goes through our normal procurement.
+
+https://marcelotryle.com/sponsors`;
 ---
 
 <Layout title="Sponsors — Marcelo Trylesinski">
@@ -11,17 +45,29 @@ const sponsors = await fetchSponsors();
   <p class="mt-4 max-w-xl text-lg text-muted">
     Your sponsorship keeps <a href="https://www.starlette.io/" class="text-accent underline underline-offset-4"
       >Starlette</a
-    > and <a href="https://www.uvicorn.org/" class="text-accent underline underline-offset-4">Uvicorn</a> maintained, and
-    sends me to <a href="/talks" class="text-accent underline underline-offset-4">Python conferences</a> to share what I
+    >, <a href="https://www.uvicorn.org/" class="text-accent underline underline-offset-4">Uvicorn</a> and
+    <a href="https://github.com/Kludex/python-multipart" class="text-accent underline underline-offset-4"
+      >python-multipart</a
+    > maintained, and sends me to <a href="/talks" class="text-accent underline underline-offset-4">Python conferences</a> to share what I
     know.
   </p>
 
-  <a
-    href="https://github.com/sponsors/Kludex"
-    class="mt-8 inline-block rounded-lg bg-accent-bright px-5 py-2.5 text-sm font-semibold text-white transition-transform hover:scale-[1.02]"
-  >
-    ❤️ Become a sponsor
-  </a>
+  <div class="mt-8 flex flex-wrap gap-3">
+    <a
+      href="https://github.com/sponsors/Kludex"
+      class="rounded-lg bg-accent-bright px-5 py-2.5 text-sm font-semibold text-white transition-transform hover:scale-[1.02]"
+    >
+      ❤️ Become a sponsor
+    </a>
+    <a
+      href="#companies"
+      class="rounded-lg px-5 py-2.5 text-sm font-semibold text-ink underline decoration-line underline-offset-4 transition-colors hover:text-accent"
+    >
+      For companies
+    </a>
+  </div>
+
+  <div id="company-sponsors"></div>
 
   {
     sponsors.length > 0 && (
@@ -42,4 +88,39 @@ const sponsors = await fetchSponsors();
       </div>
     )
   }
+
+  <section id="companies" class="mt-20 scroll-mt-8">
+    <h2 class="border-t border-line pt-6 font-display text-2xl font-bold tracking-tight sm:text-3xl">For companies</h2>
+    <p class="mt-4 max-w-xl text-base text-muted">
+      If your company runs Starlette, Uvicorn or python-multipart, these two tiers are for you. Both are paid through
+      GitHub Sponsors, by card or by an invoice from GitHub.
+    </p>
+    <div class="mt-8 grid gap-10 sm:grid-cols-2">
+      {
+        tiers.map((tier) => (
+          <div>
+            <h3 class="font-display text-2xl font-semibold">
+              {tier.name}
+              <span class="ml-2 align-middle font-mono text-xs font-normal text-muted">{tier.price}</span>
+            </h3>
+            <ul class="mt-3 list-disc space-y-1.5 pl-5 text-base text-muted">
+              {tier.perks.map((perk) => (
+                <li>{perk}</li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="mt-20">
+    <h2 class="border-t border-line pt-6 font-display text-2xl font-bold tracking-tight sm:text-3xl">
+      Ask your employer
+    </h2>
+    <p class="mt-4 max-w-xl text-base text-muted">
+      If you use these projects at work, you can forward this message to whoever holds the budget.
+    </p>
+    <p class="panel mt-6 max-w-2xl px-5 py-5 font-mono text-sm whitespace-pre-line sm:px-7">{employerMessage}</p>
+  </section>
 </Layout>
