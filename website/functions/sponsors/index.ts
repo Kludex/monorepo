@@ -1,17 +1,4 @@
-type Sponsor = { avatarUrl: string; monthlyPriceInCents: number };
-type Sponsors = Record<string, Sponsor>;
-
-type Context = {
-  request: Request;
-  env: {
-    SPONSORS?: {
-      get(key: string, type: "json"): Promise<Sponsors | null>;
-      put(key: string, value: string): Promise<void>;
-    };
-    GITHUB_WEBHOOK_SECRET?: string;
-  };
-  next: () => Promise<Response>;
-};
+import { type Context, type Listed, KEY, escape, tiers } from "../../src/lib/company-sponsors";
 
 type SponsorshipEvent = {
   action: string;
@@ -22,9 +9,7 @@ type SponsorshipEvent = {
   };
 };
 
-const KEY = "sponsors";
 const SUPPORTER = 500_00;
-const PARTNER = 1000_00;
 
 /** Fills `#company-sponsors` with Partners and Supporters. Any failure serves the static page. */
 export async function onRequestGet({ env, next }: Context): Promise<Response> {
@@ -32,16 +17,10 @@ export async function onRequestGet({ env, next }: Context): Promise<Response> {
   if (!page.ok || !page.headers.get("content-type")?.includes("text/html")) {
     return page;
   }
-  const sponsors = Object.entries((await env.SPONSORS?.get(KEY, "json").catch(() => null)) ?? {});
+  const { partners, supporters } = await tiers(env);
   const html =
-    section(
-      "Partners",
-      sponsors.filter(([, sponsor]) => sponsor.monthlyPriceInCents >= PARTNER),
-    ) +
-    section(
-      "Supporters",
-      sponsors.filter(([, sponsor]) => sponsor.monthlyPriceInCents < PARTNER),
-    );
+    section("Partners", "grid gap-6 sm:grid-cols-2", partners.map(card)) +
+    section("Supporters", "flex flex-wrap gap-x-6 gap-y-8", supporters.map(logo));
   if (!html) {
     return page;
   }
@@ -75,15 +54,19 @@ export async function onRequestPost({ request, env }: Context): Promise<Response
     sponsorship.privacy_level === "public" &&
     !sponsorship.tier.is_one_time &&
     sponsorship.tier.monthly_price_in_cents >= SUPPORTER;
+  const { login } = sponsorship.sponsor;
+  const details = listed ? await profile(login).catch(() => ({})) : {};
   // shortcut: read-modify-write can drop one of two simultaneous events, use one key per sponsor if that happens.
   const sponsors = (await env.SPONSORS.get(KEY, "json")) ?? {};
   if (listed) {
-    sponsors[sponsorship.sponsor.login] = {
+    sponsors[login] = {
+      ...sponsors[login],
+      ...details,
       avatarUrl: sponsorship.sponsor.avatar_url,
       monthlyPriceInCents: sponsorship.tier.monthly_price_in_cents,
     };
   } else {
-    delete sponsors[sponsorship.sponsor.login];
+    delete sponsors[login];
   }
   await env.SPONSORS.put(KEY, JSON.stringify(sponsors));
   return new Response(listed ? "listed" : "unlisted");
@@ -102,23 +85,50 @@ async function signed(body: string, signature: string | null, secret: string | u
   return crypto.subtle.verify("HMAC", key, mac, encoder.encode(body));
 }
 
-function section(title: string, sponsors: [string, Sponsor][]): string {
+/** Reads the name, website and description from the sponsor's public GitHub profile. */
+async function profile(login: string): Promise<Partial<Listed>> {
+  const res = await fetch(`https://api.github.com/users/${encodeURIComponent(login)}`, {
+    headers: { "user-agent": "marcelotryle.com" },
+  });
+  if (!res.ok) {
+    return {};
+  }
+  const { name, blog, bio } = await res.json<Record<"name" | "blog" | "bio", string | null>>();
+  const url = blog && URL.parse(blog.includes("://") ? blog : `https://${blog}`);
+  return {
+    name: name || undefined,
+    url: url && /^https?:$/.test(url.protocol) ? url.href : undefined,
+    description: bio?.trim() || undefined,
+  };
+}
+
+function section(title: string, layout: string, sponsors: string[]): string {
   if (!sponsors.length) {
     return "";
   }
-  const cards = sponsors.map(
-    ([login, sponsor]) =>
-      `<a href="https://github.com/${escape(login)}" class="group w-24 text-center">` +
-      `<img src="${escape(sponsor.avatarUrl)}" alt="${escape(login)}" width="80" height="80" loading="lazy" ` +
-      `class="mx-auto h-20 w-20 rounded-full transition-transform group-hover:scale-105" />` +
-      `<p class="mt-2 truncate font-mono text-xs text-muted group-hover:text-accent">${escape(login)}</p></a>`,
-  );
   return (
     `<h2 class="mt-14 border-t border-line pt-6 font-display text-2xl font-bold tracking-tight sm:text-3xl">${title}</h2>` +
-    `<div class="mt-8 flex flex-wrap gap-x-6 gap-y-8">${cards.join("")}</div>`
+    `<div class="mt-8 ${layout}">${sponsors.join("")}</div>`
   );
 }
 
-function escape(text: string): string {
-  return text.replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
+function card({ name, url, avatarUrl, description }: Listed): string {
+  return (
+    `<a href="${escape(url)}" class="group panel flex items-start gap-5 p-5">` +
+    `<img src="${escape(avatarUrl)}" alt="" width="80" height="80" loading="lazy" ` +
+    `class="h-20 w-20 shrink-0 rounded-lg" /><div class="min-w-0">` +
+    `<p class="font-display text-xl font-semibold group-hover:text-accent">${escape(name)}</p>` +
+    (description ? `<p class="mt-1 text-sm text-muted">${escape(description)}</p>` : "") +
+    `</div></a>`
+  );
+}
+
+function logo({ name, url, avatarUrl }: Listed): string {
+  return (
+    `<a href="${escape(url)}" class="group w-24 text-center">` +
+    `<img src="${escape(avatarUrl)}" alt="" width="80" height="80" loading="lazy" ` +
+    `class="mx-auto h-20 w-20 rounded-full transition-transform group-hover:scale-105" />` +
+    `<p class="mt-2 truncate font-mono text-xs text-muted group-hover:text-accent">` +
+    `${escape(name)}</p></a>`
+  );
 }
