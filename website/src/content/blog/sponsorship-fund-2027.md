@@ -33,7 +33,6 @@ There are two tiers for companies.
 | Price | $500 a month | $1,000 a month |
 | Logo on the README and docs of the projects I maintain | Yes | Yes, with top placement and the docs sidebar |
 | Credit in the release notes | Yes | Yes |
-| A sponsor badge for your own site | Yes | Yes |
 | A social post when you join | Yes | Yes |
 | A mention in the yearly report | Yes | Yes |
 | Your company description on the sponsors page | No | Yes |
