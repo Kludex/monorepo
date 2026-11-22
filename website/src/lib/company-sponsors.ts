@@ -15,6 +15,7 @@ export type Context = {
       put(key: string, value: string): Promise<void>;
     };
     GITHUB_WEBHOOK_SECRET?: string;
+    DOCUSEAL_WEBHOOK_SECRET?: string;
   };
   next: () => Promise<Response>;
   waitUntil: (promise: Promise<unknown>) => void;
