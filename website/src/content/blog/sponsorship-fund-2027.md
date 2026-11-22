@@ -1,6 +1,6 @@
 ---
 title: "1.4 Billion Downloads, $129 a Month"
-date: 2026-11-20
+date: 2026-11-22
 categories: ["Open Source"]
 ---
 
