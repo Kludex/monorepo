@@ -1,13 +1,13 @@
 This is my last attempt to make my open source work sustainable.
 
-1.4 billion downloads last month. $129 a month in sponsorships.
+1.4 billion downloads last month, and I make $129 a month from it.
 
-For 2027, sponsors at $1,000 a month get a week's notice before a security release 🔐
+So now a company can sponsor me and get a week's heads-up on security releases 🔐
 
 If you value my work, but can't sponsor, please repost this.
 
 ---
 
-That's Starlette and Uvicorn. The notice names the project, the severity, the affected versions and the date of the fix. Not the vulnerability, not the patch 📅
+I'm talking about Starlette and Uvicorn. The heads-up is for the $1,000 a month tier. I won't tell anyone what the bug is before the release, only which project, how severe it is, which versions and when the fix ships 📅
 
 https://marcelotryle.com/blog/sponsorship-fund-2027/

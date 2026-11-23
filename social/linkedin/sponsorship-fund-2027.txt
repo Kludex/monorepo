@@ -1,14 +1,16 @@
 This is my last attempt to make my open source work sustainable.
 
-Starlette and Uvicorn were downloaded 1.4 billion times last month. I get $129 a month in sponsorships. That wouldn't even pay for my Claude subscription.
+Starlette and Uvicorn were downloaded 1.4 billion times last month, and I get $129 a month in sponsorships. That wouldn't even pay for my Claude subscription.
 
-So for 2027 I'm offering companies something: a week's notice before a security release. 🔐
+That's on me. My sponsors page was basically a tip jar. I never asked companies for anything, and I never offered them anything in return.
 
-At $1,000 a month, I tell you a week ahead the project, the severity, the affected versions, the area of the code and the date of the fix. Not the vulnerability, and not the patch. Your team gets to plan the upgrade for the day the fix ships.
+So I'm trying something different for 2027. If your company sponsors me at $1,000 a month, I'll let you know a week before a security release, so your team can plan the upgrade for the day the fix ships. 🔐
 
-Security is not a business, and I'm not selling it. Every user gets the same fix on the same day, sponsor or not. But I can't work for free.
+I hope this doesn't get misinterpreted. I won't tell you what the vulnerability is, and you don't get the patch early. You'll know which project, how severe it is, which versions and which part of the code are affected, and when the fix ships. Everyone gets the same fix on the same day, sponsor or not.
 
-The target is $60,000 for 2027, through GitHub Sponsors.
+Security is not a business and I'm not selling it, but I can't work for free either.
+
+I'm trying to get to $60,000 for 2027 through GitHub Sponsors.
 
 If you value my work, but can't sponsor, please repost this.
 
