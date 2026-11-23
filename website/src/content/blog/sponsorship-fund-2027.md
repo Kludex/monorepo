@@ -45,8 +45,8 @@ Your company can pay by card, or GitHub can invoice it, so the payment goes thro
 
 Partners get a week's notice before a security release. It is a heads-up to be ready, not a disclosure.
 
-The notice names the project, the severity, the affected versions and the date of the fix. That is all. It does
-not say what the vulnerability is or how to trigger it, and it does not include the patch.
+The notice names the project, the severity, the affected versions, the area of the code and the date of the fix.
+That is all. It does not say what the vulnerability is or how to trigger it, and it does not include the patch.
 
 The point is to let your team plan the upgrade for the day the fix ships. Nobody gets a head start on the
 details, and a Partner signs a confidentiality term before the first notice.
