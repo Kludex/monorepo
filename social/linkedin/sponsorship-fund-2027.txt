@@ -1,0 +1,18 @@
+1.4 billion downloads last month. $129 a month in sponsorships. 📉
+
+That's Starlette and Uvicorn, and the gap is my fault. My sponsors page was a tip jar. I never asked companies for anything, and I never offered them anything in return.
+
+For 2027, I'm changing that. The target is $60,000, raised through GitHub Sponsors, with two tiers for companies:
+
+- Supporter, $500 a month: your logo on the README and docs, credit in the release notes, and a social post when you join.
+- Partner, $1,000 a month: all of that, plus a week's notice of security releases and priority triage on your issues.
+
+The notice is a heads-up to be ready, not a disclosure. It names the project, the severity, the affected versions, the area of the code and the date of the fix. Every user gets the same fix on the same day, sponsor or not.
+
+Why now: I got 180 security reports this year, against 22 in 2025. Every one has to be read, reproduced and answered.
+
+If your company runs these projects, the tiers are on my sponsors page. If you're an engineer, the same page has a short message you can forward to whoever holds the budget.
+
+---
+
+https://marcelotryle.com/blog/sponsorship-fund-2027/
