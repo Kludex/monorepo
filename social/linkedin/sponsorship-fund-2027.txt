@@ -1,17 +1,20 @@
-1.4 billion downloads last month. $129 a month in sponsorships. 📉
+This is my last attempt to make my open source work sustainable.
 
-That's Starlette and Uvicorn, and the gap is my fault. My sponsors page was a tip jar. I never asked companies for anything, and I never offered them anything in return.
+Starlette and Uvicorn were downloaded 1.4 billion times last month. The sponsorships I get add up to $129 a month. That wouldn't even pay for my Claude subscription.
 
-For 2027, I'm changing that. The target is $60,000, raised through GitHub Sponsors, with two tiers for companies:
+It's my fault. My sponsors page was a tip jar. I never asked companies for anything, and I never offered them anything in return.
 
-- Supporter, $500 a month: your logo on the README and docs, credit in the release notes, and a social post when you join.
-- Partner, $1,000 a month: all of that, plus a week's notice of security releases and priority triage on your issues.
+So for 2027 I'm offering something: a week's notice before a security release. 🔐
 
-The notice is a heads-up to be ready, not a disclosure. It names the project, the severity, the affected versions, the area of the code and the date of the fix. Every user gets the same fix on the same day, sponsor or not.
+This year I got 180 security reports, against 22 in 2025. Every one has to be read, reproduced and answered. It's the part of my work that matters most to a company running these projects in production.
 
-Why now: I got 180 security reports this year, against 22 in 2025. Every one has to be read, reproduced and answered.
+If your company is a Partner, at $1,000 a month, I tell you a week ahead: the project, the severity, the affected versions, the area of the code and the date of the fix. Not the vulnerability, not how to trigger it, not the patch. Your team gets to plan the upgrade for the day the fix ships.
 
-If your company runs these projects, the tiers are on my sponsors page. If you're an engineer, the same page has a short message you can forward to whoever holds the budget.
+I hope this doesn't get misinterpreted. Security is not a business, and I'm not selling it. Every user gets the same fix on the same day, sponsor or not.
+
+But I can't work for free.
+
+The target is $60,000 for 2027, through GitHub Sponsors. If you're an engineer, my sponsors page has a message you can forward to whoever holds the budget.
 
 ---
 
