@@ -1,0 +1,11 @@
+Starlette and Uvicorn were downloaded 1.4 billion times last month, and I get $129 a month in sponsorships. That wouldn't even pay for my Claude subscription.
+
+So I'm trying something different now. If your company sponsors me at $1,000 a month, I'll let you know a week before a security release, so your team can plan the upgrade for the day the fix ships. 🔐
+
+Security is not a business and I'm not selling it, but this is my attempt to get something in return from my work.
+
+If you value my work, but can't sponsor, please repost this.
+
+---
+
+You can read more about it in https://marcelotryle.com/blog/sponsorship-fund-2027/.
