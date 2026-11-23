@@ -1,6 +1,6 @@
 Starlette and Uvicorn had 1.4 billion downloads last month, and I get $129 a month in sponsorships.
 
-So for 2027, if your company sponsors me at $1,000 a month, I'll let you know a week before a security release 🔐
+So now, if your company sponsors me at $1,000 a month, I'll let you know a week before a security release 🔐
 
 If you value my work, but can't sponsor, please repost this.
 
