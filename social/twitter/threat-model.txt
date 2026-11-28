@@ -1,0 +1,18 @@
+at: 2026-11-29T15:00+01:00
+
+Your open source project should have a threat model 🔐
+
+It's a page that says what counts as a vulnerability, and what doesn't.
+
+The python-multipart one covers:
+
+- Scope
+- Untrusted input
+- What the library guarantees
+- What is your job
+
+A reporter can read it before writing.
+
+---
+
+https://github.com/Kludex/python-multipart/blob/main/THREAT_MODEL.md
