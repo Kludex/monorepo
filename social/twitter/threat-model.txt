@@ -2,11 +2,11 @@ at: 2026-11-29T15:00+01:00
 
 Your open source project should have a threat model 🔐
 
-It's a page that says what counts as a vulnerability, and what is the user's job.
+It says what counts as a vulnerability and what is the user's job.
 
-Every project draws that line in a different place, so nobody can guess it.
+Every project draws that line in a different place, so nobody can guess.
 
-In python-multipart, setting a body size limit is the user's job. Now that's written down.
+In python-multipart, the body size limit is the user's job. Now it's written down.
 
 ---
 
