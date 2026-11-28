@@ -1,0 +1,13 @@
+at: 2026-11-29T15:00+01:00
+
+Your open source project should have a threat model 🔐
+
+It says what counts as a vulnerability and what is the user's job.
+
+Every project draws that line in a different place, so nobody can guess.
+
+In python-multipart, the body size limit is the user's job. Now it's written down.
+
+---
+
+https://github.com/Kludex/python-multipart/blob/main/THREAT_MODEL.md

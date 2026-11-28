@@ -1,0 +1,24 @@
+at: 2026-11-29T15:00+01:00
+
+Your open source project should have a threat model. 🔐
+
+A threat model is a page that says what counts as a vulnerability in your project, and what doesn't. I added one to python-multipart.
+
+It matters because every project draws the line between its job and the user's job in a different place. Nobody can guess where that line is, so the project has to write it down.
+
+In python-multipart:
+
+- Scope: the code in the package. Not the frameworks built on it, proxies, servers or the application.
+- Trust: the request body and the Content-Type value are untrusted. The parser configuration is trusted.
+- User responsibilities: set body size limits, and treat name and filename as untrusted.
+- Not a vulnerability: a table of reports that don't count, each with the reason.
+
+Take body size. Memory use from a large body when MAX_BODY_SIZE is not set is not a vulnerability in python-multipart. The default is unlimited, so the user sets the limit. Another library could enforce a limit by default, and then the same report would be a vulnerability there.
+
+With the line written down, a reporter can check it before writing, and I can answer with a link.
+
+It's one file. Write it before the next report arrives.
+
+---
+
+https://github.com/Kludex/python-multipart/blob/main/THREAT_MODEL.md
