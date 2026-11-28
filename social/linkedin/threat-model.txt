@@ -4,16 +4,19 @@ Your open source project should have a threat model. 🔐
 
 A threat model is a page that says what counts as a vulnerability in your project, and what doesn't. I added one to python-multipart, in a THREAT_MODEL.md file at the root of the repository.
 
-It answers the questions a security report raises:
+It matters because every project draws the line between its job and the user's job in a different place. Nobody can guess where that line is, so the project has to write it down.
 
-- Scope: the code in the package is covered. Frameworks built on it, proxies, servers and your application are not.
-- Trust: the request body and the Content-Type value are untrusted. The parser configuration and your callbacks are trusted.
+In python-multipart:
+
+- Scope: the code in the package is covered. Frameworks built on it, proxies, servers and the application are not.
+- Trust: the request body and the Content-Type value are untrusted. The parser configuration and the callbacks are trusted.
 - Goals: what the library promises, such as CPU use that stays proportional to the size of the input.
+- User responsibilities: set body size limits, and treat name and filename as untrusted.
 - Not a vulnerability: a table of reports that don't count, each with the reason.
 
-The last one is why you want it. Memory use from a large body when MAX_BODY_SIZE is not set is not a vulnerability in python-multipart. The default is unlimited, so you set the limit there or in your server. With that written down, a reporter can check it before writing, and I can answer with a link.
+Take body size. Memory use from a large body when MAX_BODY_SIZE is not set is not a vulnerability in python-multipart. The default is unlimited, so the user sets the limit there or in their server. Another library could enforce a limit by default, and then the same report would be a vulnerability there.
 
-It also tells users what is their job, such as treating name and filename as untrusted.
+With the line written down, a reporter can check it before writing, and I can answer with a link.
 
 It's one file. Write it before the next report arrives.
 
